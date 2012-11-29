@@ -1,0 +1,35 @@
+[user]
+    name = Jason Heppler
+    email = jason.heppler@gmail.com
+
+[github]
+    user = hepplerj
+
+[alias]
+    l = "!source ~/.githelpers && prett_git_log"
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+
+[color]
+    ui = auto
+        diff = auto
+        status = auto
+        branch = auto
+
+[color "branch"]
+    current = yellow reverse
+    remote = green bold
+    local = blue bold
+
+[color "diff"]
+    meta = blue bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+
+[push]
+    default = current
+
+[core]
+    editor = vim
+    excludesfile = ~/.gitignore
