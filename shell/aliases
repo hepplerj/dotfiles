@@ -33,7 +33,7 @@ alias src='source ~/.bash_profile'
 alias subl='sublime'
 alias update='sudo softwareupdate -i -a; brew update; brew upgrade'
 alias vrc='vim ~/.vimrc'
-alias wiki='cd /Users/hepplerj/projects/research.dissertation/wiki $$ gitit'
+alias wiki='cd /Users/hepplerj/projects/research.dissertation/wiki && gitit'
 alias zshconf='mvim ~/.zshrc'
 
 

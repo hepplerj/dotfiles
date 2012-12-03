@@ -9,10 +9,7 @@ unsetopt promptcr
 
 # Aliases and Functions
 . ~/.shell/aliases
-. ~/.shell/completions
 . ~/.shell/functions
-. ~/.shell/variables
-. ~/.shell/host_specific
 if [ -f ~/.bash_local ]; then
     . ~/.bash_local
 fi
@@ -29,10 +26,11 @@ export HISTSIZE=1000
 export HISTFILESIZE=1000
 export HISTCONTROL=erasedups
 export RUBYOPT=rubygems
-export PATH=/usr/local/bin/:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:
+#export PATH=/usr/local/bin/:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:
 export PATH=$PATH:/usr/local/sbin
 export PATH=/Applications/Postgres.app/Contents/MacOS/bin:$PATH
 source /usr/local/bin/virtualenvwrapper.sh
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/local/bin:/usr/local/git/bin:/usr/local/mysql/bin:/usr/texbin:/.cabal/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:~/.cabal/bin
 
 # Python variables ------------------------------------------------------------
 export PIP_DOWNLOAD_CACHE="$HOME/.pip/cache"
