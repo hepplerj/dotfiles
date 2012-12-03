@@ -1,0 +1,96 @@
+# Bash Functions
+
+# markdownify
+# thanks to Brett Terpstra
+urlenc () { #url encode the passed string
+  echo -n "$1" | perl -pe's/([^-_.~A-Za-z0-9])/sprintf("%%%02X", ord($1))/seg'
+}
+ 
+hymd () { # copy raw markdown to clipboard
+  encurl=$(urlenc $1)
+  curl "http://heckyesmarkdown.com/go/?read=1&preview=0&showframe=0&u=$encurl"|pbcopy
+  echo "In your clipboard, man."
+}
+ 
+function console () {
+  if [[ $# > 0 ]]; then
+    query=$(echo "$*"|tr -s ' ' '|')
+    tail -f /var/log/system.log|grep -i --color=auto -E "$query"
+  else
+    tail -f /var/log/system.log
+  fi
+}
+
+# Edit markdown files in writing directory
+edmd () {
+	WRITINGDIR="/Users/hepplerj/Dropbox/writing"
+	EDITCMD="subl"
+	filelist=$(mdfind -onlyin "$WRITINGDIR" "($@) AND kind:markdown")
+	listlength=$(mdfind -onlyin "$WRITINGDIR" -count "($@) AND kind:markdown")
+	if [[ $listlength > 0 ]]; then
+		if [[ $listlength == 1 ]]; then
+			$EDITCMD $filelist
+		else
+			IFS=$'\n'
+			PS3='Edit which file? (1 to cancel): '
+			select OPT in "Cancel" $filelist; do
+				if [ $OPT != "Cancel" ]; then
+					$EDITCMD $OPT
+				fi
+				break
+			done
+		fi
+	else
+		return 1
+	fi
+	return 0
+}
+
+extract () { #unarchive various compression formats based on extension
+        if [ -f $1 ] ; then
+                case $1 in
+                        *.tar.bz2)          tar xjf $1       ;;
+                        *.tar.gz)           tar xzf $1       ;;
+                        *.bz2)              bunzip2 $1       ;;
+                        *.rar)              rar x $1         ;;
+                        *.gz)               gunzip $1        ;;
+                        *.tar)              tar xf $1        ;;
+                        *.tbz2)             tar xjf $1       ;;
+                        *.tgz)              tar xzf $1       ;;
+                        *.zip)              unzip $1         ;;
+                        *.Z)                uncompress $1    ;;
+                        *.dmg)              hdiutil mount $1 ;;
+                        *)                  echo "'$1' cannot be extracted via extract()" ;;
+                esac
+        else
+                echo "'$1' is not a valid file"
+        fi
+}
+
+# wrapper for git to log commits to an nvALT note
+# just an overall reminder of what I did all night
+# via Brett Terpstra
+function ca(){
+  note="/Users/hepplerj/Dropbox/notes/universalgitlog.txt"
+  msg=$*
+  path=$(pwd)
+  before=$(cat "$note")
+  echo "$(date '+%y-%m-%d %H:%M | ') (${path##*/}) $msg" > "$note"
+  echo "$before" >> "$note"
+  git commit -am "$msg"
+}
+
+tman () { # open man page in TextMate
+  MANWIDTH=160 MANPAGER='col -bx' man $@ | mate
+}
+
+sman () { # open man page in Sublime
+  MANWIDTH=160 MANPAGER='col -bx' man $@ | sublime
+}
+
+# Gitlogger
+# For use with gitlogger.sh
+function glog () {
+	echo "$1:`pwd`" >> ~/.gitlogger
+  echo "Done!"
+}

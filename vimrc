@@ -97,3 +97,10 @@ com! WP call WordProcessorMode()
 " bibkeys
 set dictionary=$HOME/bib/citekeys.txt
 set complete+=k
+
+" Source configuration files
+nmap <leader>sv :source %<cr>
+source $HOME/.vim/bibtex.vimrc
+source $HOME/.vim/gitit.vimrc
+source $HOME/.vim/markdown.vimrc
+source $HOME/.vim/pandoc.vimrc
