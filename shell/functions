@@ -94,3 +94,7 @@ function glog () {
 	echo "$1:`pwd`" >> ~/.gitlogger
   echo "Done!"
 }
+
+i() {
+    (head -n 5; tail -n 5) < "$1" | column -t
+}

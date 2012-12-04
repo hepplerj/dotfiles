@@ -28,6 +28,7 @@ alias mem='top -o rsize -n 10'
 alias mutt='cd ~/Desktop && mutt'
 alias o='open -a'
 alias otask='ruby ~/src/otask/bin/otask'
+alias rake="noglob rake"
 alias rtt='/Users/hepplerj/src/Read2Text/read2text'
 alias src='source ~/.bash_profile'
 alias subl='sublime'

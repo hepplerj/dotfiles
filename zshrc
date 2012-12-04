@@ -24,9 +24,9 @@ export PATH="$HOME/lib/dotfiles/bin:${PATH}"
 export GREP_OPTIONS='--color=auto'
 export HISTSIZE=1000
 export HISTFILESIZE=1000
+export HISTTIMEFORMAT='"%d/%m/%y %T "'
 export HISTCONTROL=erasedups
 export RUBYOPT=rubygems
-#export PATH=/usr/local/bin/:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:
 export PATH=$PATH:/usr/local/sbin
 export PATH=/Applications/Postgres.app/Contents/MacOS/bin:$PATH
 source /usr/local/bin/virtualenvwrapper.sh

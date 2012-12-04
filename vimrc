@@ -17,8 +17,15 @@ set backspace=indent,eol,start  " backspace through everything in insert mode
 set list
 set list listchars=tab:\ \ ,trail:·
 
+nmap <silent> <leader>wa :set fo-=a<CR>
+nmap <silent> <leader>aw :set fo+=a<CR>
+" remove line breaks within paragraphs
+nmap <silent> <leader>sw Go<Esc>:3,$g/^./ .,/^$/-1 join<CR>
+" straighten quotes
+nmap <leader>q :exe '%s/[“”]/"/eg'<cr>:exe "%s/[‘’]/'/eg"<cr>:nohlsearch<cr>
+
 " MacVim settings
-:set guifont=Monaco:h12
+"set guifont=Inconsolata:h14
 
 " auto commands
 :autocmd BufWrite *.py %retab   " retab python files
@@ -62,7 +69,11 @@ noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
 " colorscheme
-colorscheme tomorrow_night
+syntax enable
+let g:solarized_termtrans=1
+colorscheme solarized
+set background=dark
+" togglebg#map("<F5>") "need to get this working
 
 set laststatus=2
 
