@@ -92,16 +92,13 @@ nmap <leader>sv :source $MYVIMRC<cr> " mapping to source vimrc quickly
 
 " writing
 func! WordProcessorMode()
-    setlocal formatoptions=1
-    setlocal noexpandtab
+    setlocal formatoptions=t1
+    setlocal textwidth=80
     map j gj
     map k gk
+    setlocal smartindent
     setlocal spell spelllang=en_us
-    set thesaurus+=/Users/hepplerj/.vim/thesarus/thesaur.txt
-    set complete+=s
-    set formatprg=par
-    setlocal wrap
-    setlocal linebreak
+    setlocal noexpandtab
 endfu
 com! WP call WordProcessorMode()
 
