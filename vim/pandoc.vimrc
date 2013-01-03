@@ -4,19 +4,19 @@ let g:pandoc_no_folding = 1
 " Preview buffer in browser after passing through pandoc
 " http://rtomayko.github.com/bcat/bcat.1.html#EXAMPLES
 
+" Highlight markers in text
+match Error '{\w\+}'
+
 nmap <leader>v :!pandoc -t html --smart --include-in-header=/Users/wcm1/.pandoc/marked.css % \|bcat<cr><cr>
 
 " Convert buffer to html from markdown
-
 nmap <leader>h :%!pandoc -f markdown -t html
 
 " Command to call Pandoc and process working file, using functions below
-
 command! -nargs=* Pan execute ":call Pan<args>()"
 nmap <leader>p :Pan 
 
 " Functions to pass file through pandoc
-
 function! PanPdf()
    exec ":! pandoc -o ~/Desktop/" . fnameescape(expand('%:t:r')) . ".pdf " . fnameescape(expand('%:p'))
 endfunction
