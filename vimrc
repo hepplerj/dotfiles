@@ -1,6 +1,6 @@
 " Jason Heppler vimrc
 
-call pathogen#runtime_append_all_bundles() 
+call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
 set nocompatible                " choose no compatibility with legacy vi
@@ -16,8 +16,8 @@ set backspace=indent,eol,start  " backspace through everything in insert mode
 set list
 set list listchars=tab:\ \ ,trail:·
 
-" toggle automatic hardwrapping 
-nmap <silent> <leader>wa :set fo-=a<CR> 
+" toggle automatic hardwrapping
+nmap <silent> <leader>wa :set fo-=a<CR>
 nmap <silent> <leader>aw :set fo+=a<CR>
 
 " remove line breaks within paragraphs (softwrap)
@@ -70,7 +70,6 @@ syntax enable
 let g:solarized_termtrans=1
 colorscheme solarized
 set background=dark
-call togglebg#map("<F6>") " need to get this working
 
 set laststatus=2
 
@@ -101,11 +100,6 @@ func! WordProcessorMode()
 endfu
 com! WP call WordProcessorMode()
 
-" iawriter color scheme
-" turn on with F4
-let g:fullscreen_colorscheme = "iawriter"
-let g:fullscreen_font = "Cousine:h14"
-
 " bibkeys
 " via https://github.com/lmullen/bibkeys
 " launch with CTRL-X CTRL-K
@@ -127,6 +121,16 @@ if has("autocmd")
     " Make sure all mardown files have the correct filetype set and setup wrapping
     au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} setf markdown | call s:setupWrapping()
 endif
+
+" Strip trailing white space (,ss)
+function! StripWhitespace()
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    :%s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
+endfunction
+noremap <leader>ss :call StripWhitespace()<CR>
 
 " Source configuration files
 nmap <leader>sv :source %<cr>

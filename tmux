@@ -7,8 +7,6 @@ set -g mode-mouse on
 setw -g mouse-select-window on
 setw -g mouse-select-pane on
 
-set -g default-command "reattach-to-user-namespace -l zsh"
-
 set -g base-index 1
 setw -g pane-base-index 1
 
@@ -99,5 +97,4 @@ bind -t vi-copy y copy-selection
 bind -t vi-copy Escape cancel
 bind y run "tmux save-buffer - | reattach-to-user-namespace pbcopy"
 
-set-option -g default-shell /bin/zsh
-set-option -g default-command "reattach-to-user-namespace -l zsh"
+set-option -g default-shell /bin/bash
