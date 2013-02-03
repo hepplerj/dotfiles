@@ -3,16 +3,15 @@
 ## Installation
 
 You can clone the repository where ever you would like it (I keep mine
-in ~/github/dotfiles). The `install.sh` script will symlink files to
-your home directory. The install bootstrap isn't very robust, so you may
-have to make some changes to the paths for it to work correctly.
+in ~/.dotfiles). The `install.sh` script will symlink files to
+your home directory. 
 
 ```bash
-git clone https://github.com/hepplerj/dotfiles.git
+$ git clone https://github.com/hepplerj/dotfiles.git ~/.dotfiles
 
-cd dotfiles
+$ cd ~/.dotfiles
 
-sh install.sh
+$ sh install.sh
 ```
 
 ## Sensible OS X defaults
