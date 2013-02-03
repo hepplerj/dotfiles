@@ -25,9 +25,23 @@ for file in ~/github/dotfiles/{bash_prompt,aliases,functions}; do
 done
 unset file
 
-# Paths
+# Environment variables
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/local/bin:/usr/local/git/bin:/usr/local/mysql/bin:/usr/texbin:$PATH
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
+
+#export PATH="$HOME/.gem/ruby/1.8/bin:${PATH}"
+export PATH="$HOME/bin:${PATH}"
+export PATH="$HOME/lib/dotfiles/bin:${PATH}"
+#export RUBYOPT=rubygems
+export PATH=$PATH:/usr/local/sbin
+export PATH=/Applications/Postgres.app/Contents/MacOS/bin:$PATH
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/local/bin:/usr/local/git/bin:/usr/local/mysql/bin:/usr/textbin:~/.cabal/bin
+
+# Python variables
+alias servethis="python SimpleHTTPServer; SimpleHTTPServer.test()"
+
+
+
 
 # Colors
 export CLICOLOR=1

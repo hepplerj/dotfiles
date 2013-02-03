@@ -1,35 +1,21 @@
 #!/usr/bin/env bash
 
+cd "${HOME}/.dotfiles"
 echo "Initializing submodules"
-git submodule init
-git submodule update
-
-echo "Deleting old files"
-rm ~/.bashrc
-rm ~/.bash_profile
-rm ~/.gvimrc
-rm ~/.gitconfig
-rm ~/.gitignore
-rm ~/.tmux.conf
-rm ~/.vim
-rm ~/.vimrc
-rm ~/.zshrc
+git submodule --quit update --init
+cd "${OLDPWD}"
 
 echo "Symlinking files"
-ln -s ~/github/dotfiles/bashrc ~/.bashrc
-ln -s ~/github/dotfiles/bash_profile ~/.bash_profile
-ln -s ~/github/dotfiles/gitconfig ~/.gitconfig
-ln -s ~/github/dotfiles/gitignore ~/.gitignore
-ln -s ~/github/dotfiles/githelpers ~/.githelpers
-ln -s ~/github/dotfiles/gvimrc ~/.gvimrc
-ln -s ~/github/dotfiles/tmux ~/.tmux.conf
-ln -s ~/github/dotfiles/vimrc ~/.vimrc
-ln -s ~/github/dotfiles/zshrc ~/.zshrc
+ln -fs ".dotfiles/bash/bashrc"          "${HOME}/.bashrc"
+ln -fs ".dotfiles/bash/bash_profile"    "${HOME}/.bash_profile"
+ln -fs ".dotfiles/git/gitconfig"        "${HOME}/.gitconfig"
+ln -fs ".dotfiles/git/gitignore"        "${HOME}/.gitignore"
+ln -fs ".dotfiles/git/githelpers"       "${HOME}/.githelpers"
+ln -fs ".dotfiles/tmux/tmux.conf"       "${HOME}/.tmux.conf"
+ln -fs ".dotfiles/vim/vimrc"            "${HOME}/.vimrc"
 
 echo "Symlinking directories"
-ln -s ~/github/dotfiles/vim ~/.vim
+[[ -e "${HOME}/.vim" ]] && rm -r "${HOME}/.vim"
+ln -fs ".dotfiles/vim" "${HOME}/.vim"
 
-echo "Updating submodules"
-git submodule foreach git pull origin master --recurse-submodules
-
-echo "Done!"
+echo "Done! Restart terminal and vim."

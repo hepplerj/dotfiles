@@ -1,17 +1,72 @@
 " Jason Heppler vimrc
 
+" Compatibility
+set nocompatible                " choose no compatibility with legacy vi
+
+" Plugins
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
-set nocompatible                " choose no compatibility with legacy vi
-syntax on
-set encoding=utf-8
-set showcmd
-filetype plugin indent on
+" Filetypes
+if has("autocmd")
+    filetype indent plugin on
 
-" whitespace
-set tabstop=4 shiftwidth=4      " tab is two spaces
-set expandtab                   " use spaces, not tabs
+    " Shortcuts
+    nnoremap _ap :setlocal filetype=apache<CR>
+    nnoremap _bi :setlocal filetype=bindzone<CR>
+    nnoremap _cs :setlocal filetype=css<CR>
+    nnoremap _ht :setlocal filetype=html<CR>
+    nnoremap _js :setlocal filetype=javascript<CR>
+    nnoremap _md :setlocal filetype=markdown<CR>
+    nnoremap _pl :setlocal filetype=perl<CR>
+    nnoremap _ph :setlocal filetype=php<CR>
+    nnoremap _py :setlocal filetype=python<CR>
+    nnoremap _rb :setlocal filetype=ruby<CR>
+    nnoremap _sh :setlocal filetype=sh<CR>
+    nnoremap _vi :setlocal filetype=vim<CR>
+    nnoremap _xm :setlocal filetype=xml<CR>
+
+    " Apache
+    augroup apache
+        autocmd!
+        autocmd BufNewFile,BufRead *{etc,local,lib}/apache*/*.conf setlocal filetype=apache
+        autocmd BufNewFile,BufRead *etc/apache*/sites-*/* setlocal filetype=apache
+    augroup END
+
+    " Markdown
+    augroup markdown
+        autocmd!
+        autocmd Filetype markdown setlocal formatoptions+=t
+        autocmd Filetype markdown setlocal textwidth=79
+        if exists("&colorcolumn")
+            autocmd Filetype markdown setlocal colorcolumn=+1
+        endif
+    augroup END
+endif
+
+" Commands
+if has("cmdline_info")
+    set ruler
+    set showcmd
+    set showmode
+endif
+
+" Encoding
+set fileformats=unix,dos,mac
+if has("multi_byte")
+    set encoding=utf-8
+endif
+
+" Formatting
+set expandtab
+set formatoptions=croqn1
+silent! set formatoptions+=j
+set smarttab
+set nojoinspaces
+set shiftround
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
 set backspace=indent,eol,start  " backspace through everything in insert mode
 set list
 set list listchars=tab:\ \ ,trail:·
@@ -65,11 +120,25 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
+" Colors
+if has("syntax")
+    syntax enable
+    set background=dark
+    silent! colorscheme sahara
+    if has("folding")
+        set fillchars=diff:\ ,fold:\ ,vert:\ 
+    endif
+    if exists("&synmaxcol")
+        set synmaxcol=3000
+    endif
+endif
+
+
 " colorscheme
-syntax enable
-let g:solarized_termtrans=1
-colorscheme solarized
-set background=dark
+"syntax enable
+"let g:solarized_termtrans=1
+"colorscheme solarized
+"set background=dark
 
 set laststatus=2
 
