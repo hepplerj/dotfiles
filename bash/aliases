@@ -1,0 +1,47 @@
+# Easier navigation
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+# Shortcuts
+alias bp='mate ~/.bash_profile'
+alias c='clear'
+alias cd.='cd ..'
+#alias cp='cp -i'
+alias cpu='top -o cpu -n 10'
+alias chromeproof="open -a Google\ Chrome --args -incognito"
+alias df="df -h"
+alias f='open -a Finder ./'
+alias ff='ruby /Users/hepplerj/src/editscript.rb'
+alias fireproof="/Applications/Firefox.app/Contents/MacOS/firefox -safe-mode"
+alias gp='git push origin master'
+alias gpa='git push --all'
+alias grep='grep --color=auto'
+alias h='history'
+alias home='cd && clear'
+#alias la='ls -Al' # show hidden files
+alias l='ls -Gl'
+alias la='ls -aF'
+alias ld='ls -ld'
+alias lg='ls -AlG'
+alias ls='ls -F'
+alias ll='ls -l'
+#alias lm='ls -al | more' # pipe through 'more'¬
+alias lt='echo "-----Newest--" && ls -Atl && echo "-----Oldest--"'
+alias newproject='ruby ~/src/newproject.rb'
+alias mem='top -o rsize -n 10' #memory
+alias md='perl Users/hepplerj/src/Markdown_1.0.1/Markdown.pl'
+alias mutt='cd ~/Desktop && mutt'
+#alias mv='mv -i'
+alias o='open -a'
+alias otask='ruby ~/src/otask/bin/otask'
+#alias rm='rm -i'
+alias rtt='/Users/hepplerj/src/Read2Text/read2text'
+alias smartypants='perl /Users/hepplerj/src/SmartyPants.pl'
+alias src="source ~/.bash_profile"
+#alias subl='sublime'
+alias update='sudo softwareupdate -i -a; brew update; brew upgrade'
+alias vrc='vim ~/.vimrc'
+
+# Servers
+alias stanford='ssh jheppler@cardinal.stanford.edu'
