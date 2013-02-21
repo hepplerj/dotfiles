@@ -35,10 +35,10 @@ export PATH="$HOME/lib/dotfiles/bin:${PATH}"
 #export RUBYOPT=rubygems
 export PATH=$PATH:/usr/local/sbin
 export PATH=/Applications/Postgres.app/Contents/MacOS/bin:$PATH
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/local/bin:/usr/local/git/bin:/usr/local/mysql/bin:/usr/textbin:~/.cabal/bin
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/local/bin:/usr/local/git/bin:/usr/local/mysql/bin:/usr/textbin:~/.cabal/bin:/usr/local/mysql/bin:$PATH
 
 # Python variables
-alias servethis="python SimpleHTTPServer; SimpleHTTPServer.test()"
+alias servethis="python -m SimpleHTTPServer"
 
 
 

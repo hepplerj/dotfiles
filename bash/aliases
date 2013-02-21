@@ -14,6 +14,9 @@ alias df="df -h"
 alias f='open -a Finder ./'
 alias ff='ruby /Users/hepplerj/src/editscript.rb'
 alias fireproof="/Applications/Firefox.app/Contents/MacOS/firefox -safe-mode"
+# Quick way to rebuild the Launch Services database and get rid
+# of duplicates in the Open With submenu.
+alias fixopenwith='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user'
 alias gp='git push origin master'
 alias gpa='git push --all'
 alias grep='grep --color=auto'
@@ -45,3 +48,4 @@ alias vrc='vim ~/.vimrc'
 
 # Servers
 alias stanford='ssh jheppler@cardinal.stanford.edu'
+alias jason='ssh jasonhep@jasonheppler.org'
