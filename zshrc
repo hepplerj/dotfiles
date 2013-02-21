@@ -1,55 +1,32 @@
-export ZSH="$HOME/.oh-my-zsh"
-export ZSH_THEME="myzsh"
-plugins=(command-coloring pip fabric lein redis-cli vagrant)
+#    ____   _       ___           __ _
+#   |_  /__| |_    / __|___ _ _  / _(_)__ _
+#    / /(_-< ' \  | (__/ _ \ ' \|  _| / _` |
+#   /___/__/_||_|  \___\___/_||_|_| |_\__, |
+#                                      |___/
 
-source $ZSH/oh-my-zsh.sh
-
-# Custom options --------------------------------------------------------------
-unsetopt promptcr
-
-# Aliases and Functions
-. ~/.shell/aliases
-. ~/.shell/functions
-if [ -f ~/.bash_local ]; then
-    . ~/.bash_local
+if [ "$TERM" = "xterm" ]; then
+  if [ -e /usr/share/terminfo/x/xterm-256color ]; then
+    export TERM='xterm-256color'
+  else
+    export TERM='xterm-color'
+  fi
 fi
 
-export DISABLE_AUTO_TITLE="true"
+[ -z "$PS1" ] && return
 
-# Environment variables -------------------------------------------------------
-export EDITOR="vim"
-export PATH="$HOME/.gem/ruby/1.8/bin:${PATH}"
-export PATH="$HOME/bin:${PATH}"
-export PATH="$HOME/lib/dotfiles/bin:${PATH}"
-export GREP_OPTIONS='--color=auto'
-export HISTSIZE=1000
-export HISTFILESIZE=1000
-export HISTTIMEFORMAT='"%d/%m/%y %T "'
-export HISTCONTROL=erasedups
-export RUBYOPT=rubygems
-export PATH=$PATH:/usr/local/sbin
-export PATH=/Applications/Postgres.app/Contents/MacOS/bin:$PATH
-source /usr/local/bin/virtualenvwrapper.sh
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/local/bin:/usr/local/git/bin:/usr/local/mysql/bin:/usr/texbin:/.cabal/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:~/.cabal/bin
+. ~/.dotfiles/zsh/completion.zsh
+. ~/.dotfiles/zsh/prompt.zsh
 
-# Python variables ------------------------------------------------------------
-export PIP_DOWNLOAD_CACHE="$HOME/.pip/cache"
-alias servethis="python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'"
+[ -e  ~/.rvm/scripts/rvm ] && . ~/.rvm/scripts/rvm
 
-# Server stuff ----------------------------------------------------------------
-alias spacely="ssh jheppler@spacely.unl.edu"
-alias segonku="ssh jheppler@segonku.unl.edu"
-alias jetson="ssh jheppler@jetson.unl.edu"
+if [ -e  ~/.rbenv ]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
 
-# Bigger scripts seaprated out
+# Pull in bash functions and aliases to avoid repetation
+source "/Users/jheppler/.dotfiles/bash/functions"
+source "/Users/jheppler/.dotfiles/bash/aliases"
 
-[[ -s "/Users/hepplerj/src/scripts/na.sh" ]] && source "/Users/hepplerj/src/scripts/na.sh"
-
-# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-# [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
-# export PATH="$HOME/.rbenv/bin:$PATH"
-# eval "$(rbenv init -)"
-
-# Terminal 256 colors
-export TERM="xterm-256color"
-export PYTHONDONTWRITEBYTECODE=1
+# Don't end with errors.
+true
