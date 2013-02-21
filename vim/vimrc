@@ -1,55 +1,41 @@
+"        _
+" __   _(_)_ __ ___  _ __ ___
+" \ \ / / | '_ ` _ \| '__/ __|
+"  \ V /| | | | | | | | | (__
+"   \_/ |_|_| |_| |_|_|  \___|
+"
 " Jason Heppler vimrc
+" Last updated 2013-02-19
 
 " Compatibility
-set nocompatible                " choose no compatibility with legacy vi
+" choose no compatibility with legacy vi
+set nocompatible
+
+" Key mappings
+" --------------------------------------------------------------------------
+
+" I use these the most
+nmap \l :setlocal number!<CR>:setlocal number?<CR>
+nmap \r :TagbarToggle<CR>
+nmap \Y :vertical resize 40<CR>:wincmd 1<CR>
+nmap \y :exec "vertical resize " . (80 + (&number * &numberwidth))<CR>:wincmd l<CR>
+
+" Move between buffers
+map <C-n> :bnext<CR>
+map <C-p> :bprev<CR>
+
+" buffer navigation
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+
+nnoremap <CR> :noh<CR>          " remove search highlight
+noremap! jj <Esc>
 
 " Plugins
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
-
-" Filetypes
-if has("autocmd")
-    filetype indent plugin on
-
-    " Shortcuts
-    nnoremap _ap :setlocal filetype=apache<CR>
-    nnoremap _bi :setlocal filetype=bindzone<CR>
-    nnoremap _cs :setlocal filetype=css<CR>
-    nnoremap _ht :setlocal filetype=html<CR>
-    nnoremap _js :setlocal filetype=javascript<CR>
-    nnoremap _md :setlocal filetype=markdown<CR>
-    nnoremap _pl :setlocal filetype=perl<CR>
-    nnoremap _ph :setlocal filetype=php<CR>
-    nnoremap _py :setlocal filetype=python<CR>
-    nnoremap _rb :setlocal filetype=ruby<CR>
-    nnoremap _sh :setlocal filetype=sh<CR>
-    nnoremap _vi :setlocal filetype=vim<CR>
-    nnoremap _xm :setlocal filetype=xml<CR>
-
-    " Apache
-    augroup apache
-        autocmd!
-        autocmd BufNewFile,BufRead *{etc,local,lib}/apache*/*.conf setlocal filetype=apache
-        autocmd BufNewFile,BufRead *etc/apache*/sites-*/* setlocal filetype=apache
-    augroup END
-
-    " Markdown
-    augroup markdown
-        autocmd!
-        autocmd Filetype markdown setlocal formatoptions+=t
-        autocmd Filetype markdown setlocal textwidth=79
-        if exists("&colorcolumn")
-            autocmd Filetype markdown setlocal colorcolumn=+1
-        endif
-    augroup END
-endif
-
-" Commands
-if has("cmdline_info")
-    set ruler
-    set showcmd
-    set showmode
-endif
 
 " Encoding
 set fileformats=unix,dos,mac
@@ -57,29 +43,54 @@ if has("multi_byte")
     set encoding=utf-8
 endif
 
-" Formatting
-set expandtab
-set formatoptions=croqn1
-silent! set formatoptions+=j
-set smarttab
-set nojoinspaces
-set shiftround
-set shiftwidth=4
-set softtabstop=4
-set tabstop=4
+" Hacks
+"--------------------------------------------------------------------------
+
+" I want `j` and `k` to work visually, where `down` means the next line
+map j gj
+map k gk
+
+" Vim options
+"--------------------------------------------------------------------------
+set autoindent                  " carry over indent from previous line
+set autoread                    " don't bother me
 set backspace=indent,eol,start  " backspace through everything in insert mode
-set list
+set cindent                     " automatic indenting
+set cinkeys-=0#                 " comments don't fiddle with indenting
+set encoding=utf-8              " UTF-8 by default
+set expandtab                   " no tabs
+set formatoptions=tcqn1         " t - autowrap normal text
+                                " c - autowrap comments
+                                " q - gq formats comments
+                                " n - autowrap lists
+                                " 1 - break _before_ single letter words
+                                " 2 - use indenting from 2nd line of para
+set hidden                      " don't promt to save hidden windows until exit
+set history=200                 " how mnay lines of history to save
+set hlsearch                    " highlight search matches
+set incsearch                   " incremental search
+set ignorecase                  " case insensitive
+set infercase
+set laststatus=2                " always show status bar
+set linebreak                   " break long lines by word, not char
+set list                        " show invisible characters in listchars
 set list listchars=tab:\ \ ,trail:·
+set nobackup
+set nonumber                    " no line number at start
+set ruler                       " show row/col and percentage
+set smartcase
+set smarttab
+set showmatch                   " hilight matching braces/parens
+set shiftround                  " shift to certain columns, not just spaces
+set shiftwidth=4                " number of spaces to shift for autoindent
+set softtabstop=4               " spaces 'feel' like tabs
+set tabstop=4                   " One True Tab
+set wildmenu                    " Show possible completions on command line
+set wildmode=list:longest,full  " List all options and complete
+set wildignore=*.class,*.o,*~,*.pyc,.git,node_modules  " Ignore certain files in tab-completion
 
-" toggle automatic hardwrapping
-nmap <silent> <leader>wa :set fo-=a<CR>
-nmap <silent> <leader>aw :set fo+=a<CR>
-
-" remove line breaks within paragraphs (softwrap)
-" http://superuser.com/questions/200423/join-lines-inside-paragraphs-in-vim
-nmap <silent> <leader>sw Go<Esc>:3,$g/^./ .,/^$/-1 join<CR>
-" straighten quotes
-nmap <leader>q :exe '%s/[“”]/"/eg'<cr>:exe "%s/[‘’]/'/eg"<cr>:nohlsearch<cr>
+" Commands and Functions
+"--------------------------------------------------------------------------
 
 " auto commands
 :autocmd BufWrite *.py %retab   " retab python files
@@ -88,17 +99,17 @@ nmap <leader>q :exe '%s/[“”]/"/eg'<cr>:exe "%s/[‘’]/'/eg"<cr>:nohlsearch
 :iabbrev ppython #!/usr/bin/env python <cr>#-*- coding: utf-8 -*-
 :iabbrev rruby #!/usr/bin/env ruby<cr>
 
-" searching
-set hlsearch                    " highlight matches
-set incsearch                   " incremental search
-set ignorecase                  " case insensitive
-set smartcase
 nnoremap <CR> :noh<CR>          " remove search highlight
 
-" mappings
-let mapleader = ","
-noremap! jj <Esc>
-nmap <leader>g :GundoToggle<CR>
+" CTRL-P
+nmap ; :CtrlPBuffer<CR>
+let g:ctrlp_map = '<leader>t'
+let g:ctrlp_match_window_bottom = 0
+let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_custom_ignore = '\v\~$|\.(o|swp|pyc|wav|mp3|ogg|blend)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|__init__\.py'
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_dotfiles = 0
+let g:ctrlp_switch_buffer = 0
 
 " NERDTree
 augroup ps_nerdtree
@@ -107,54 +118,50 @@ augroup ps_nerdtree
     au Filetype nerdtree setlocal nolist
     au Filetype nerdtree nnoremap <buffer> K :q<cr>
 augroup END
-
 let NERDTreeHighlightCursorline = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
+map \d :NERDTreeToggle<CR>
 
-map <leader>d :NERDTreeToggle<CR>
-
-" buffer navigation
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
-
-" Colors
-if has("syntax")
-    syntax enable
-    set background=dark
-    silent! colorscheme sahara
-    if has("folding")
-        set fillchars=diff:\ ,fold:\ ,vert:\ 
-    endif
-    if exists("&synmaxcol")
-        set synmaxcol=3000
-    endif
-endif
-
-
-" colorscheme
-"syntax enable
-"let g:solarized_termtrans=1
-"colorscheme solarized
-"set background=dark
-
-set laststatus=2
-
-" Marked.app
+" Launch Marked.app to preview markdown files
 :nnoremap <leader>ma :silent !open -a Marked.app '%:p' :redraw!<cr>
+
+" Strip trailing white space (,ss)
+function! StripWhitespace()
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    :%s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
+endfunction
+noremap \ss :call StripWhitespace()<CR>
+
+" Color and syntax
+"--------------------------------------------------------------------------
+
+" Make sure colored syntax is on, and make it work with 256 terminals
+if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
+     colorscheme ir_black
+     set background=dark
+     set t_Co=256
+elseif has ("terminfo")
+    colorscheme default
+    set t_Co=8
+    set t_Sf=[3%p1%dm
+    set t_Sb=[4%p1%dm
+else
+    colorscheme default
+    set t_Co=8
+    set t_Sf=[3%dm
+    set t_Sb=[4%dm
+endif
+syntax on
 
 " enable fancy mode
 let g:Powerline_symbols = 'fancy'
 
-" Visuals
-set number
-set colorcolumn=81
-set cursorline
-nmap <leader>ev :vsplit $MYVIMRC<cr> " mapping to edit vimrc quickly
-nmap <leader>sv :source $MYVIMRC<cr> " mapping to source vimrc quickly
-
+" Markdown specifics
+"--------------------------------------------------------------------------
 " writing mode
 func! WordProcessorMode()
     setlocal formatoptions=t1
@@ -169,39 +176,27 @@ func! WordProcessorMode()
 endfu
 com! WP call WordProcessorMode()
 
-" bibkeys
+" bibkeys - launch with CTRL-X CTRL-K
 " via https://github.com/lmullen/bibkeys
-" launch with CTRL-X CTRL-K
 set dictionary=$HOME/bib/citekeys.txt
 set complete+=k
 
 " Find text markers
 nnoremap <leader>{ :vimgrep /{\w\+}/ %<CR>:copen<CR>
 
-" Some file types should wrap their text
-function! s:setupWrapping()
-    set wrap
-    set linebreak
-    set textwidth=72
-    set nolist
-endfunction
+" Plugin settings
+"--------------------------------------------------------------------------
 
-if has("autocmd")
-    " Make sure all mardown files have the correct filetype set and setup wrapping
-    au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} setf markdown | call s:setupWrapping()
-endif
+" vim package manager
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
 
-" Strip trailing white space (,ss)
-function! StripWhitespace()
-    let save_cursor = getpos(".")
-    let old_query = getreg('/')
-    :%s/\s\+$//e
-    call setpos('.', save_cursor)
-    call setreg('/', old_query)
-endfunction
-noremap <leader>ss :call StripWhitespace()<CR>
+" For any plugins that use leader, use comma
+let mapleader=","
+let maplocalleader=","
 
 " Source configuration files
+"--------------------------------------------------------------------------
 nmap <leader>sv :source %<cr>
 source $HOME/.vim/bibtex.vimrc
 source $HOME/.vim/gitit.vimrc
