@@ -1,0 +1,10 @@
+set background=dark
+colors tomorrow_night
+hi Normal guibg=#292929
+hi Visual guibg=#505050
+
+set columns=80 lines=50
+set cursorline
+
+au FocusLost * :wa
+"set guifont=Monaco:h14
