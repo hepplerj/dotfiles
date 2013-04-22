@@ -7,7 +7,7 @@ let g:pandoc_no_folding = 1
 " Highlight markers in text
 match Error '{\w\+}'
 
-nmap <leader>v :!pandoc -t html --smart --include-in-header=/Users/wcm1/.pandoc/marked.css % \|bcat<cr><cr>
+nmap <leader>v :!pandoc -t html --smart --include-in-header=/Users/jheppler/.pandoc/marked.css % \|bcat<cr><cr>
 
 " Convert buffer to html from markdown
 nmap <leader>h :%!pandoc -f markdown -t html
@@ -30,11 +30,11 @@ function! PanSyllabus()
 endfunction
 
 function! PanDocx()
-   exec ":! makebib;pandoc -s -S -t docx --reference-docx=/Users/wcm1/.pandoc/reference.docx --bibliography=/Users/wcm1/all.bib -o ~/Desktop/" . fnameescape(expand('%:t:r')) . ".docx " . fnameescape(expand('%:p'))
+   exec ":! makebib;pandoc -s -S -t docx --reference-docx=/Users/jheppler/.pandoc/reference.docx --bibliography=/Users/jheppler/all.bib -o ~/Desktop/" . fnameescape(expand('%:t:r')) . ".docx " . fnameescape(expand('%:p'))
 endfunction
 
 function! PanBib()
-   exec ":! makebib;pandoc -s -S -t markdown --bibliography=/Users/wcm1/all.bib . fnameescape(expand('%:p'))"
+   exec ":! makebib;pandoc -s -S -t markdown --bibliography=/Users/jheppler/all.bib . fnameescape(expand('%:p'))"
 endfunction
 
 " Change regular pandoc footnotes to inline notes
