@@ -5,20 +5,29 @@
 "   \_/ |_|_| |_| |_|_|  \___|
 "
 " Jason Heppler vimrc
-" Last updated 2013-02-19
+" Last updated 2013-04-21
 
 " Compatibility
 " choose no compatibility with legacy vi
 set nocompatible
 
+" Pathogen
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
 " Key mappings
 " --------------------------------------------------------------------------
 
-" I use these the most
-nmap \l :setlocal number!<CR>:setlocal number?<CR>
-nmap \r :TagbarToggle<CR>
-nmap \Y :vertical resize 40<CR>:wincmd 1<CR>
-nmap \y :exec "vertical resize " . (80 + (&number * &numberwidth))<CR>:wincmd l<CR>
+" For any plugins that use leader, use a comma
+" This *must* come before anything else calls on <leader>
+let mapleader=","
+let maplocalleader=","
+
+" I use these frequently
+nmap ,l :setlocal number!<CR>:setlocal number?<CR>
+nmap ,r :TagbarToggle<CR>
+nmap ,Y :vertical resize 40<CR>:wincmd 1<CR>
+nmap ,y :exec "vertical resize " . (80 + (&number * &numberwidth))<CR>:wincmd l<CR>
 
 " Move between buffers
 map <C-n> :bnext<CR>
@@ -29,13 +38,6 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
-
-nnoremap <CR> :noh<CR>          " remove search highlight
-noremap! jj <Esc>
-
-" Plugins
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
 
 " Encoding
 set fileformats=unix,dos,mac
@@ -49,6 +51,7 @@ endif
 " I want `j` and `k` to work visually, where `down` means the next line
 map j gj
 map k gk
+noremap! jj <Esc>
 
 " Vim options
 "--------------------------------------------------------------------------
@@ -64,12 +67,12 @@ set formatoptions=tcqn1         " t - autowrap normal text
                                 " q - gq formats comments
                                 " n - autowrap lists
                                 " 1 - break _before_ single letter words
-                                " 2 - use indenting from 2nd line of para
-set hidden                      " don't promt to save hidden windows until exit
-set history=200                 " how mnay lines of history to save
+set hidden                      " don't prompt to save hidden windows until exit
+set history=500                 " how many lines of history to save
 set hlsearch                    " highlight search matches
 set incsearch                   " incremental search
 set ignorecase                  " case insensitive
+nnoremap <CR> :noh<CR>          " remove search highlight
 set infercase
 set laststatus=2                " always show status bar
 set linebreak                   " break long lines by word, not char
@@ -85,6 +88,8 @@ set shiftround                  " shift to certain columns, not just spaces
 set shiftwidth=4                " number of spaces to shift for autoindent
 set softtabstop=4               " spaces 'feel' like tabs
 set tabstop=4                   " One True Tab
+set undofile                    " Vim 7.3 -- maintain undo history between sessions
+set undodir=~/.cache/undodir    " where `undofile` puts files
 set wildmenu                    " Show possible completions on command line
 set wildmode=list:longest,full  " List all options and complete
 set wildignore=*.class,*.o,*~,*.pyc,.git,node_modules  " Ignore certain files in tab-completion
@@ -95,13 +100,11 @@ set wildignore=*.class,*.o,*~,*.pyc,.git,node_modules  " Ignore certain files in
 " auto commands
 :autocmd BufWrite *.py %retab   " retab python files
 
-" abbreviations
+" abbreviations, in cases where TextExpander is disabled
 :iabbrev ppython #!/usr/bin/env python <cr>#-*- coding: utf-8 -*-
 :iabbrev rruby #!/usr/bin/env ruby<cr>
 
-nnoremap <CR> :noh<CR>          " remove search highlight
-
-" CTRL-P
+" CTRL-P (`;`)
 nmap ; :CtrlPBuffer<CR>
 let g:ctrlp_map = '<leader>t'
 let g:ctrlp_match_window_bottom = 0
@@ -110,8 +113,9 @@ let g:ctrlp_custom_ignore = '\v\~$|\.(o|swp|pyc|wav|mp3|ogg|blend)$|(^|[/\\])\.(
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_dotfiles = 0
 let g:ctrlp_switch_buffer = 0
+"let g:ctrlp_cache_dir = ~/.cache/ctrlp
 
-" NERDTree
+" NERDTree (`,d`)
 augroup ps_nerdtree
     au!
 
@@ -121,12 +125,9 @@ augroup END
 let NERDTreeHighlightCursorline = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
-map \d :NERDTreeToggle<CR>
+map <leader>d :NERDTreeToggle<CR>
 
-" Launch Marked.app to preview markdown files
-:nnoremap <leader>ma :silent !open -a Marked.app '%:p' :redraw!<cr>
-
-" Strip trailing white space (,ss)
+" Strip trailing white space (`,ss`)
 function! StripWhitespace()
     let save_cursor = getpos(".")
     let old_query = getreg('/')
@@ -134,14 +135,14 @@ function! StripWhitespace()
     call setpos('.', save_cursor)
     call setreg('/', old_query)
 endfunction
-noremap \ss :call StripWhitespace()<CR>
+noremap <leader>ss :call StripWhitespace()<CR>
 
 " Color and syntax
 "--------------------------------------------------------------------------
 
 " Make sure colored syntax is on, and make it work with 256 terminals
 if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
-     colorscheme ir_black
+     colorscheme solarized
      set background=dark
      set t_Co=256
 elseif has ("terminfo")
@@ -157,7 +158,7 @@ else
 endif
 syntax on
 
-" enable fancy mode
+" enable fancy mode with Powerline
 let g:Powerline_symbols = 'fancy'
 
 " Markdown specifics
@@ -176,6 +177,63 @@ func! WordProcessorMode()
 endfu
 com! WP call WordProcessorMode()
 
+" Launch Marked.app to preview markdown files
+:nnoremap <leader>ma :silent !open -a Marked.app '%:p' :redraw!<cr>
+
+" Temporary -- trying functions to switch between
+" writing code and writing prose
+command! Prose inoremap <buffer> . .<C-G>u|
+            \ inoremap <buffer> ! !<C-G>u|
+            \ inoremap <buffer> ? ?<C-G>u|
+            \ setlocal spell spelllang=sv,en
+            \     nolist nowrap tw=74 fo=t1 nonu|
+            \ augroup PROSE|
+            \   autocmd InsertEnter <buffer> set fo+=a|
+            \   autocmd InsertLeave <buffer> set fo-=a|
+            \ augroup END
+
+command! Code silent! iunmap <buffer> .|
+            \ silent! iunmap <buffer> !|
+            \ silent! iunmap <buffer> ?|
+            \ setlocal nospell list nowrap
+            \     tw=74 fo=cqr1 showbreak=… nu|
+            \ silent! autocmd! PROSE * <buffer>
+
+" spell check
+set spelllang=en_us
+set spell
+set spellsuggest=10
+nnoremap <silent> <leader>sp :set spell!<CR>
+
+" Find related Pandoc footnote numbers
+" -------------------------------------------------------------------
+" Vim's * key searches for the next instance of the word under the 
+" cursor; Vim decides what counts as the boundary of a word with the 
+" iskeyword option. This function toggles the special characters of a 
+" Pandoc footnote in the form [^1] to allow you to jump between 
+" footnotes with the * key.
+nnoremap _fn :call ToggleFootnoteJumping()<CR>
+function! ToggleFootnoteJumping()
+  if exists("g:FootnoteJumping") 
+    if g:FootnoteJumping == 1
+      set iskeyword-=[
+      set iskeyword-=]
+      set iskeyword-=^
+      let g:FootnoteJumping = 0
+    else
+      set iskeyword+=[
+      set iskeyword+=]
+      set iskeyword+=^
+      let g:FootnoteJumping = 1
+    endif
+  else 
+    set iskeyword+=[
+    set iskeyword+=]
+    set iskeyword+=^
+    let g:FootnoteJumping = 1
+  endif
+endfunction
+
 " bibkeys - launch with CTRL-X CTRL-K
 " via https://github.com/lmullen/bibkeys
 set dictionary=$HOME/bib/citekeys.txt
@@ -184,20 +242,9 @@ set complete+=k
 " Find text markers
 nnoremap <leader>{ :vimgrep /{\w\+}/ %<CR>:copen<CR>
 
-" Plugin settings
-"--------------------------------------------------------------------------
-
-" vim package manager
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
-
-" For any plugins that use leader, use comma
-let mapleader=","
-let maplocalleader=","
-
 " Source configuration files
 "--------------------------------------------------------------------------
-nmap <leader>sv :source %<cr>
+nmap <leader>src :source %<cr>
 source $HOME/.vim/bibtex.vimrc
 source $HOME/.vim/gitit.vimrc
 source $HOME/.vim/markdown.vimrc

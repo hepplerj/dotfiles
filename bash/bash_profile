@@ -25,8 +25,10 @@ for file in ~/.dotfiles/bash/{bash_prompt,aliases,functions}; do
 done
 unset file
 
+source /Users/jheppler/git/se-aliases/se-aliases.sh
+
 # Environment variables
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/local/bin:/usr/local/git/bin:/usr/local/mysql/bin:/usr/texbin:$PATH
+#export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/local/bin:/usr/local/git/bin:/usr/local/mysql/bin:/usr/texbin:$PATH
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 
 #export PATH="$HOME/.gem/ruby/1.8/bin:${PATH}"
@@ -35,13 +37,11 @@ export PATH="$HOME/lib/dotfiles/bin:${PATH}"
 #export RUBYOPT=rubygems
 export PATH=$PATH:/usr/local/sbin
 export PATH=/Applications/Postgres.app/Contents/MacOS/bin:$PATH
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/local/bin:/usr/local/git/bin:/usr/local/mysql/bin:/usr/textbin:~/.cabal/bin:/usr/local/mysql/bin:$PATH
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/local/bin:/usr/local/git/bin:/usr/local/mysql/bin:/usr/textbin:~/.cabal/bin:/usr/local/mysql/bin:/usr/local/bin/node:/usr/local/bin/npm:$PATH
+export NODE_PATH="/usr/local/lib/node"
 
 # Python variables
 alias servethis="python -m SimpleHTTPServer"
-
-
-
 
 # Colors
 export CLICOLOR=1
@@ -49,7 +49,7 @@ export LSCOLORS=Gxfxcxdxbxegedabagacad
 
 # Bigger scripts seaprated out
 
-[[ -s "/Users/hepplerj/src/scripts/na.sh" ]] && source "/Users/hepplerj/src/scripts/na.sh"
+[[ -s "/Users/jheppler/src/scripts/na.sh" ]] && source "/Users/jheppler/src/scripts/na.sh"
 
 # [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 # [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function

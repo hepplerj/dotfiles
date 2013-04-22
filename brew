@@ -9,7 +9,8 @@ brew upgrade
 # Install core GNU utilities (OS X utilities are old)
 brew install coreutils
 echo "Don't forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH."
-" Install GNU `find`, `locate`, and `xargs`
+
+# Install GNU `find`, `locate`, and `xargs`
 brew install findutils
 
 # Install wget
