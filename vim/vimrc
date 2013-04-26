@@ -66,7 +66,7 @@ set formatoptions=tcqn1         " t - autowrap normal text
                                 " c - autowrap comments
                                 " q - gq formats comments
                                 " n - autowrap lists
-                                " 1 - break _before_ single letter words
+                                " 1 - break *before* single letter words
 set hidden                      " don't prompt to save hidden windows until exit
 set history=500                 " how many lines of history to save
 set hlsearch                    " highlight search matches
@@ -79,11 +79,13 @@ set linebreak                   " break long lines by word, not char
 set list                        " show invisible characters in listchars
 set list listchars=tab:\ \ ,trail:·
 set nobackup
+set nocindent                   " turn off 'C' indenting, stops problem of
+                                " newline indenting after a comma
 set nonumber                    " no line number at start
 set ruler                       " show row/col and percentage
 set smartcase
 set smarttab
-set showmatch                   " hilight matching braces/parens
+set showmatch                   " highlight matching braces/parens
 set shiftround                  " shift to certain columns, not just spaces
 set shiftwidth=4                " number of spaces to shift for autoindent
 set softtabstop=4               " spaces 'feel' like tabs
@@ -101,8 +103,9 @@ set wildignore=*.class,*.o,*~,*.pyc,.git,node_modules  " Ignore certain files in
 :autocmd BufWrite *.py %retab   " retab python files
 
 " abbreviations, in cases where TextExpander is disabled
-:iabbrev ppython #!/usr/bin/env python <cr>#-*- coding: utf-8 -*-
-:iabbrev rruby #!/usr/bin/env ruby<cr>
+iab ppython #!/usr/bin/env python <cr>#-*- coding: utf-8 -*-
+iab rruby #!/usr/bin/env ruby<cr>
+iab jah Jason Heppler<cr>
 
 " CTRL-P (`;`)
 nmap ; :CtrlPBuffer<CR>
@@ -207,14 +210,14 @@ nnoremap <silent> <leader>sp :set spell!<CR>
 
 " Find related Pandoc footnote numbers
 " -------------------------------------------------------------------
-" Vim's * key searches for the next instance of the word under the 
-" cursor; Vim decides what counts as the boundary of a word with the 
-" iskeyword option. This function toggles the special characters of a 
-" Pandoc footnote in the form [^1] to allow you to jump between 
+" Vim's * key searches for the next instance of the word under the
+" cursor; Vim decides what counts as the boundary of a word with the
+" iskeyword option. This function toggles the special characters of a
+" Pandoc footnote in the form [^1] to allow you to jump between
 " footnotes with the * key.
 nnoremap _fn :call ToggleFootnoteJumping()<CR>
 function! ToggleFootnoteJumping()
-  if exists("g:FootnoteJumping") 
+  if exists("g:FootnoteJumping")
     if g:FootnoteJumping == 1
       set iskeyword-=[
       set iskeyword-=]
@@ -226,7 +229,7 @@ function! ToggleFootnoteJumping()
       set iskeyword+=^
       let g:FootnoteJumping = 1
     endif
-  else 
+  else
     set iskeyword+=[
     set iskeyword+=]
     set iskeyword+=^

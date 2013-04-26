@@ -47,13 +47,13 @@ set text_flowed=yes        # no line breaks
 # }}}
 # Sidebar Patch {{{
 
-#set sidebar_delim='  |'
-#set sidebar_visible=yes
-#set sidebar_width=24
-#color sidebar_new color221 color233
-#bind index,pager <down>   sidebar-next
-#bind index,pager <up>     sidebar-prev
-#bind index,pager <right>  sidebar-open
+set sidebar_delim='  |'
+set sidebar_visible=yes
+set sidebar_width=24
+color sidebar_new color221 color233
+bind index,pager <down>   sidebar-next
+bind index,pager <up>     sidebar-prev
+bind index,pager <right>  sidebar-open
 
 # }}}
 # Status Bar {{{
