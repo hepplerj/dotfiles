@@ -28,17 +28,13 @@ unset file
 source /Users/jheppler/git/se-aliases/se-aliases.sh
 
 # Environment variables
-#export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/local/bin:/usr/local/git/bin:/usr/local/mysql/bin:/usr/texbin:$PATH
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 
-#export PATH="$HOME/.gem/ruby/1.8/bin:${PATH}"
-export PATH="$HOME/bin:${PATH}"
-export PATH="$HOME/lib/dotfiles/bin:${PATH}"
-#export RUBYOPT=rubygems
-export PATH=$PATH:/usr/local/sbin
-export PATH=/Applications/Postgres.app/Contents/MacOS/bin:$PATH
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/local/bin:/usr/local/git/bin:/usr/local/mysql/bin:/usr/textbin:~/.cabal/bin:/usr/local/mysql/bin:/usr/local/bin/node:/usr/local/bin/npm:$PATH
+#export PATH=$PATH:/usr/local/sbin
+#export PATH=/Applications/Postgres.app/Contents/MacOS/bin:$PATH
 export NODE_PATH="/usr/local/lib/node"
+
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/local/bin:/usr/local/git/bin:/usr/local/mysql/bin:/usr/textbin:~/.cabal/bin:/usr/local/mysql/bin:/usr/local/bin/node:/usr/local/bin/npm:$PATH
 
 # Python variables
 alias servethis="python -m SimpleHTTPServer"

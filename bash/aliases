@@ -50,11 +50,12 @@ alias src="source ~/.bash_profile"
 alias update='sudo softwareupdate -i -a; brew update; brew upgrade'
 alias vrc='vim ~/.vimrc'
 alias runwiki='cd ~/Projects/Dissertation/wiki && gitit'
-alias research="mvim -c ':cd ~/ProjectsDissertation/wiki/wikidata'"
+alias research="cd ~/Dropbox/wikidata"
 alias diss='cd ~/Projects/Dissertation'
 alias posts="mvim -c ':cd ~/git/jasonheppler.org/_posts'"
 alias servethis="python -m SimpleHTTPServer"
 alias wordcount="clear; wc -mlw *.md"
+alias spotify="~/bin/shpotify/spotify"
 
 # Servers
 alias stanford='ssh jheppler@cardinal.stanford.edu'

@@ -1,5 +1,5 @@
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="mine"
+ZSH_THEME="losh"
 plugins=(osx git ruby command-coloring pip)
 
 export EDITOR='vim'

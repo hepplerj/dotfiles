@@ -45,6 +45,9 @@ if has("multi_byte")
     set encoding=utf-8
 endif
 
+" Preserve indentation while pasting text from the OS X clipboard
+noremap <leader>p :set paste<CR>:put *<CR>:set nopaste<CR>
+
 " Hacks
 "--------------------------------------------------------------------------
 
