@@ -24,7 +24,7 @@ let mapleader=","
 let maplocalleader=","
 
 " I use these frequently
-nmap ,l :setlocal number!<CR>:setlocal number?<CR>
+"nmap ,l :setlocal number!<CR>:setlocal number?<CR>
 nmap ,r :TagbarToggle<CR>
 nmap ,Y :vertical resize 40<CR>:wincmd 1<CR>
 nmap ,y :exec "vertical resize " . (80 + (&number * &numberwidth))<CR>:wincmd l<CR>
@@ -46,7 +46,7 @@ if has("multi_byte")
 endif
 
 " Preserve indentation while pasting text from the OS X clipboard
-noremap <leader>p :set paste<CR>:put *<CR>:set nopaste<CR>
+noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 
 " Hacks
 "--------------------------------------------------------------------------
@@ -85,6 +85,7 @@ set nobackup
 set nocindent                   " turn off 'C' indenting, stops problem of
                                 " newline indenting after a comma
 set nonumber                    " no line number at start
+set number
 set ruler                       " show row/col and percentage
 set smartcase
 set smarttab
@@ -132,6 +133,9 @@ let NERDTreeHighlightCursorline = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 map <leader>d :NERDTreeToggle<CR>
+
+" NERDCommenter
+map <leader>cc NERDCommenterToggle<CR>
 
 " Strip trailing white space (`,ss`)
 function! StripWhitespace()
@@ -242,7 +246,7 @@ endfunction
 
 " bibkeys - launch with CTRL-X CTRL-K
 " via https://github.com/lmullen/bibkeys
-set dictionary=$HOME/bib/citekeys.txt
+set dictionary=$HOME/Projects/Dissertation/bib/citekeys.txt
 set complete+=k
 
 " Find text markers
