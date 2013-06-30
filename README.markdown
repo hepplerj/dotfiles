@@ -21,15 +21,6 @@ $ cd system
 
 $./osx
 ```
-
-## Install vim bundles
-
-Hat tip to Ian Langworth's script. This script, located in the `vim` directory, downloads all my vim bundles and organizes them using Pathogen:
-
-```bash
-./update.sh
-```
-
 ## Install Homebrew formulae
 
 When setting up a new Mac, I install some common Homebrew formulae once Homebrew is installed:
