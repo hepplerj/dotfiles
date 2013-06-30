@@ -19,35 +19,23 @@ if [ -f ~/.git_completion.sh ]; then
   source ~/.git_completion.sh
 fi
 
-# Load the shell dotfiles
-for file in ~/.dotfiles/bash/{bash_prompt,aliases,functions}; do
-    [ -r "$file" ] && source "$file"
-done
-unset file
-
-source /Users/jheppler/git/se-aliases/se-aliases.sh
-
-# Environment variables
-export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
-
-#export PATH=$PATH:/usr/local/sbin
-#export PATH=/Applications/Postgres.app/Contents/MacOS/bin:$PATH
-export NODE_PATH="/usr/local/lib/node"
-
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/local/bin:/usr/local/git/bin:/usr/local/mysql/bin:/usr/textbin:~/.cabal/bin:/usr/local/mysql/bin:/usr/local/bin/node:/usr/local/bin/npm:$PATH
-
-# Python variables
-alias servethis="python -m SimpleHTTPServer"
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+#export PATH="$HOME/Library/Haskell/bin:$PATH"
+#export PATH="$HOME/.cabal/bin:$PATH"
+export LC_CTYPE=en_US.UTF-8 
+export PS1="\[\e[0;32m\]\W @ \h (\u) \n\$ \[\e[m\]" 
+export EDITOR="subl -w"
+#ignore certain commands from history: duplicates, ls, bg, fg, and exit
+export HISTIGNORE="&:ls:[bf]g:exit"
+export NODE_PATH="/usr/local/lib/node_modules"
+export CDPATH=".:~:~/acad/dissertation/:~/acad/:~/dev/"
+export PYTHONPATH="/usr/local/lib/python:/usr/local/share/python:/usr/local/lib/python2.7/site-packages"
+set -o vi
+alias ls="ls -F"
 
 # Colors
 export CLICOLOR=1
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 
-# Bigger scripts seaprated out
-
-[[ -s "/Users/jheppler/src/scripts/na.sh" ]] && source "/Users/jheppler/src/scripts/na.sh"
-
-# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-# [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
 # export PATH="$HOME/.rbenv/bin:$PATH"
 # eval "$(rbenv init -)"

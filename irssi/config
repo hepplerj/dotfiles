@@ -1,9 +1,0 @@
-settings = {
-  core = {
-    real_name = "Jason Heppler";
-    user_name = "jheppler";
-    nick = "jheppler";
-  };
-  "fe-text" = { actlist_sort = "refnum"; };
-};
-ignores = ( { mask = "JOINS"; level = "PARTS QUITS NICKS"; } );
