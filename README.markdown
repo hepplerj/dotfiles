@@ -17,7 +17,9 @@ $ rake
 Hat tip to Mathias Bynen's excellent OS X defaults. You can set these by running:
 
 ```bash
-./osx
+$ cd system
+
+$./osx
 ```
 
 ## Install vim bundles
