@@ -60,7 +60,12 @@
   url = git://github.com/tpope/vim-rbenv.git
 [submodule "vim/vim.symlink/bundle/supertab"]
   path = vim/vim.symlink/bundle/supertab
-  url = https://github.com/ervandew/supertab
+[submodule "vim/vim.symlink/bundle/FuzzyFinder"]
+  path = vim/vim.symlink/bundle/FuzzyFinder
+  url = https://github.com/vim-scripts/FuzzyFinder.git
+[submodule "vim/vim.symlink/bundle/gist-vim"]
+  path = vim/vim.symlink/bundle/gist-vim
+  url = https://github.com/mattn/gist-vim.git
 [submodule "csl/csl.symlink"]
   path = csl/csl.symlink
   url = git@github.com:citation-style-language/styles.git
