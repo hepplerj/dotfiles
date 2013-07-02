@@ -17,4 +17,5 @@ source $HOME/.dotfiles/zsh/aliases.zsh
 source $HOME/.dotfiles/zsh/colors.zsh
 source $HOME/.dotfiles/zsh/config.zsh
 source $HOME/.dotfiles/zsh/functions/*
+source $HOME/.dotfiles/system/path.zsh
 source $HOME/git/se-aliases/se-aliases.sh
