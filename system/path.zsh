@@ -7,7 +7,7 @@ pathdirs=(
   /usr/bin/
   /usr/texbin
   /usr/X11/bin
-  $HOME/.cabal/bin
+  ~/.cabal/bin
   /opt/X11/bin
   /usr/local/mysql/bin
   /usr/local/git/bin

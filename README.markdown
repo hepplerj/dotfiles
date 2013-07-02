@@ -19,7 +19,7 @@ Hat tip to Mathias Bynen's excellent OS X defaults. You can set these by running
 ```bash
 $ cd system
 
-$./osx
+$ ./osx
 ```
 ## Install Homebrew formulae
 

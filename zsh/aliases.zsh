@@ -5,13 +5,18 @@ alias blog="subl --new-window --project ~/Dropbox/Sublime\ projects/lincolnmulle
 alias diss="subl --new-window --project ~/Dropbox/Sublime\ projects/dissertation.sublime-project"
 alias dot="subl --new-window --project ~/Dropbox/Sublime\ projects/dotfiles.sublime-project"
 
-alias runwiki='cd ~/acad/research/dissertation/wiki && gitit -f my.conf > /dev/null 2>&1 &'
+alias runwiki='cd ~/acad/research/dissertation/wiki && gitit'
 alias research='cd ~/acad/research/dissertation'
 
 # Change application behavior
 # -------------------------------------------------------------------
 alias R="R --no-restore"
 alias chrome="open -a \"Google Chrome\""
+
+# Navigation
+# -------------------------------------------------------------------
+alias ..="cd .."
+alias ...="cd ../.."
 
 # File and system management
 # -------------------------------------------------------------------
@@ -35,12 +40,12 @@ alias md='perl /Users/jheppler/bin/Markdown_1.0.1/Markdown.pl'
 alias more='more -R'                # give more colors
 alias mutt='cd ~/Desktop && mutt'
 alias process="ps aux | grep"
-alias synaptic="sudo synaptic"
-alias tn="new-todo.rb"
-alias tu="timeuse.rb"
-alias zshreload='source ~/.zshrc'
+alias servethis="python -m SimpleHTTPServer"
+alias src='source ~/.zshrc'
+alias update="sudo softwareupdate -i -a; brew update; brew upgrade"
 
 # Servers
+# -------------------------------------------------------------------
 alias stanford='ssh jheppler@cardinal.stanford.edu'
 alias jason='ssh jasonhep@jasonheppler.org'
 

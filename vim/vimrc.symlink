@@ -175,3 +175,4 @@ source $HOME/.vim/bibtex.vimrc
 source $HOME/.vim/gitit.vimrc
 source $HOME/.vim/markdown.vimrc
 source $HOME/.vim/pandoc.vimrc
+source $HOME/.vim/functions.vimrc
