@@ -13,6 +13,7 @@ pathdirs=(
   /usr/local/git/bin
   /usr/local/bin/node
   /usr/local/bin/npm
+  ~/bin/
 )
 
 for dir in $pathdirs; do

@@ -118,7 +118,7 @@ else
     set t_Sf=[3%dm
     set t_Sb=[4%dm
 endif
-syntax on
+syntax enable
 
 " enable fancy mode with Powerline
 let g:Powerline_symbols = 'fancy'
@@ -141,6 +141,27 @@ com! WP call WordProcessorMode()
 
 " Launch Marked.app to preview markdown files
 :nnoremap <leader>ma :silent !open -a Marked.app '%:p' :redraw!<cr>
+
+function! Formd(option)
+    :let save_view = winsaveview()
+    :let flag = a:option
+    :if flag == "-r"
+        :%! ~/bin/formd/formd -r
+    :elseif flag == "-i"
+        :%! ~/bin/formd/formd -i
+    :else
+        :%! ~/bin/formd/formd -f
+    :endif
+    :call winrestview(save_view)
+endfunction
+
+" formd mappings
+
+nmap <leader>fr :call Formd("-r")<CR>
+nmap <leader>fi :call Formd("-i")<CR>
+nmap <leader>f :call Formd("-f")<CR>
+
+nnoremap <F3> :NumbersToggle<CR>
 
 " Temporary -- trying functions to switch between
 " writing code and writing prose

@@ -44,7 +44,7 @@ endfunction
 
 " bibkeys - launch with CTRL-X CTRL-K
 " via https://github.com/lmullen/bibkeys
-set dictionary=$HOME/Projects/Dissertation/bib/citekeys.txt
+set dictionary=$HOME/acad/research/bib/citekeys.txt
 set complete+=k
 
 " Find text markers
