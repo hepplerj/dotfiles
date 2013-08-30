@@ -5,7 +5,8 @@ let g:pandoc_no_folding = 1
 " http://rtomayko.github.com/bcat/bcat.1.html#EXAMPLES
 
 " Highlight markers in text
-match Error '{\w\+}'
+" Thanks to Lincoln Mullen
+"match Error '{\w\+}'
 
 nmap <leader>v :!pandoc -t html --smart --include-in-header=/Users/jheppler/.pandoc/marked.css % \|bcat<cr><cr>
 
@@ -30,11 +31,11 @@ function! PanSyllabus()
 endfunction
 
 function! PanDocx()
-   exec ":! makebib;pandoc -s -S -t docx --reference-docx=/Users/jheppler/.pandoc/reference.docx --bibliography=/Users/jheppler/all.bib -o ~/Desktop/" . fnameescape(expand('%:t:r')) . ".docx " . fnameescape(expand('%:p'))
+   exec ":! makebib;pandoc -s -S -t docx --reference-docx=/Users/jheppler/.pandoc/reference.docx --bibliography=/Users/jheppler/Dropbox/research/bib/master.bib -o ~/Desktop/" . fnameescape(expand('%:t:r')) . ".docx " . fnameescape(expand('%:p'))
 endfunction
 
 function! PanBib()
-   exec ":! makebib;pandoc -s -S -t markdown --bibliography=/Users/jheppler/all.bib . fnameescape(expand('%:p'))"
+   exec ":! makebib;pandoc -s -S -t markdown --bibliography=/Users/jheppler/Dropbox/research/bib/master.bib . fnameescape(expand('%:p'))"
 endfunction
 
 " Change regular pandoc footnotes to inline notes

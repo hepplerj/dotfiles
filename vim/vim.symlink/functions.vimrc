@@ -2,14 +2,14 @@
 command! -nargs=0 Wiki call CommitToWiki()
 nnoremap _wc :call CommitToWiki()<CR>
 function! CommitToWiki()
-  :silent !cd ~/acad/research/wiki/wikidata && git --git-dir=/home/lmullen/acad/research/wiki/wikidata/.git --no-pager add *.page && git --git-dir=/home/lmullen/acad/research/wiki/wikidata/.git commit -a -m "Automatic commit from Vim" 
+  :silent !cd ~/Dropbox/research/dissertation/wiki/wikidata && git --git-dir=/Users/jheppler/Dropbox/research/dissertation/wiki/wikidata/.git --no-pager add *.page && git --git-dir=/Users/jheppler/Dropbox/research/dissertation/wiki/wikidata/.git commit -a -m "Automatic commit from Vim" 
 endfunction
 
 " Make the BibTeX bibliography
 command! -nargs=0 Bib call MakeBib()
 nnoremap _bib :call MakeBib()<CR>
 function! MakeBib()
-  :silent !cd ~/acad/research/bib && Rake
+  :silent !cd ~/Dropbox/research/bib && Rake
   :redraw!
 endfunction
 
@@ -44,7 +44,7 @@ endfunction
 
 " bibkeys - launch with CTRL-X CTRL-K
 " via https://github.com/lmullen/bibkeys
-set dictionary=$HOME/Projects/Dissertation/bib/citekeys.txt
+set dictionary=$HOME/Dropbox/research/bib/citekeys.txt
 set complete+=k
 
 " Find text markers

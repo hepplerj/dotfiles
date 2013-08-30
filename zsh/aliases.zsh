@@ -1,17 +1,8 @@
 # Project aliases
 # -------------------------------------------------------------------
-alias bib="subl --new-window --project ~/Dropbox/Sublime\ projects/bib.sublime-project"
-alias blog="subl --new-window --project ~/Dropbox/Sublime\ projects/lincolnmullen.com.sublime-project"
-alias diss="subl --new-window --project ~/Dropbox/Sublime\ projects/dissertation.sublime-project"
-alias dot="subl --new-window --project ~/Dropbox/Sublime\ projects/dotfiles.sublime-project"
-
-alias runwiki='cd ~/acad/research/dissertation/wiki && gitit'
-alias research='cd ~/acad/research/dissertation'
-
-# Change application behavior
-# -------------------------------------------------------------------
-alias R="R --no-restore"
-alias chrome="open -a \"Google Chrome\""
+alias runwiki='cd ~/Dropbox/research/dissertation/wiki && gitit -f my.conf'
+alias research='cd ~/Dropbox/research/dissertation'
+alias wiki='cd ~/Dropbox/research/dissertation/wiki'
 
 # Navigation
 # -------------------------------------------------------------------
@@ -21,6 +12,7 @@ alias ...="cd ../.."
 # File and system management
 # -------------------------------------------------------------------
 alias ack="ack-grep"
+alias atsp="~/Projects/ATSP/ATS\ -\ History/"
 alias c='clear'
 alias chromeproof="open -a Google\ Chrome --args -incognito"
 alias cp='cp -i'
