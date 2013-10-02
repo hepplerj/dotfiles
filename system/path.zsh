@@ -2,9 +2,9 @@ pathdirs=(
   ./bin
   $ZSH/bin
   $HOME/.rbenv/shims
+  /usr/bin/
   /usr/local/bin
   /usr/local/sbin
-  /usr/bin/
   /usr/texbin
   /usr/X11/bin
   ~/.cabal/bin

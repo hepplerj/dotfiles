@@ -41,6 +41,10 @@ alias update="sudo softwareupdate -i -a; brew update; brew upgrade"
 alias stanford='ssh jheppler@cardinal.stanford.edu'
 alias jason='ssh jasonhep@jasonheppler.org'
 
+# PostgreSQL
+alias start_pg='pg_ctl -D /usr/local/var/postgres/9.2/main start -l /usr/local/var/postgres/9.2/main/server.log'
+alias stop_pg='pg_ctl -D /usr/local/var/postgres/9.2/main stop -s -m fast'
+
 # Gists
 # -------------------------------------------------------------------
 alias pastegist="jist -Ppo"  # paste copy of clipboard to public Gist
