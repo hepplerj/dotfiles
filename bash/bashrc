@@ -2,3 +2,5 @@
 #	source ~/.bash_profile
 #fi
 
+export OFEXPORT_HOME="/Users/jheppler/git/ofexport"
+export PATH=$PATH:"$OFEXPORT_HOME/bin"

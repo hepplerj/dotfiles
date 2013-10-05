@@ -51,7 +51,7 @@ $endif$
 \chapterstyle{article-4} 
 \pagestyle{kjh}
 
-\published{Draft only. Please do not cite or circulate without permission. Revision: \textsf{\VCRevision} on \textsf{\VCDateTEX}.}
+\published{Draft only. Revision: \textsf{\VCRevision} on \textsf{\VCDateTEX}.}
 
 $if(title)$
 \maketitle
