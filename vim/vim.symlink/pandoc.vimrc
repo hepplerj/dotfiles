@@ -1,3 +1,7 @@
+au BufNewFile,BufRead *.markdown,*.md,*.mkd,*.pd,*.pdc,*.pdk,*.pandoc,*.text,*.txt,*.page   set filetype=pandoc
+" Find the space before Pandoc footnotes
+nnoremap <leader><space> /\v^$\n[\^1\]:<CR>:let @/ = ""<CR>
+
 " Turn off vim-pandoc section folding
 let g:pandoc_no_folding = 1
 
@@ -6,7 +10,7 @@ let g:pandoc_no_folding = 1
 
 " Highlight markers in text
 " Thanks to Lincoln Mullen
-"match Error '{\w\+}'
+match Error '{\w\+}'
 
 nmap <leader>v :!pandoc -t html --smart --include-in-header=/Users/jheppler/.pandoc/marked.css % \|bcat<cr><cr>
 

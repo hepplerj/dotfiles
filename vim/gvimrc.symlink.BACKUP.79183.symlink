@@ -1,4 +1,5 @@
 " MacVim specific -----------------------------------------------------
+<<<<<<< HEAD
 if has('gui_running')
     " GUI Vim
 
@@ -49,8 +50,10 @@ else
     " Mouse support
     set mouse=a
 endif
+=======
 set guioptions-=T                           " remove the toolbar
 set guioptions-=l                           " remove scrollbars
 set guioptions-=L
 set guioptions-=r
 set guioptions-=R
+>>>>>>> 393d165d9ff056c821f27db5a5eb7a9fff5781db

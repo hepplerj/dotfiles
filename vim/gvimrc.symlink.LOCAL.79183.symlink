@@ -49,8 +49,3 @@ else
     " Mouse support
     set mouse=a
 endif
-set guioptions-=T                           " remove the toolbar
-set guioptions-=l                           " remove scrollbars
-set guioptions-=L
-set guioptions-=r
-set guioptions-=R

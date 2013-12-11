@@ -13,6 +13,7 @@ alias ...="cd ../.."
 # -------------------------------------------------------------------
 alias ack="ack-grep"
 alias atsp="~/Projects/ATSP/ATS\ -\ History/"
+alias byword="open -a Byword"
 alias c='clear'
 alias chromeproof="open -a Google\ Chrome --args -incognito"
 alias cp='cp -i'
@@ -32,7 +33,7 @@ alias md='perl /Users/jheppler/bin/Markdown_1.0.1/Markdown.pl'
 alias more='more -R'                # give more colors
 alias mutt='cd ~/Desktop && mutt'
 alias process="ps aux | grep"
-alias servethis="python -m SimpleHTTPServer"
+alias serve="python -m SimpleHTTPServer"
 alias src='source ~/.zshrc'
 alias update="sudo softwareupdate -i -a; brew update; brew upgrade"
 

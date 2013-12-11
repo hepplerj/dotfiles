@@ -2,7 +2,7 @@ pathdirs=(
   ./bin
   $ZSH/bin
   $HOME/.rbenv/shims
-  /usr/bin/
+  /usr/bin
   /usr/local/bin
   /usr/local/sbin
   /usr/texbin
@@ -13,7 +13,7 @@ pathdirs=(
   /usr/local/git/bin
   /usr/local/bin/node
   /usr/local/bin/npm
-  ~/bin/
+  $HOME/Dropbox/bin
 )
 
 for dir in $pathdirs; do

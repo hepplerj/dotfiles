@@ -1,5 +1,5 @@
 nmap `S :FufFile $HOME/src/<cr>
-nmap `k :sp<cr>:FufFile $HOME/Dropbox/wikidata/<cr>
+nmap `k :sp<cr>:FufFile $HOME/Dropbox/research/dissertation/wiki/wikidata/<cr>
 nmap `d :FufDir $HOME/Dropbox/<cr>
 nmap `h :FufDir $HOME/<cr>
 nmap `n :FufFile $HOME/Dropbox/notes/<cr>
