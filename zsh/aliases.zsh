@@ -33,7 +33,7 @@ alias md='perl /Users/jheppler/bin/Markdown_1.0.1/Markdown.pl'
 alias more='more -R'                # give more colors
 alias mutt='cd ~/Desktop && mutt'
 alias process="ps aux | grep"
-alias serve="python -m SimpleHTTPServer"
+alias servethis="python -m SimpleHTTPServer"
 alias src='source ~/.zshrc'
 alias update="sudo softwareupdate -i -a; brew update; brew upgrade"
 

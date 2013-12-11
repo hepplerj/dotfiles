@@ -215,7 +215,7 @@ set wildignore=*.class,*.o,*~,*.pyc,.git,node_modules  " Ignore certain files in
 
 " Make sure colored syntax is on, and make it work with 256 terminals
 if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
-     colorscheme badwolf
+     colorscheme solarized
      set background=dark
      set t_Co=256
 elseif has ("terminfo")
