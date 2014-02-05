@@ -53,32 +53,6 @@ nnoremap <leader>{ :vimgrep /{\w\+}/ %<CR>:copen<CR>
 " auto commands
 :autocmd BufWrite *.py %retab   " retab python files
 
-" CTRL-P (`;`)
-nmap <leader>; :CtrlPBuffer<CR>
-let g:ctrlp_map = '<leader>t'
-let g:ctrlp_match_window_bottom = 0
-let g:ctrlp_match_window_reversed = 0
-let g:ctrlp_custom_ignore = '\v\~$|\.(o|swp|pyc|wav|mp3|ogg|blend)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|__init__\.py'
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_dotfiles = 0
-let g:ctrlp_switch_buffer = 0
-"let g:ctrlp_cache_dir = ~/.cache/ctrlp
-
-" NERDTree (`,d`)
-augroup ps_nerdtree
-    au!
-
-    au Filetype nerdtree setlocal nolist
-    au Filetype nerdtree nnoremap <buffer> K :q<cr>
-augroup END
-let NERDTreeHighlightCursorline = 1
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-map <leader>d :NERDTreeToggle<CR>
-
-" NERDCommenter
-map <leader>cc NERDCommenterToggle<CR>
-
 " Strip trailing white space (`,ss`)
 function! StripWhitespace()
     let save_cursor = getpos(".")

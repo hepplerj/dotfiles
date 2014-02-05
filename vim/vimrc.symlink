@@ -68,6 +68,17 @@ set wildmenu                    " Show possible completions on command line
 set wildmode=list:longest,full  " List all options and complete
 set wildignore=*.class,*.o,*~,*.pyc,.git,node_modules  " Ignore certain files in tab-completion
 
+set complete=.,w,t
+function! InsertTabWrapper()
+  let col = col('.') - 1
+  if !col || getline('.')[col - 1] !~ '\k'
+    return "\<tab>"
+  else
+    return "\<c-p>"
+  endif
+endfunction
+inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
+
 " Yank text to the OS X clipboard
 noremap <leader>y "*y
 noremap <leader>yy "*Y
@@ -130,6 +141,7 @@ inoremap <F1> <nop>
 
 " Toggle line numbers
 nnoremap <leader>n :setlocal number!<cr>
+set numberwidth=5
 
 " Buffer navigation
 noremap <C-h> <C-w>h
@@ -144,6 +156,12 @@ map k gk
 " Escape with 'jj'
 noremap! jj <Esc>
 
+" Get off my lawn
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
+
 " Tab mapping for YouCompleteMe
 imap <Tab> <C-P>
 
@@ -152,9 +170,12 @@ imap <Tab> <C-P>
 
 " Make sure colored syntax is on, and make it work with 256 terminals
 if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
-     colorscheme solarized
-     set background=dark
+     "colorscheme solarized
+     "set background=dark
      set t_Co=256
+     colorscheme github
+     highlight NonText guibg=#060606
+     highlight Folded  guibg=#0A0A0A guifg=#9090D0
 elseif has ("terminfo")
     colorscheme default
     set t_Co=8
@@ -261,11 +282,8 @@ nmap <leader>fr :call Formd("-r")<CR>
 nmap <leader>fi :call Formd("-i")<CR>
 nmap <leader>f :call Formd("-f")<CR>
 
-" spell check
-set spelllang=en_us
-set spell
-set spellsuggest=10
-nnoremap <silent> <leader>sp :set spell!<CR>
+" Enable spellcheck for Markdown 
+autocmd FileType markdown setlocal spell
 
 " Mouse scrolling
 set mouse=nicr
