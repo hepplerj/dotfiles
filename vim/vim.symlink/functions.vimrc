@@ -54,7 +54,7 @@ nnoremap <leader>{ :vimgrep /{\w\+}/ %<CR>:copen<CR>
 :autocmd BufWrite *.py %retab   " retab python files
 
 " CTRL-P (`;`)
-nmap ; :CtrlPBuffer<CR>
+nmap <leader>; :CtrlPBuffer<CR>
 let g:ctrlp_map = '<leader>t'
 let g:ctrlp_match_window_bottom = 0
 let g:ctrlp_match_window_reversed = 0

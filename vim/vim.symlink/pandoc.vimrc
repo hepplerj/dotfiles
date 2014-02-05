@@ -44,5 +44,5 @@ endfunction
 
 " Change regular pandoc footnotes to inline notes
 " Hat-tip to @udioioca at http://vimgolf.com/challenges/5014b2156318a4000200000b
-" nmap <leader>ln qn/[^<cr>*W"fd}d{N%ct]^[<C-R>f<Esc>gq{q
+nmap <leader>fn qn/[^<cr>*W"fd}d{N%ct]^[<C-R>f<Esc>gq{q
 

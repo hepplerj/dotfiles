@@ -30,6 +30,16 @@ function console () {
   fi
 }
 
+# cd to the path of the front Finder window
+cdf() {
+	target=`osascript -e 'tell application "Finder" to if (count of Finder windows) > 0 then get POSIX path of (target of front Finder window as text)'`
+	if [ "$target" != "" ]; then
+		cd "$target"; pwd
+	else
+		echo 'No Finder window found' >&2
+	fi
+}
+
 extract () { #unarchive various compression formats based on extension
         if [ -f $1 ] ; then
                 case $1 in
@@ -66,6 +76,71 @@ urlenc () { #url encode the passed string
 sman () { # open man page in Sublime
   MANWIDTH=160 MANPAGER='col -bx' man $@ | sublime
 }
+
+# List files with specified Finder tags in current directory and subdirectories
+# Works with partial words starting from the beginning of the word
+lst() {
+  local query
+  # if the first argument is "all" (case insensitive),
+  # a boolean AND search will be used. Defaults to OR.
+  bool="OR"
+  [[ $1 =~ "all" ]] && bool="AND" && shift
+ 
+  # if there's no argument or the argument is "+"
+  # list all files with any tags
+  if [[ -z $1 || $1 == "+" ]]; then
+    query="kMDItemUserTags == '*'"
+  # if the first argument is "-"
+  # list only files without tags
+  elif [[ $1 == "-" ]]; then
+    query="kMDItemUserTags != '*'"
+  # Otherwise, build a Spotlight syntax query string
+  else
+    query="tag:$1"
+    shift
+    for tag in $@; do
+      query="$query $bool tag:$tag"
+    done
+  fi
+ 
+  while IFS= read -r -d $'\0' line; do
+    echo ${line#`pwd`/}
+  done < <(mdfind -onlyin . -0 "$query")
+}
+
+# ==============================================================================
+# I keep running into problems with Cabal. These are some attempts to fix some
+# of these issues. From: https://gist.github.com/timmytofu/7417408
+
+# Unregister broken GHC packages. Run this a few times to resolve dependency rot in installed packages.
+# ghc-pkg-clean -f cabal/dev/packages*.conf also works.
+function ghc-pkg-clean() {
+  for p in `ghc-pkg check $* 2>&1  | grep problems | awk '{print $6}' | sed -e 's/:$//'`
+  do
+    echo unregistering $p; ghc-pkg $* unregister $p
+  done
+}
+ 
+# remove all installed GHC/cabal packages, leaving ~/.cabal binaries and docs in place.
+# When all else fails, use this to get out of dependency hell and start over.
+function ghc-pkg-reset() {
+  if [[ $(readlink -f /proc/$$/exe) =~ zsh ]]; then
+    read 'ans?Erasing all your user ghc and cabal packages - are you sure (y/N)? '
+  else # assume bash/bash compatible otherwise
+    read -p 'Erasing all your user ghc and cabal packages - are you sure (y/N)? ' ans
+  fi
+ 
+  [[ x$ans =~ "xy" ]] && ( \
+    echo 'erasing directories under ~/.ghc'; command rm -rf `find ~/.ghc/* -maxdepth 1 -type d`; \
+    echo 'erasing ~/.cabal/lib'; command rm -rf ~/.cabal/lib; \
+  )
+}
+ 
+alias cabalupgrades="cabal list --installed  | egrep -iv '(synopsis|homepage|license)'"
+# ==============================================================================
+
+#rbenv
+eval "$(rbenv init -)"
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.dotfiles/zsh/aliases.zsh
