@@ -12,6 +12,14 @@ let g:pandoc_no_folding = 1
 " Thanks to Lincoln Mullen
 match Error '{\w\+}'
 
+" Convert pandoc buffer to HTML and copy to system clipboard
+" Thanks to LM
+autocmd FileType pandoc nnoremap <buffer> <C-S-x> :write \| let @+ = system("pandoc -t html " . shellescape(expand("%:p")))<CR>
+
+" Format text
+" Thanks to Lincoln Mullen
+setlocal equalprg=pandoc\ -t\ markdown\ --reference-links\ --atx-headers
+
 nmap <leader>v :!pandoc -t html --smart --include-in-header=/Users/jheppler/.pandoc/marked.css % \|bcat<cr><cr>
 
 " Convert buffer to html from markdown

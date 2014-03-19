@@ -39,6 +39,7 @@
     #merges
     ours = "!f() { git co --ours $@ && git add $@; }; f"
     theirs = "!f() { git co --theirs $@ && git add $@; }; f"
+	  up = "!git remote update -p; git merge --ff-only @{u}"
 [color]
     ui = auto
         diff = auto
@@ -60,3 +61,6 @@
     excludesfile = ~/.gitignore
 [credential]
 	helper = osxkeychain
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f

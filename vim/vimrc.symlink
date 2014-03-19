@@ -170,12 +170,10 @@ imap <Tab> <C-P>
 
 " Make sure colored syntax is on, and make it work with 256 terminals
 if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
-     "colorscheme solarized
-     "set background=dark
+     colorscheme badwolf
+     set background=dark
      set t_Co=256
-     colorscheme github
-     highlight NonText guibg=#060606
-     highlight Folded  guibg=#0A0A0A guifg=#9090D0
+     "colorscheme tomorrow_night
 elseif has ("terminfo")
     colorscheme default
     set t_Co=8
@@ -202,6 +200,9 @@ nnoremap _js :set ft=javascript<CR>
 nnoremap _pd :set ft=python<CR>
 nnoremap _rb :set ft=ruby<CR>
 nnoremap _d  :set ft=diff<CR>
+
+" execute Ruby on the fly
+:map _rb :!ruby %<cr>
 
 " Quick editing
 "--------------------------------------------------------------------------
@@ -243,9 +244,13 @@ let g:ctrlp_extensions = ['tag']
 
 let g:ctrlp_map = '<leader>,'
 nnoremap <leader>. :CtrlPTag<cr>
+nnoremap <leader>,; :CtrlPBuffer<cr>
 
 " Markdown specifics
 "--------------------------------------------------------------------------
+
+" Format text with Pandoc
+nnoremap <silent> <leader>= mpgg/\v^(\w\|\#)<CR>=G`p :let @/ = ""<CR>
 
 " writing mode
 func! WordProcessorMode()
