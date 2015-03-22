@@ -18,7 +18,7 @@
 \def\mydate{}
 \def\mycoursenumber{$coursenumber$}
 \def\myoffice{$office$}
-\def\myhours{$hours$}
+\def\myhours{$officehours$}
 \def\mymailbox{$mailbox$}
 
 
@@ -43,7 +43,7 @@
 
 \makechapterstyle{lam-syllabus}{
   \settocdepth{chapter}
-  \maxsecnumdepth{chapter} 
+  \maxsecnumdepth{chapter}
   \setsecnumdepth{chapter}
 
   % reduce skip after section heading
@@ -51,22 +51,23 @@
 
   % Title flush left
   $if(draft)$
-  \pretitle{\begin{flushleft}\footnotesize\textsc{\MakeLowercase{\myuniversity} \quad \ding{167} \quad \MakeLowercase{\mysemester}}\\\LARGE}
+  \pretitle{\begin{flushleft}\footnotesize\textsc{\MakeLowercase{\myuniversity} \quad \Squaredot \quad \MakeLowercase{\mysemester}}\\\LARGE}
   \posttitle{\end{flushleft}}
   $else$
-  \pretitle{\begin{flushleft}\footnotesize\textsc{\MakeLowercase{\mycoursenumber} \quad \ding{167} \quad \MakeLowercase{\myuniversity} \quad \ding{167} \quad \MakeLowercase{\mysemester}}\\\LARGE}
-  \posttitle{\\[.25em] \footnotesize Meets in \myclassroom\ on \mytimes\\Course website: \href{\mycourseweb}{\mycourseweb} \end{flushleft}\par\vskip 0.5em} 
+  \pretitle{\begin{flushleft}\footnotesize\textsc{\MakeLowercase{\mycoursenumber}} \quad \Squaredot \quad \mysemester. \myclassroom, \mytimes.\\\LARGE}
+  \posttitle{\\[.25em] \end{flushleft}\par\vskip 0.5em}
   $endif$
   \preauthor{\begin{flushleft}\itshape  \Large \vspace{0.5em}}
     \postauthor{\normalfont\\[.25em]\footnotesize
       \href{mailto:\myemail}{\myemail}\quad\Squaredot\quad\href{\myweb}{\myweb}\end{flushleft}}
   $if(draft)$
   $else$
-  \preauthor{\begin{flushleft}\itshape  \Large \vspace{0.5em}}
+  \preauthor{\begin{flushleft} \large  \vspace{0.5em}}
     \postauthor{\normalfont\\[.25em]\footnotesize
-      \href{mailto:\myemail}{\myemail}\quad\Squaredot\quad\href{\myweb}{\myweb}\\
-      Office: \myoffice\quad\Squaredot\quad Mailbox: \mymailbox\\
-      Office hours: \myhours \end{flushleft}}
+      \href{mailto:\myemail}{\myemail}\\
+      Office: \myoffice\\
+      Office hours: \myhours
+    \end{flushleft}}
   $endif$
   \predate{}
   \postdate{}
@@ -171,8 +172,8 @@ $endif$
             pdfauthor={$author-meta$},
             pdftitle={$title-meta$},
             colorlinks=true,
-            urlcolor=$if(urlcolor)$$urlcolor$$else$black$endif$,
-            linkcolor=$if(linkcolor)$$linkcolor$$else$black$endif$,
+            urlcolor=red,
+            linkcolor=red,
             pdfborder={0 0 0}}
 $if(links-as-notes)$
 % Make links footnotes instead of hotlinks:
@@ -214,6 +215,7 @@ $endif$
 \author{\myauthor}
 \date{}
 
+\expandafter\def\expandafter\quote\expandafter{\quote\scriptsize}
 
 \begin{document}
 \thispagestyle{vcsyllabus}
@@ -227,10 +229,11 @@ $include-before$
 $endfor$
 $if(toc)$
 {
-\hypersetup{linkcolor=black}
+\hypersetup{linkcolor=red}
 \tableofcontents
 }
 $endif$
+
 $body$
 
 $if(natbib)$

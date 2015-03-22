@@ -1,0 +1,37 @@
+snippet source "Rubygems source"
+source "https://rubygems.org"
+$0
+endsnippet
+
+snippet gem "Gem"
+gem "$1"
+$0
+endsnippet
+
+snippet server "Rake task for server"
+task :server do
+  sh "ruby -run -e httpd . -p 4000"
+end
+$0
+endsnippet
+
+snippet "sys(tem)?" "system %[]" r
+system %[${1:command}]
+endsnippet
+
+snippet "sh(ell)?" "shell %[]" r
+sh %[${1:command}]
+endsnippet
+
+snippet "okf(ail)?" "ok_fail" r
+def ok_fail(condition)
+	puts condition ? "OK" : "FAILED"
+end
+endsnippet
+
+snippet scp "scp a file"
+task :push => ${1:filename} do
+	puts "Copying file to server..."
+	ok_fail system %[scp #{$1} reclaim:~/www/lincolnmullen.com/files]
+end
+endsnippet

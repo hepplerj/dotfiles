@@ -2,5 +2,7 @@
 #	source ~/.bash_profile
 #fi
 
-export OFEXPORT_HOME="/Users/jheppler/git/ofexport"
-export PATH=$PATH:"$OFEXPORT_HOME/bin"
+unset MAILCHECK
+
+# added by travis gem
+[ -f /Users/jheppler/.travis/travis.sh ] && source /Users/jheppler/.travis/travis.sh

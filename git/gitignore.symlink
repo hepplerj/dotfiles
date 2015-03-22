@@ -29,4 +29,4 @@
 .tags
 .tags_sorted_by_file
 Session.vim
-vc.tex
+.travis.yml

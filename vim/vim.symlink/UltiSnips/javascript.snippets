@@ -1,0 +1,64 @@
+snippet lfosm "Open Street Maps layer"
+var map = L.map('viz');
+var osm = new L.TileLayer(
+  'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  {attribution:
+    'Map data: <a href="http://www.openstreetmap.org/">OpenStreetMap</a>'});
+map.addLayer(osm);
+endsnippet
+
+snippet lfview "Leaflet: set map lat, long, zoom"
+map.setView(new L.LatLng(39.8, -95), 4);
+endsnippet
+
+snippet randomData "Function to generate random data points"
+function randomData(numPoints) { 
+  var data = [];
+  random = function() {return Math.floor(Math.random() * 100);};
+  for (i = 0; i < numPoints; i++) {
+    data.push({
+      x: random(),
+      y: random(),
+      z: random()
+    });
+  }
+  return data;
+}
+endsnippet
+
+snippet con "console.log();"
+console.log($0);
+endsnippet
+
+snippet queue "Basic pattern for queue.js"
+queue()
+  .defer(${1:function}, "${2:filename}")
+  .await(ready);
+
+function ready(error, $2) { console.log($2); }
+endsnippet
+
+snippet d3margin "Margin convention for d3"
+var margin = {top: 10, right: 10, bottom: 10, left: 10};
+var width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+var svg = d3.select("#viz").append("svg")
+  .attr("width", width + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+endsnippet
+
+snippet df "function()"
+function(d) {$0}
+endsnippet
+
+snippet dif "function()"
+function(d,i) {$0}
+endsnippet
+
+snippet time "console.time();"
+console.time("${1:myFunction}");
+$0
+console.timeEnd("$1");
+endsnippet

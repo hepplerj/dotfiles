@@ -1,0 +1,192 @@
+\documentclass[12pt]{article}
+
+%%% Create handing indent after first line
+%%% Based on template by Kieran Healy <kjhealy@gmail.com>
+%%% Most recent version of his is at http://kjhealy.github.com/kjh-vita
+\def\ind{\hangindent=1 true cm\hangafter=1 \noindent}
+
+%%% Change with your own information
+\def\myauthor{Jason A. Heppler}
+\def\mytitle{Vita}
+\def\mycopyright{\myauthor}
+\def\mykeywords{}
+\def\mybibliostyle{plain}
+\def\mybibliocommand{}
+\def\mysubtitle{}
+\def\myaffiliation{Stanford University}
+\def\myaddress{History Department}
+\def\myemail{jheppler@stanford.edu}
+\def\myweb{http://jasonheppler.org}
+\def\myphone{(402) 909-1323}
+\def\myfax{}
+\def\myversion{}
+\def\myrevision{}
+\def\myaffiliation{Stanford University}
+\def\myauthor{Jason A. Heppler}
+\def\mykeywords{Heppler, Jason, Jason Heppler, History, Vita, CV}
+
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fancyhdr}
+\pagestyle{plain}
+\frenchspacing
+\ifxetex
+  \usepackage{fontspec,xltxtra,xunicode}
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \setmainfont{Linux Libertine O}
+  \setmonofont{Inconsolata}
+\else
+  \ifluatex
+    \usepackage{fontspec}
+    \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \else
+    \usepackage[utf8]{inputenc}
+  \fi
+\fi
+$if(listings)$
+\usepackage{listings}
+$endif$
+$if(verbatim-in-note)$
+\usepackage{fancyvrb}
+$endif$
+$if(fancy-enums)$
+% Redefine labelwidth for lists; otherwise, the enumerate package will cause
+% markers to extend beyond the left margin.
+\makeatletter\AtBeginDocument{%
+  \renewcommand{\@listi}
+    {\setlength{\labelwidth}{4em}}
+}\makeatother
+\usepackage{enumerate}
+$endif$
+$if(tables)$
+\usepackage{ctable}
+\usepackage{float} % provides the H option for float placement
+$endif$
+$if(url)$
+\usepackage{url}
+$endif$
+$if(graphics)$
+\usepackage{graphicx}
+% We will generate all images so they have a width \maxwidth. This means
+% that they will get their normal width if they fit onto the page, but
+% are scaled down if they would overflow the margins.
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+\else\Gin@nat@width\fi}
+\makeatother
+\let\Oldincludegraphics\includegraphics
+\renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=\maxwidth]{#1}}
+$endif$
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex,
+              colorlinks=true,
+              linkcolor=blue]{hyperref}
+\else
+  \usepackage[unicode=true,
+              colorlinks=true,
+              linkcolor=blue]{hyperref}
+\fi
+\hypersetup{breaklinks=true, colorlinks=false, pdfborder={0 0 0}}
+$if(strikeout)$
+\usepackage[normalem]{ulem}
+% avoid problems with \sout in headers with hyperref:
+\pdfstringdefDisableCommands{\renewcommand{\sout}{}}
+$endif$
+$if(subscript)$
+\newcommand{\textsubscr}[1]{\ensuremath{_{\scriptsize\textrm{#1}}}}
+$endif$
+% \setlength{\parindent}{0pt}
+% \setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+$if(numbersections)$
+$else$
+\setcounter{secnumdepth}{0}
+$endif$
+$if(verbatim-in-note)$
+\VerbatimFootnotes % allows verbatim text in footnotes
+$endif$
+$if(lang)$
+\usepackage[$lang$]{babel}
+$endif$
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+\widowpenalty=2000
+\clubpenalty=2000
+\begin{document}
+\thispagestyle{fancy}
+\fancyfoot{}
+\fancyhead{}
+\renewcommand{\headrulewidth}{0pt}
+%%% The next line will put the date revised in footer of first page
+\rfoot{\texttt{\scriptsize Current as of \today}} 
+
+\begin{minipage}[t]{2.95in}
+ \flushright {\footnotesize \href{http://history.stanford.edu}{Department of History} \\ Stanford University \\ 450 Serra Mall, Building 200 {-0.05in} Stanford, CA 94305-2024}  
+\end{minipage}
+\hfill     
+%\begin{minipage}[t]{0.0in}
+% dummy (needed here)
+%\end{minipage}
+\hfill
+\begin{minipage}[t]{1.7in}
+  \flushright \footnotesize Phone: \myphone \\ 
+  Fax: \myfax  \\ 
+  {\footnotesize  \texttt{\href{mailto:\myemail}{\myemail}}} \\
+  \vspace{-0.1em}{\footnotesize  \texttt{\href{\myweb}{\myweb}}} 
+\end{minipage}
+
+%% Name 
+\vspace{0.5in}
+\noindent{\LARGE{\textbf{Jason A. Heppler}}}
+\reversemarginpar
+
+%% Positions
+\section{Positions}
+\ind Rice University, Assistant Professor of History (2008-Present)
+
+\ind University of Denver, Assistant Professor of History (2006-2008)
+
+%% Education
+\section{Education}
+
+\ind Ph.D, History, Johns Hopkins University 2006. Dissertation: \emph{Our Country is the World: Radical American Abolitionists Abroad}. %\vspace{-0.1in}  
+
+\ind M.A., Philosophy, Texas A\&M University, 2001.
+
+\ind B.A., History, Texas A\&M University, 2000. \emph{Summa Cum Laude}
+
+%% Current Research
+\section{Current Research}
+
+\noindent{I am currently conducting research for an article called ``Confederate Rehearsal for Reconstruction: The Trans-Mississippi and the Wartime Genesis of Forced Labor, 1862-1876,'' part of a larger book project on slavery, emancipation, and their legacies in Texas and neighboring states.}
+
+\indent Visit \url{http://wiki.wcaleb.rice.edu} for more information.
+
+%% Book
+\section{Publications}
+
+\subsection{Book}
+
+\ind \emph{The Problem of Democracy in the Age of Slavery: Garrisonian Abolitionists and Transatlantic Reform} (Louisiana State University Press, 2013).
+
+\ind Winner of the 2014 Merle Curti Award for Best Book in American Intellectual History from the Organization of American Historians.
+
+$for(include-before)$
+$include-before$
+
+$endfor$
+$if(toc)$
+\tableofcontents
+$endif$
+
+$body$
+
+$for(include-after)$
+$include-after$
+
+$endfor$
+\end{document}

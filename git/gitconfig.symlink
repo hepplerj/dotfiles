@@ -1,38 +1,26 @@
 [user]
     name = Jason Heppler
     email = jason.heppler@gmail.com
+
 [github]
     user = hepplerj
+
 [alias]
-    l = "!source ~/.githelpers && prett_git_log"
+    aa = add --all
+    ap = add --patch
+  branches = for-each-ref --sort=-committerdate --format=\"%(color:blue)%(authordate:relative)\t%(color:red)%(authorname)\t%(color:white)%(color:bold)%(refname:short)\" refs/remotes
+    ca = commit --ammend -v
+    ci = commit -v
+    cl = clone
+    cm = commit -m
+    co = checkout
     ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
     ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
     st = status -s
-
-    cl = clone
-
-    ci = commit
-    cm = commit -m
-    cma = commit -a -m
-    amend = commit --amend
-    caa = commit -a --amend -C HEAD
     filelog = log -u
     fl = log -u
-
-    ai = add --interactive
-
-    co = checkout
-    br = branch
-    bra = branch -ra
-    le = log --oneline --decorate
     dlc = diff --cached HEAD^
-    dr = "|f() ( it diff "$1"^.."$1"; }; f"
-    diffr = "|f() { git diff "$1"^.."$1"; }; f"
-    branch = branch -ra
-
-    #resent commands
     r = reset
-    
     grep = grep -Ii
     gr = grep -Ii
 
@@ -40,27 +28,24 @@
     ours = "!f() { git co --ours $@ && git add $@; }; f"
     theirs = "!f() { git co --theirs $@ && git add $@; }; f"
 	  up = "!git remote update -p; git merge --ff-only @{u}"
+
 [color]
     ui = auto
-        diff = auto
-        status = auto
-        branch = auto
-[color "branch"]
-    current = red reverse
-    remote = green
-    local = blue
-[color "diff"]
-    meta = yellow bold
-    frag = magenta bold
-    old = red bold
-    new = green bold
+
 [push]
     default = current
+
 [core]
     editor = vim
     excludesfile = ~/.gitignore
+
 [credential]
 	helper = osxkeychain
+
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
+[filter "hawser"]
+	clean = git hawser clean %f
+	smudge = git hawser smudge %f
+	required = true

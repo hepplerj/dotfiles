@@ -1,0 +1,30 @@
+# List files with specified Finder tags in current directory and subdirectories
+# Works with partial words starting from the beginning of the word
+lst() {
+  local query
+  # if the first argument is "all" (case insensitive),
+  # a boolean AND search will be used. Defaults to OR.
+  bool="OR"
+  [[ $1 =~ "all" ]] && bool="AND" && shift
+
+  # if there's no argument or the argument is "+"
+  # list all files with any tags
+  if [[ -z $1 || $1 == "+" ]]; then
+    query="kMDItemUserTags == '*'"
+  # if the first argument is "-"
+  # list only files without tags
+  elif [[ $1 == "-" ]]; then
+    query="kMDItemUserTags != '*'"
+  # Otherwise, build a Spotlight syntax query string
+  else
+    query="tag:$1"
+    shift
+    for tag in $@; do
+      query="$query $bool tag:$tag"
+    done
+  fi
+
+  while IFS= read -r -d $'\0' line; do
+    echo ${line#`pwd`/}
+  done < <(mdfind -onlyin . -0 "$query")
+}

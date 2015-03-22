@@ -1,4 +1,4 @@
-\documentclass[11pt,article,oneside]{memoir}
+\documentclass[12pt,article,oneside]{memoir}
 \usepackage{org-preamble-xelatex}
 \input{vc}
 
@@ -18,6 +18,8 @@ $if(tables)$
 \usepackage{longtable}
 $endif$
 
+\RequirePackage{setspace}
+
 $if(graphics)$
 \usepackage{graphicx}
 % We will generate all images so they have a width \maxwidth. This means
@@ -32,26 +34,36 @@ $if(graphics)$
 $endif$
 
 $if(title)$
-\title{\bigskip \bigskip $title$}
-$endif$ 
- 
-\author{\bigskip\Large $for(author)$$author$$sep$\\$endfor$}
+\title{$title$}
+$endif$
 
-\begin{document}  
+\def\thoughtbreak#1{\bigskip\bigskip\noindent{\lowercase{\sc #1}}}
+
+%\author{\bigskip\Large $for(author)$$author$$sep$\\$endfor$}
+
+% \doublespacing
+% % But we don't want the title double-spaced. So at the beginning of the document, make the title within a single-spaced environment.
+% \AtBeginDocument{
+%   \begin{singlespace}
+%     \maketitle
+%   \end{singlespace}
+% }
+
+\begin{document}
 
 \setsansfont[Mapping=tex-text, BoldFont={* Bold SemiCondensed}, ItalicFont={* Semibold SemiCondensed Italic}]{Myriad Pro}
 \setmonofont[Mapping=tex-text,Scale=MatchLowercase]{Consolas}
 \setromanfont[Mapping=tex-text,Numbers=OldStyle]{Minion Pro}
 
 
-\setkeys{Gin}{width=1\textwidth}  
-\setromanfont[Mapping=tex-text,Numbers=OldStyle]{Minion Pro} 
-\setsansfont[Mapping=tex-text]{Minion Pro} 
+\setkeys{Gin}{width=1\textwidth}
+\setromanfont[Mapping=tex-text,Numbers=OldStyle]{Minion Pro}
+\setsansfont[Mapping=tex-text]{Minion Pro}
 \setmonofont[Mapping=tex-text,Scale=0.8]{Consolas}
-\chapterstyle{article-4} 
-\pagestyle{kjh}
+\chapterstyle{article-4}
+%\pagestyle{kjh}
 
-\published{Draft only. Revision: \textsf{\VCRevision} on \textsf{\VCDateTEX}.}
+\published{$author$. Draft only. Revision: \textsf{\VCRevision} on \textsf{\VCDateTEX}.}
 
 $if(title)$
 \maketitle
@@ -66,7 +78,6 @@ $if(toc)$
 $endif$
 
 $body$
-
 
 $if(natbib)$
 $if(biblio-files)$
