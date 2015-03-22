@@ -40,7 +40,6 @@ if [[ -s $HOME/.zshrc_local ]] ; then source $HOME/.zshrc_local ; fi
 
 # Sourced
 source $ZSH/oh-my-zsh.sh
-source $HOME/.dotfiles/zsh/colors.zsh
 source $HOME/.dotfiles/zsh/config.zsh
 source $HOME/.dotfiles/system/path.zsh
 
