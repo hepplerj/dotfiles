@@ -47,8 +47,10 @@ snippet libanalytics "Google Analytics script"
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-25121492-1', 'lincolnmullen.com');
+
+  ga('create', 'UA-12786552-1', 'jasonheppler.org');
   ga('send', 'pageview');
+
 </script>
 endsnippet
 
@@ -59,7 +61,7 @@ snippet template-standalone "Standalone template for a Leaflet/D3 project"
 <title></title>
 <meta charset="utf-8">
 <meta name="description" content="">
-<meta name="author" content="Lincoln Mullen">
+<meta name="author" content="Jason A. Heppler">
 
 <!-- Libraries -->
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.1.1/css/normalize.min.css">
@@ -76,8 +78,10 @@ snippet template-standalone "Standalone template for a Leaflet/D3 project"
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-25121492-1', 'lincolnmullen.com');
+
+  ga('create', 'UA-12786552-1', 'jasonheppler.org');
   ga('send', 'pageview');
+
 </script>
 </head>
 <body>
@@ -103,10 +107,6 @@ snippet template-gist "Gist template for a D3 visualization"
 <script src="visualization.js"></script>
 </body>
 </html>
-endsnippet
-
-snippet gaevent "Google Analytics event"
-onclick="ga('send', 'event', { 'eventCategory': '${1:PDF}', 'eventAction': '${2:Download}', 'eventLabel': '${3:Filename}', 'page': '${4:/path/to/download}' });"
 endsnippet
 
 snippet row "Row in Foundation"

@@ -28,10 +28,3 @@ def ok_fail(condition)
 	puts condition ? "OK" : "FAILED"
 end
 endsnippet
-
-snippet scp "scp a file"
-task :push => ${1:filename} do
-	puts "Copying file to server..."
-	ok_fail system %[scp #{$1} reclaim:~/www/lincolnmullen.com/files]
-end
-endsnippet

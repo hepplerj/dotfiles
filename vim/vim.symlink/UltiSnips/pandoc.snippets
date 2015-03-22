@@ -1,5 +1,4 @@
 # Markdown
-# Includes octopress (http://octopress.org/) snippets
 snippet [ "["
 [${1:text}](http://${2:address})
 endsnippet
@@ -89,6 +88,20 @@ snippet article "BibTeX article"
 
 endsnippet
 
+snippet book "BibTeX book"
+~~~~~{.bib}
+@Book{        ${1},
+  author    = {${2}},
+  title     = {${3}},
+  note      = {${4}}
+  year      = {${5}},
+  address   = {${6}},
+  publisher = {${7}}
+}
+~~~~~
+
+endsnippet
+
 snippet cat "Gitit categories"
 ---
 categories: ${0}
@@ -97,39 +110,6 @@ endsnippet
 
 snippet fn "Footnote"
 ^[${1}] ${2}
-endsnippet
-
-snippet jsrarticle
----
-layout: article
-title: "${1}"
-author-first: ${2:}
-author-last: ${3:}
-author: $2 $3
-author-note: "${4}"
-vol: ${5:14}
-year: ${6:2012}
-
----
-
-${7}
-endsnippet
-
-snippet jsrreview
----
-layout: article
-title: "review: ${1}"
-author-first: ${2:}
-author-last: ${3:}
-author: $2 $3
-author-note: "${4}"
-vol: ${5:14}
-year: ${6:2012}
-book-reviewed: "${7}"
-
----
-
-${8}
 endsnippet
 
 snippet mk "Mark {MARK: with explanation}"
@@ -158,48 +138,8 @@ endsnippet
 
 snippet % "Pandoc header" !b
 % ${1:Title}
-% ${2:Lincoln A. Mullen}
+% ${2:Jason A. Heppler}
 % ${3:`!v strftime("%d %B %Y")`}
-endsnippet
-
-snippet reph "Republish ProfHacker post" !b
----
-layout: post
-title: "${1:Title}"
-date: ${2:YYYY-MM-DD} 12:00
-comments: true
-categories: 
-- ProfHacker$3
-tags: 
-- ProfHacker$4
----
-
-*[This post originally appeared at [ProfHacker][].]*
-
-  [ProfHacker]: $5
-
-$0
-endsnippet
-
-snippet jsrpodcast "JSR podcast metadata" !b
----
-title: $1
-layout: podcast
-categories:
-- new-media
-- podcast
-author: ${2:Art Remillard}
-podcast-filename: "jsr.ep${3:000}.${4:title}.mp3"
-podcast-filesize: $5
-podcast-running-time: "${6:00:00}"
-podcast-episode: ${7:00}
----
-
-$0
-endsnippet
-
-snippet more "More link" !b
-<!--more-->
 endsnippet
 
 snippet c) "Copyright symbol"
@@ -257,17 +197,17 @@ $0
 
 endsnippet
 
-snippet readme "Basic GitHub README"
+snippet readme "Basic README"
 ## ${1:Title}
 
-Lincoln Mullen | <http://lincolnmullen.com> | <lincoln@lincolnmullen.com>
+Jason A. Heppler | <http://jasonheppler.org> | <jason@jasonheppler.org>
 
 $0
 
 ### License
 
 This project is released under the MIT License: 
-<http://lmullen.mit-license.org/>
+<http://heppler.mit-license.org/>
 endsnippet
 
 snippet citation "Citation for wiki"
@@ -278,30 +218,10 @@ snippet citation "Citation for wiki"
 $0
 endsnippet
 
-snippet gaevent "Google Analytics event"
-onclick="ga('send', 'event', { 'eventCategory': '${1:PDF}', 'eventAction': '${2:Download}', 'eventLabel': '${3:Filename}', 'page': '${4:/path/to/download}' });"
-endsnippet
-
 snippet figure "{% figure %}" 
 {% figure ${1:filename} svg,png,pdf "${2:caption}" %}
 endsnippet
 
 snippet ccicon "CC-BY icon"
 [![CC-BY](https://i.creativecommons.org/l/by/4.0/80x15.png)](http://creativecommons.org/licenses/by/4.0/)
-endsnippet
-
-snippet ;n "Beamer note"
-\note{
-$0
-}
-endsnippet
-
-snippet slideheader "Slide header"
----
-author: 
-date: 
-title: 
-titlepage-note: |
-  First page note
-....
 endsnippet
