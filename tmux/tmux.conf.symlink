@@ -80,7 +80,7 @@ set -g status-left-length 60
 set -g status-right-length 90
 set -g status-interval 2
 
-set -g status-right '♪ #(/Users/jheppler/bin/itunes-current-track-tmux.sh) | #(/usr/bin/battery -t) | %a %m-%d %H:%M'
+set -g status-right '#(/usr/bin/battery -t) | %a %m-%d %H:%M'
 
 set -g window-status-format "#[fg=white,bg=colour234] #I #W "
 

@@ -6,7 +6,7 @@
 "
 " Author: Jason Heppler
 " Source: http://github.com/hepplerj/dotfiles/
-" Last updated 2015-03-21
+" Last updated: 2015-06-10
 " This file changes a lot. I'll document things whenever I have time to kill.
 
 " Vundle plugins
@@ -33,13 +33,14 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-vinegar'
 Plugin 'sheerun/vim-polyglot'
-"Plugin 'vim-pandoc/vim-pandoc-syntax'
-"Plugin 'vim-pandoc/vim-pandoc'
-" Testing out some JS plugins...
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'pangloss/vim-javascript'
-Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'Raimondi/delimitMate'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'lmullen/vim-gitit'
+" Testing out vim writing environment plugins
+Plugin 'reedes/vim-pencil'
+Plugin 'reedes/vim-wordy'
+Plugin 'reedes/vim-lexical'
+Plugin 'vimoutliner/vimoutliner'
 
 call vundle#end()
 filetype plugin indent on
@@ -65,7 +66,7 @@ noremap <C-l> <C-w>l
 map j gj
 map k gk
 
-" I'd rather not reach: escape with `jj`
+" I'd rather not reach; escape with `jj`
 noremap! jj <Esc>
 
 " General
@@ -83,17 +84,32 @@ set undofile                                " Vim 7.3 -- maintain undo history b
 set undodir=~/.cache/undodir                " where `undofile` puts files
 set noerrorbells
 set mouse=nicr                              " mouse scrolling
-set shiftround                              " shift to certain columns, not just spaces
 set timeoutlen=2000
 set ttimeoutlen=10
 set autoread
 au FocusLost * :wa                          " save when losing focus (gvim)
 
+" Text formatting 
+" -------------------------------------------------------------------
+set wrap                                    " soft wrap long lines
+set textwidth=78
+set tabstop=2                               " a tab is two spaces
+set softtabstop=2                           " soft tab is two spaces
+set shiftwidth=2                            " # of spaces for autoindenting
+set expandtab                               " insert spaces not tabs
+set autoindent                              " always set autoindenting on
+set copyindent                              " copy prev indentation
+set shiftround                              " use shiftwidth when indenting
+" Use Q to format paragraph
+vnoremap Q gq
+nnoremap Q gwap
+set formatoptions=tqcwn                     " see :help fo-table
+
 " Display
 "--------------------------------------------------------------------------
 set t_Co=16                                 " colors!
 syntax enable
-set background=light
+set background=dark
 colorscheme solarized
 set display+=lastline                       " show partial last lines
 set nolist                                  " don't display space chars
@@ -103,8 +119,8 @@ set number
 " Resize the splits if the vim windows is resized
 autocmd VimResized * :wincmd =
 " enable fancy mode with Powerline
-let g:Powerline_symbols = 'fancy'
-let g:Powerline_cache_enabled = 1
+"let g:Powerline_symbols = 'fancy'
+"let g:Powerline_cache_enabled = 1
 
 " Status line
 " -------------------------------------------------------------------
@@ -116,9 +132,9 @@ set statusline+=\ [%Y]                      " line endings/type of file
 set statusline+=\ %{fugitive#statusline()}  " Git status
 set statusline+=%=                          " left/right separator
 " Syntastic warning
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 "display a warning if &paste is set
 set statusline+=%#error#
 set statusline+=%{&paste?'[paste]':''}
@@ -147,7 +163,6 @@ endif
 
 " OS X specifics
 "--------------------------------------------------------------------------
-
 " Yank text to the OS X clipboard
 noremap <leader>y "*y
 noremap <leader>yy "*Y
@@ -201,14 +216,13 @@ endif
 
 " Easy filetype switching
 "--------------------------------------------------------------------------
-
 nnoremap _fmkd :set ft=markdown<CR>
 nnoremap _fjs :set ft=javascript<CR>
 nnoremap _fpd :set ft=python<CR>
 nnoremap _frb :set ft=ruby<CR>
 nnoremap _fd  :set ft=diff<CR>
 " execute Ruby on the fly
-:map _rb :!ruby %<cr>
+:map _erb :!ruby %<cr>
 
 " Quick editing
 "--------------------------------------------------------------------------
@@ -235,7 +249,6 @@ let g:pandoc#syntax#conceal#use = 0
 
 " Ctrl-P
 "--------------------------------------------------------------------------
-
 let g:ctrlp_open_new_file = 'r'             " open new files in same window
 let g:ctrlp_map = '<leader>,'
 nnoremap <C-P> :CtrlPBuffer<CR>
@@ -245,12 +258,6 @@ let g:ctrlp_clear_cache_on_exit = 1
 let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
 let g:ctrlp_dotfiles = 0                    " ignore dotfiles and dotdirs
 let g:ctrlp_custom_ignore = { 'dir': '\.git$\|\_site$' }
-
-" Tabular
-" -------------------------------------------------------------------
-nnoremap <leader>t= :Tabularize /=<CR>
-nnoremap <leader>t, :Tabularize /,<CR>
-nnoremap <leader>t: :Tabularize /:\zs<CR>
 
 " Formating file
 "--------------------------------------------------------------------------
@@ -266,12 +273,19 @@ autocmd FileType js set commentstring=\\ %s               " comments for javascr
 autocmd FileType rb set commentstring=#\ %s               " comments for ruby
 nmap <C-c> gcc
 
+" Auto-tab sizing
+" -------------------------------------------------------------------
+"autocmd Filetype html setlocal ts=2 sts=2 sw=2
+"autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+"autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
+
 " UltiSnips
 " -------------------------------------------------------------------
+let g:UltiSnipsSnippetDirectories=["/Users/jheppler/.dotfiles/vim/vim.symlink/UltiSnips"]
 let g:UltiSnipsEditSplit = 'horizontal'
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsExpandTrigger=";<tab>"
+let g:UltiSnipsJumpForwardTrigger=";<f-tab>"
+let g:UltiSnipsJumpBackwardTrigger=";<b-tab>"
 map <F5> :UltiSnipsEdit<CR>
 
 " Syntastic
@@ -303,13 +317,25 @@ let g:ycm_add_preview_to_completeopt=0
 let g:ycm_confirm_extra_conf=0
 set completeopt-=preview
 
+" Writing Environment Plugins
+"--------------------------------------------------------------------------
+" Lexical 
+augroup lexical
+	autocmd!
+    autocmd FileType markdown,mkd call lexical#init()
+    autocmd FileType textile call lexical#init()
+    autocmd FileType text call lexical#init({ 'spell': 0 })
+augroup END
+
+" Vim Pencil
+let g:pencil#wrapModeDefault = 'soft'
+augroup pencil
+    autocmd!
+    autocmd FileType markdown,mkd,md,page,text call pencil#init()
+augroup END
+
 " Source configs
 "--------------------------------------------------------------------------
-"nmap <leader>src :source %<cr>
-"source $HOME/.vim/general.vimrc
+nmap <leader>src :source %<cr>
 source $HOME/.vim/abbreviations.vimrc
-"source $HOME/.vim/bibtex.vimrc
-"source $HOME/.vim/gitit.vimrc
-"source $HOME/.vim/markdown.vimrc
-"source $HOME/.vim/pandoc.vimrc
-"source $HOME/.vim/functions.vimrc
+source $HOME/.vim/functions.vimrc

@@ -2,7 +2,7 @@
 command! -nargs=0 Wiki call CommitToWiki()
 nnoremap _wc :call CommitToWiki()<CR>
 function! CommitToWiki()
-  :silent !cd ~/acad/dissertation/wiki/wikidata && git --git-dir=/Users/jheppler/acad/dissertation/wiki/wikidata/.git --no-pager add *.page && git --git-dir=/Users/jheppler/acad/dissertation/wiki/wikidata/.git commit -a -m "Automatic commit from Vim" 
+  :silent !cd ~/Dropbox/acad/dissertation/wiki/wikidata && git --git-dir=/Users/jheppler/Dropbox/acad/dissertation/wiki/wikidata/.git --no-pager add *.page && git --git-dir=/Users/jheppler/Dropbox/acad/dissertation/wiki/wikidata/.git commit -a -m "Automatic commit from Vim" 
 endfunction
 
 " Find related Pandoc footnote numbers
@@ -36,7 +36,7 @@ endfunction
 
 " bibkeys - launch with CTRL-X CTRL-K
 " via https://github.com/lmullen/bibkeys
-set dictionary=$HOME/acad/bib/citekeys.txt
+set dictionary=$HOME/Dropbox/acad/bib/citekeys.txt
 set complete+=k
 
 " Find text markers

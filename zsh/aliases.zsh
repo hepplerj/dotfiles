@@ -1,7 +1,7 @@
 # Projects
 # -------------------------------------------------------------------
-alias blog='mvim -S ~/acad/hepplerj.github.com'
-alias diss='cd ~/acad/dissertation'
+alias blog='mvim -S ~/Dropbox/acad/hepplerj.github.com/Session.vim'
+alias diss='mvim -S ~/Dropbox/dissertation/Session.vim'
 
 # Unix
 # -------------------------------------------------------------------
@@ -32,13 +32,20 @@ alias update="sudo softwareupdate -i -a; brew update; brew upgrade"
 
 # File and system management
 # -------------------------------------------------------------------
-alias atsp="~/work/ATSP/ATS\ -\ History/"
-alias cesta="~/work/ATSP/ATS\ -\ CESTA/"
+alias atsp="~/Dropbox/work/ATSP/ATS\ -\ History/"
+alias brewup='brew update && brew upgrade'
+alias cesta="~/Dropbox/work/ATSP/ATS\ -\ CESTA/"
+alias ducks='du -cks ~/**/* | sort -rn | head -n 20'
+alias duh='du -hs * | sort -h -r'  # Sort files/dirs by size
+alias findd="find . -type d -iname" # find a directory
+alias findf="find . -type f -iname" # find a file
+alias ip="curl icanhazip.com"       # get current public IP
 alias process="ps aux | grep"
-alias runwiki='cd ~/acad/wiki && gitit -f my.conf > /dev/null 2>&1 &'
-alias research='cd ~/acad/wiki/wikidata/'
-alias todo='mvim ~/acad/wiki/wikidata/TODO.page -c "BG"'
-alias wiki='cd ~/acad/wiki'
+alias runwiki='cd ~/Dropbox/acad/wiki && gitit -f my.conf > /dev/null 2>&1 &'
+alias research='cd ~/Dropbox/acad/wiki/wikidata/'
+alias todo='mvim ~/Dropbox/acad/wiki/wikidata/TODO.page -c "BG"'
+alias wiki='cd ~/Dropbox/acad/wiki'
+alias zshreload='source ~/.zshrc'
 
 # PostgreSQL
 # -------------------------------------------------------------------

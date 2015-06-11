@@ -1,4 +1,4 @@
-" Correct text width
+i" Correct text width
 setlocal textwidth=72
 
 " filter text through pandoc to clean markdown, using reference links and atx headers
