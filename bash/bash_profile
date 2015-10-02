@@ -28,7 +28,6 @@ export EDITOR="subl -w"
 #ignore certain commands from history: duplicates, ls, bg, fg, and exit
 export HISTIGNORE="&:ls:[bf]g:exit"
 export NODE_PATH="/usr/local/lib/node_modules"
-export CDPATH=".:~:~/acad/dissertation/:~/acad/:~/dev/"
 export PYTHONPATH="/usr/local/lib/python:/usr/local/share/python:/usr/local/lib/python2.7/site-packages"
 set -o vi
 alias ls="ls -F"
@@ -43,3 +42,10 @@ alias ls="ls -F"
 # The orginal version is saved in .bash_profile.pysave
 PATH="/Library/Frameworks/Python.framework/Versions/3.4/bin:${PATH}"
 export PATH
+
+# Add GHC 7.10.1 to the PATH, via https://ghcformacosx.github.io/
+export GHC_DOT_APP="/Users/jheppler/Downloads/ghc-7.10.1.app"
+if [ -d "$GHC_DOT_APP" ]; then
+  export PATH="${HOME}/.cabal/bin:${GHC_DOT_APP}/Contents/bin:${PATH}"
+fi
+

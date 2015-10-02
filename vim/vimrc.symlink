@@ -35,7 +35,7 @@ Plugin 'tpope/vim-vinegar'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'Raimondi/delimitMate'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'lmullen/vim-gitit'
+Plugin 'scrooloose/nerdtree'
 " Testing out vim writing environment plugins
 Plugin 'reedes/vim-pencil'
 Plugin 'reedes/vim-wordy'
@@ -111,13 +111,16 @@ set t_Co=16                                 " colors!
 syntax enable
 set background=dark
 colorscheme solarized
+
 set display+=lastline                       " show partial last lines
 set nolist                                  " don't display space chars
 set listchars=tab:▸\ ,eol:¬,trail:·,nbsp:·  " TextMate style space chars
 set scrolloff=5                             " cursor 5 lines from top or bottom
 set number
+
 " Resize the splits if the vim windows is resized
 autocmd VimResized * :wincmd =
+
 " enable fancy mode with Powerline
 "let g:Powerline_symbols = 'fancy'
 "let g:Powerline_cache_enabled = 1
@@ -259,6 +262,9 @@ let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
 let g:ctrlp_dotfiles = 0                    " ignore dotfiles and dotdirs
 let g:ctrlp_custom_ignore = { 'dir': '\.git$\|\_site$' }
 
+" NERDTree
+map <C-n> :NERDTreeToggle<CR>
+
 " Formating file
 "--------------------------------------------------------------------------
 " Run equalprg on the entire file
@@ -278,6 +284,9 @@ nmap <C-c> gcc
 "autocmd Filetype html setlocal ts=2 sts=2 sw=2
 "autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 "autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
+
+" Gitit
+command! -nargs=1 Wiki execute ":split $HOME/Dropbox/acad/wiki/wikidata/" . fnameescape("<args>.page") | execute ":Gwrite"
 
 " UltiSnips
 " -------------------------------------------------------------------

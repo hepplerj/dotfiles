@@ -3,6 +3,9 @@
 alias blog='mvim -S ~/Dropbox/acad/hepplerj.github.com/Session.vim'
 alias diss='mvim -S ~/Dropbox/dissertation/Session.vim'
 
+alias vim='vim -w ~/.vimlog "$@"'
+alias mvim='mvim -w ~/.vimlog "$@"'
+
 # Unix
 # -------------------------------------------------------------------
 alias ..="cd .."

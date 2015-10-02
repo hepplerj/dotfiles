@@ -71,37 +71,6 @@ snippet youtube "youtube"
 {% youtube ${1:video_id} %}
 endsnippet
 
-snippet article "BibTeX article"
-~~~~~{.bib}
-@Article{     ${1},
-  author    = {${2}},
-  title     = {${3}},
-  journal   = {${5}},
-  volume    = {${6}},
-  number    = {${7}},
-  year      = {${8}},
-  pages     = {${9}},
-  url       = {${10}},
-  doi       = {${11}},
-}
-~~~~~
-
-endsnippet
-
-snippet book "BibTeX book"
-~~~~~{.bib}
-@Book{        ${1},
-  author    = {${2}},
-  title     = {${3}},
-  note      = {${4}}
-  year      = {${5}},
-  address   = {${6}},
-  publisher = {${7}}
-}
-~~~~~
-
-endsnippet
-
 snippet cat "Gitit categories"
 ---
 categories: ${0}
@@ -249,4 +218,81 @@ endsnippet
 
 snippet ccicon "CC-BY icon"
 [![CC-BY](https://i.creativecommons.org/l/by/4.0/80x15.png)](http://creativecommons.org/licenses/by/4.0/)
+endsnippet
+
+# Based on http://pts.szit.bme.hu/bibtex-cheat-sheet.txt
+# Most optional fields are not included.
+snippet article
+	~~~~~{.bib}
+	@Article{ `Filename('', 'id')`,
+		author = {${1:authors separated by "and"}},
+		title = {${2:title}},
+		journal = {${3:journal}},
+		volume = ${4:volume},
+		number = ${5:number},
+		month = {${6:month}},
+		pages = {${7:pages}},
+		year = `fnamemodify(expand('%'), ':t:gs?\(\w\+\)\(\d\{4\}\)\(\S\+\)?\2?')`,
+	}
+	~~~~~
+endsnippet
+
+snippet book
+	~~~~~{.bib}
+	@Book{ `Filename('', 'id')`,
+		${1:author/editor} = {${2:$1s separated by "and"}},
+		title = {${3:title}},
+		address = {${4:city}},
+		publisher = {${5:publisher}},
+		year = `fnamemodify(expand('%'), ':t:gs?\(\w\+\)\(\d\{4\}\)\(\S\+\)?\2?')`,
+	}
+	~~~~~
+endsnippet
+
+snippet inbook
+	~~~~~{.bib}
+	@InBook{ `Filename('', 'id')`,
+		${1:author/editor} = {${2:$1s separated by "and"}},
+		title = {${3:title}},
+		${4:chapter/pages} = {${5:$4}},
+		address = {${6:city}},
+		publisher = {${7:publisher}},
+		pages = {${8:pages}},
+		year = `fnamemodify(expand('%'), ':t:gs?\(\w\+\)\(\d\{4\}\)\(\S\+\)?\2?')`,
+	}
+	~~~~~
+endsnippet
+
+snippet incollection
+	~~~~~{.bib}
+	@InCollection{ `Filename('', 'id')`,
+		author = {${1:authors separated by "and"}},
+		title = {${2:title}},
+		pages = {${3:pages}},
+		editor = {${4:editors separated by "and"}},
+		booktitle = {${5:book title}},
+		address = {${6:city}},
+		publisher = {${7:publisher}},
+		year = `fnamemodify(expand('%'), ':t:gs?\(\w\+\)\(\d\{4\}\)\(\S\+\)?\2?')`,
+	}
+	~~~~~
+endsnippet
+
+snippet misc
+	~~~~~{.bib}
+	@Misc{ `Filename('', 'id')`,
+		author = {${1:authors separated by "and"}},
+		title = {${2:title}},
+	}
+endsnippet
+
+snippet phd
+	~~~~~{.bib}
+	@PhDThesis{ `Filename('', 'id')`,
+		author = {${1:authors separated by "and"}},
+		title = {${2:title}},
+		school = {${3:school}},
+		year = `fnamemodify(expand('%'), ':t:gs?\(\w\+\)\(\d\{4\}\)\(\S\+\)?\2?')`,
+	}
+	~~~~~
 endsnippet

@@ -2,7 +2,7 @@
 if has('gui_running')
     " GUI Vim
 
-    set guifont=Cousine:h14
+    set guifont=Cousine:h12
 
     " Remove all the UI cruft
     set go-=T

@@ -2,8 +2,26 @@
 command! -nargs=0 Wiki call CommitToWiki()
 nnoremap _wc :call CommitToWiki()<CR>
 function! CommitToWiki()
-  :silent !cd ~/Dropbox/acad/dissertation/wiki/wikidata && git --git-dir=/Users/jheppler/Dropbox/acad/dissertation/wiki/wikidata/.git --no-pager add *.page && git --git-dir=/Users/jheppler/Dropbox/acad/dissertation/wiki/wikidata/.git commit -a -m "Automatic commit from Vim" 
+  :silent !cd ~/Dropbox/acad/wiki/wikidata && git --git-dir=/Users/jheppler/Dropbox/acad/wiki/wikidata/.git --no-pager add *.page && git --git-dir=/Users/jheppler/Dropbox/acad/wiki/wikidata/.git commit -a -m "Automatic commit from Vim" 
 endfunction
+
+" Commit all changes in research wiki
+command! -nargs=0 WikiCommit call CommitToWikiTest()
+function! CommitToWikiTest()
+  :silent !cd ~/acad/research && rake wiki
+  :redraw!
+endfunction
+
+" Push all changes in research wiki
+command! -nargs=0 WikiPush call PushWiki()
+function! PushWiki()
+  :silent !cd ~/acad/research && rake pushwiki
+  :redraw!
+endfunction
+
+" Commands for editing wiki pages to Gitit
+
+command! -nargs=1 Wiki execute ":split $HOME/Dropbox/acad/wiki/wikidata/" . fnameescape("<args>.page") | execute ":Gwrite"
 
 " Find related Pandoc footnote numbers
 " -------------------------------------------------------------------
@@ -36,11 +54,12 @@ endfunction
 
 " bibkeys - launch with CTRL-X CTRL-K
 " via https://github.com/lmullen/bibkeys
-set dictionary=$HOME/Dropbox/acad/bib/citekeys.txt
+"set dictionary=$HOME/Dropbox/acad/bib/citekeys.txt
+set dictionary=$HOME/.vim/dicts/bibtexpages.txt
 set complete+=k
 
 " Find text markers
-"nnoremap <leader>{ :vimgrep /{\w\+}/ %<CR>:copen<CR>
+nnoremap <leader>{ :vimgrep /{\w\+}/ %<CR>:copen<CR>
 
 " auto commands
 ":autocmd BufWrite *.py %retab   " retab python files
@@ -117,6 +136,7 @@ function! GoToFootnote(footnote, ...)
   call search('\[\^' . a:footnote . '\]' . definition)
 endfunction
 
+" Abbreviate months
 command! -nargs=0 AbbreviateMonths call AbbreviateMonths()
 function! AbbreviateMonths()
   :%s/January/Jan./g
