@@ -2,7 +2,7 @@
 
 ## Installation
 
-Clone the repository to your home directory under `~/.dotfiles` and run `make` to symlink the files to your home directory. Configuration files are separated out into their respective directories to keep everything organized and locate configurations easily.
+Clone the repository to your home directory under `~/.dotfiles` and run `rake` to symlink the files to your home directory. Configuration files are separated out into their respective directories to keep everything organized and locate configurations easily.
 
 ```bash
 $ git clone https://github.com/hepplerj/dotfiles.git ~/.dotfiles
@@ -14,7 +14,7 @@ $ rake
 
 ## Sensible OS X defaults
 
-Hat tip to Mathias Bynen's excellent OS X defaults. You can set these by running:
+Hat tip to Mathias Bynen's excellent OS X defaults. **Current as of OS X 10.11.2**. You can set these by running:
 
 ```bash
 $ cd system

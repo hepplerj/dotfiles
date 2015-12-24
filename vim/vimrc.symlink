@@ -6,8 +6,8 @@
 "
 " Author: Jason Heppler
 " Source: http://github.com/hepplerj/dotfiles/
-" Last updated: 2015-06-10
-" This file changes a lot. I'll document things whenever I have time to kill.
+" Last updated: 2015-12-23
+" This file changes a lot. Usually used with MacVim, but compatible with CLI vim.
 
 " Vundle plugins
 " -------------------------------------------------------------------
@@ -17,6 +17,7 @@ set rtp+=~/.dotfiles/vim/vim.symlink/bundle/Vundle.vim
 let g:vundle_default_git_proto = 'git'
 call vundle#begin()
 
+Plugin 'benekastah/neomake'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/syntastic'
 Plugin 'SirVer/ultisnips'
@@ -37,6 +38,7 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdtree'
 " Testing out vim writing environment plugins
+Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'reedes/vim-pencil'
 Plugin 'reedes/vim-wordy'
 Plugin 'reedes/vim-lexical'
@@ -110,13 +112,20 @@ set formatoptions=tqcwn                     " see :help fo-table
 set t_Co=16                                 " colors!
 syntax enable
 set background=dark
-colorscheme solarized
+colorscheme hybrid
 
 set display+=lastline                       " show partial last lines
 set nolist                                  " don't display space chars
 set listchars=tab:▸\ ,eol:¬,trail:·,nbsp:·  " TextMate style space chars
 set scrolloff=5                             " cursor 5 lines from top or bottom
+set relativenumber
 set number
+set colorcolumn=81
+set synmaxcol=400
+
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+set statusline=%f%{fugitive#statusline()}
 
 " Resize the splits if the vim windows is resized
 autocmd VimResized * :wincmd =
@@ -227,6 +236,9 @@ nnoremap _fd  :set ft=diff<CR>
 " execute Ruby on the fly
 :map _erb :!ruby %<cr>
 
+autocmd BufNewFile,BufRead *.json set filetype=javascript
+autocmd BufRead,BufNewFile *.md set filetype=markdown
+
 " Quick editing
 "--------------------------------------------------------------------------
 command! -nargs=0 Evimrc e $MYVIMRC
@@ -248,7 +260,7 @@ au BufNewFile,BufRead *.markdown,*.md,*.mkd,*.pd,*.pdc,*.pdk,*.pandoc,*.text,*.t
 nnoremap <leader><space> /\v^$\n[\^1\]:<CR>:let @/ = ""<CR>
 " Convert pandoc buffer to HTML and copy to system clipboard
 autocmd FileType markdown nnoremap <buffer> <C-S-x> :write \| let @+ = system("pandoc -t html " . shellescape(expand("%:p")))<CR>
-let g:pandoc#syntax#conceal#use = 0
+"let g:pandoc#syntax#conceal#use = 0
 
 " Ctrl-P
 "--------------------------------------------------------------------------
@@ -263,7 +275,7 @@ let g:ctrlp_dotfiles = 0                    " ignore dotfiles and dotdirs
 let g:ctrlp_custom_ignore = { 'dir': '\.git$\|\_site$' }
 
 " NERDTree
-map <C-n> :NERDTreeToggle<CR>
+map <C-t> :NERDTreeToggle<CR>
 
 " Formating file
 "--------------------------------------------------------------------------
@@ -290,7 +302,7 @@ command! -nargs=1 Wiki execute ":split $HOME/Dropbox/acad/wiki/wikidata/" . fnam
 
 " UltiSnips
 " -------------------------------------------------------------------
-let g:UltiSnipsSnippetDirectories=["/Users/jheppler/.dotfiles/vim/vim.symlink/UltiSnips"]
+let g:UltiSnipsSnippetDirectories=["/Users/jasonheppler/.dotfiles/vim/vim.symlink/UltiSnips"]
 let g:UltiSnipsEditSplit = 'horizontal'
 let g:UltiSnipsExpandTrigger=";<tab>"
 let g:UltiSnipsJumpForwardTrigger=";<f-tab>"
@@ -342,6 +354,21 @@ augroup pencil
     autocmd!
     autocmd FileType markdown,mkd,md,page,text call pencil#init()
 augroup END
+
+let g:neomake_error_sign = {
+    \ 'text': '✖',
+    \ 'texthl': 'ErrorMsg',
+    \ }
+
+" Configure Gist
+let g:gist_clip_command = 'pbcopy'
+let g:gist_detect_filetype = 1
+
+" configure vim-jsx
+let g:jsx_ext_required = 0
+
+" Configure Ack
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " Source configs
 "--------------------------------------------------------------------------

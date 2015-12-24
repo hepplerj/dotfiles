@@ -1,7 +1,6 @@
 pathdirs=(
-  ./bin
-  $ZSH/bin
   $HOME/.rbenv/shims
+  $ZSH/bin
   $HOME/Libaray/Haskell/bin
   $HOME/Library/Haskell/bin
   $HOME/.cabal/bin
@@ -15,9 +14,7 @@ pathdirs=(
   /usr/local/git/bin
   /usr/local/bin/node
   /usr/local/bin/npm
-  $HOME/Dropbox/bin
   $HOME/.pandoc/filters
-  $HOME/.go
 )
 
 for dir in $pathdirs; do
@@ -26,6 +23,6 @@ for dir in $pathdirs; do
   fi
 done
 
-export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
-export GOPATH=$HOME/.go
-export PATH=$PATH:$GOPATH/bin
+#export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
+#export GOPATH=$HOME/.go
+#export PATH=$PATH:$GOPATH/bin

@@ -1,6 +1,11 @@
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="me"
+ZSH_THEME="robbyrussell"
 plugins=(osx git ruby command-coloring pip npm brew rbenv)
+
+# Sourced
+source $ZSH/oh-my-zsh.sh
+source $HOME/.dotfiles/zsh/config.zsh
+source $HOME/.dotfiles/system/path.zsh
 
 for function in $HOME/.dotfiles/zsh/functions/*; do
   source $function
@@ -9,14 +14,14 @@ done
 # Aliases
 [[ -f $HOME/.dotfiles/zsh/aliases.zsh ]] && source $HOME/.dotfiles/zsh/aliases.zsh
 
-# ZSHENV
+# rbenv 
 if which rbenv &>/dev/null; then
   eval "$(rbenv init - --no-rehash)"
 fi
 
-autoload -U colors
-colors
-export CLICOLOR=1
+#autoload -U colors
+#colors
+#export CLICOLOR=1
 
 export VISUAL=vim
 export EDITOR=$VISUAL
@@ -37,11 +42,6 @@ bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
 
 # Local Config
 if [[ -s $HOME/.zshrc_local ]] ; then source $HOME/.zshrc_local ; fi
-
-# Sourced
-source $ZSH/oh-my-zsh.sh
-source $HOME/.dotfiles/zsh/config.zsh
-source $HOME/.dotfiles/system/path.zsh
 
 # added by travis gem
 [ -f /Users/jheppler/.travis/travis.sh ] && source /Users/jheppler/.travis/travis.sh

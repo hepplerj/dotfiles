@@ -19,8 +19,14 @@ function! PushWiki()
   :redraw!
 endfunction
 
-" Commands for editing wiki pages to Gitit
+" With a file `test.md` in the current Vim buffer, open the file `test.md.pdf` in the OS.
+" https://gist.github.com/lmullen/b7231f5ce79eba9c6aeb
+command! -nargs=0 PDF call PDF()
+function! PDF()
+    :silent exec "!open ".expand("%:p").".pdf"
+endfunction
 
+" Commands for editing wiki pages to Gitit
 command! -nargs=1 Wiki execute ":split $HOME/Dropbox/acad/wiki/wikidata/" . fnameescape("<args>.page") | execute ":Gwrite"
 
 " Find related Pandoc footnote numbers
@@ -54,8 +60,8 @@ endfunction
 
 " bibkeys - launch with CTRL-X CTRL-K
 " via https://github.com/lmullen/bibkeys
-"set dictionary=$HOME/Dropbox/acad/bib/citekeys.txt
-set dictionary=$HOME/.vim/dicts/bibtexpages.txt
+set dictionary=$HOME/Dropbox/acad/bib/citekeys.txt
+"set dictionary=$HOME/.vim/dicts/bibtexpages.txt
 set complete+=k
 
 " Find text markers
