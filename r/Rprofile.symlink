@@ -7,6 +7,7 @@
 # http://gettinggeneticsdone.blogspot.com/2013/07/customize-rprofile.html?m=1
 # http://inundata.org/2011/09/29/customizing-your-rprofile/
 # http://kevinushey.github.io/blog/2015/02/02/rprofile-essentials/
+# https://github.com/lmullen/dotfiles/blob/master/r/Rprofile.symlink
 
 # warn on partial matches
 options(warnPartialMatchAttr = TRUE,

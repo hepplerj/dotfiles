@@ -1,53 +1,192 @@
-ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="robbyrussell"
-plugins=(osx git ruby command-coloring pip npm brew rbenv)
-
-# Sourced
-source $ZSH/oh-my-zsh.sh
 source $HOME/.dotfiles/zsh/config.zsh
-source $HOME/.dotfiles/system/path.zsh
+#source $HOME/.dotfiles/system/path.zsh
 
-for function in $HOME/.dotfiles/zsh/functions/*; do
-  source $function
-done
+# Getting Java to work with rStudio
+export LD_LIBRARY_PATH=/Library/Java/JavaVirtualMachines/jdk1.8.0_11.jdk/Contents/Home/jre/lib/server
 
-# Aliases
-[[ -f $HOME/.dotfiles/zsh/aliases.zsh ]] && source $HOME/.dotfiles/zsh/aliases.zsh
+# shortcut to this dotfiles path is $ZSH
+export ZSH=$HOME/.dotfiles
 
-# rbenv 
-if which rbenv &>/dev/null; then
-  eval "$(rbenv init - --no-rehash)"
-fi
+# load aliases
+source $ZSH/zsh/aliases.zsh
 
-#autoload -U colors
-#colors
-#export CLICOLOR=1
+# your project folder that we can `c [tab]` to
+export PROJECTS=~/Dropbox/dev
+export WRITING=~/Dropbox/acad
 
-export VISUAL=vim
-export EDITOR=$VISUAL
-export DISABLE_AUTO_TITLE="true"
-export RUBYOPT=rubygems
-export HISTSIZE=1000
-export HISTFILESIZE=1000
-export HISTCONTROL=erasedups
+# functions
+fpath=($ZSH/zsh/functions /usr/local/share/zsh-completions $fpath)
+autoload -U $ZSH/zsh/functions/*(:t)
 
-# Keybindings
-bindkey "^A" beginning-of-line
-bindkey "^E" end-of-line
-bindkey "^R" history-incremental-search-backward
-bindkey "^P" history-search-backward
-bindkey "^Y" accept-and-hold
-bindkey "^N" insert-last-word
-bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
+# tools
+export EDITOR='vim'
 
-# Local Config
-if [[ -s $HOME/.zshrc_local ]] ; then source $HOME/.zshrc_local ; fi
+# history
+HISTFILE=~/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
+setopt APPEND_HISTORY # adds history
+setopt INC_APPEND_HISTORY SHARE_HISTORY  # adds history incrementally and share it across sessions
+setopt HIST_IGNORE_ALL_DUPS  # don't record dupes in history
+setopt HIST_REDUCE_BLANKS
+
+# colors
+export LSCOLORS="exfxcxdxbxegedabagacad"
+export CLICOLOR=true
+export TERM="xterm-256color"
+
+# options
+setopt NO_BG_NICE # don't nice background tasks
+setopt NO_HUP
+setopt NO_LIST_BEEP
+setopt LOCAL_OPTIONS # allow functions to have local options
+setopt LOCAL_TRAPS # allow functions to have local traps
+setopt EXTENDED_HISTORY # add timestamps to history
+setopt PROMPT_SUBST
+setopt CORRECT
+setopt COMPLETE_IN_WORD
+setopt IGNORE_EOF
+setopt AUTOPUSHD        # keep history of directories
+setopt AUTO_LIST        # list ambiguous completions automatically
+
+# don't expand aliases _before_ completion has finished
+#   like: git comm-[tab]
+setopt complete_aliases
+
+# Vim key bindings and Vim-like line editor
+bindkey -v
+autoload -U   edit-command-line
+zle -N        edit-command-line
+bindkey -M vicmd v edit-command-line
+
+# vi style incremental search
+bindkey '^R' history-incremental-search-backward
+bindkey '^S' history-incremental-search-forward
+
+unsetopt nomatch
+
+cdpath=( . ~ )
+autoload colors zsh/terminfo && colors
+
+# Prompt
+# -------------------------------------------------------------------
+
+git_branch() {
+  echo $(/usr/bin/git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
+}
+
+git_dirty() {
+  st=$(/usr/bin/git status 2>/dev/null | tail -n 1)
+  if [[ $st == "" ]]
+  then
+    echo ""
+  else
+    if [[ $st == "nothing to commit, working directory clean" ]]
+    then
+      echo ":%{$fg[green]%}$(git_prompt_info)%{$reset_color%}"
+    else
+      echo ":%{$fg[red]%}$(git_prompt_info)%{$reset_color%}"
+    fi
+  fi
+}
+
+git_prompt_info () {
+ ref=$(/usr/bin/git symbolic-ref HEAD 2>/dev/null) || return
+# echo "(%{\e[0;33m%}${ref#refs/heads/}%{\e[0m%})"
+ echo ":%{$fg[magenta]%}${ref#refs/heads/}${reset_color%}"
+}
+
+unpushed () {
+  /usr/bin/git cherry -v @{upstream} 2>/dev/null
+}
+
+need_push () {
+  if [[ $(unpushed) == "" ]]
+  then
+    echo ""
+  else
+    echo ":%{$fg[magenta]%}unpushed%{$reset_color%}"
+  fi
+}
+
+has_stash () {
+  if [[ -n "$(git stash list 2>/dev/null)" ]]; then
+    echo ":%{$fg[magenta]%}stash%{$reset_color%}"
+  fi
+}
+
+rb_prompt(){
+  if $(which rbenv &> /dev/null)
+  then
+    rb_v=$(rbenv version |awk '{print $1}')
+    # if [[ $rb_v  == $(rbenv global) ]]
+    # then
+    #   echo ""
+    # else
+      echo "%{$fg[yellow]%}rb:$rb_v%{$reset_color%}"
+    # fi
+  else
+    echo ""
+  fi
+  }
+
+directory_name(){
+  echo "%{$fg[blue]%}%~%{$reset_color%}"
+}
+
+user_machine(){
+  echo "%{$fg[yellow]%}%n@%M%{$reset_color%}"
+}
+
+set_prompt () {
+  export PROMPT=$'\n$(directory_name)$(git_prompt_info)\n%{$fg[red]%}›%{$reset_color%} '
+  RPROMPT='%(?.. %?)'
+}
+
+# Set the correct prompt
+precmd() {
+  set_prompt
+  print -Pn "\e]0;%~\a"
+}
+
+# Path
+# -------------------------------------------------------------------
+pathdirs=(
+  /usr/texbin
+  /usr/X11/bin
+  /usr/local/bin
+  /usr/local/sbin
+  ~/bin
+  /usr/local/opt/coreutils/libexec/gnubin
+  $HOME/.rbenv/shims
+  $HOME/.dotfiles/bin
+)
+
+for dir in $pathdirs; do PATH=$dir:$PATH done
+
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
+
+# Rbenv
+# -------------------------------------------------------------------
+eval "$(rbenv init -)"
+
+# matches case insensitive for lowercase
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+# pasting with tabs doesn't perform completion
+zstyle ':completion:*' insert-tab pending
+
+# initialize autocomplete here, otherwise functions won't be loaded
+autoload -U compinit
+compinit
 
 # added by travis gem
-[ -f /Users/jheppler/.travis/travis.sh ] && source /Users/jheppler/.travis/travis.sh
+[ -f /Users/jasonheppler/.travis/travis.sh ] && source /Users/jasonheppler/.travis/travis.sh
 
-# Add GHC 7.10.1 to the PATH, via https://ghcformacosx.github.io/
-export GHC_DOT_APP="/Applications/ghc-7.10.1.app"
-if [ -d "$GHC_DOT_APP" ]; then
-  export PATH="${HOME}/.cabal/bin:${GHC_DOT_APP}/Contents/bin:${PATH}"
-fi
+# Docker
+export DOCKER_HOST=tcp://192.168.59.104:2376
+export DOCKER_CERT_PATH=/Users/jasonheppler/.boot2docker/certs/boot2docker-vm
+export DOCKER_TLS_VERIFY=1
+
+# Go
+export GOPATH=$HOME/go

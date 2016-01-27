@@ -36,7 +36,7 @@ alias update="sudo softwareupdate -i -a; brew update; brew upgrade"
 
 # File and system management
 # -------------------------------------------------------------------
-alias atsp="~/Dropbox/work/ATSP/ATS\ -\ History/"
+alias atsp="cd ~/Dropbox/work/ATSP/ATS\ -\ History/"
 alias brewup='brew update && brew upgrade'
 alias cesta="~/Dropbox/work/ATSP/ATS\ -\ CESTA/"
 alias ducks='du -cks ~/**/* | sort -rn | head -n 20'

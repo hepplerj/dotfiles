@@ -7,7 +7,7 @@
 " Author: Jason Heppler
 " Source: http://github.com/hepplerj/dotfiles/
 " Last updated: 2015-12-23
-" This file changes a lot. Usually used with MacVim, but compatible with CLI vim.
+" This file changes a lot. Usually used with MacVim, but compatible with vim.
 
 " Vundle plugins
 " -------------------------------------------------------------------
@@ -17,12 +17,12 @@ set rtp+=~/.dotfiles/vim/vim.symlink/bundle/Vundle.vim
 let g:vundle_default_git_proto = 'git'
 call vundle#begin()
 
-Plugin 'benekastah/neomake'
-Plugin 'majutsushi/tagbar'
+Plugin 'gmarik/Vundle.vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'Lokaltog/vim-powerline'
 Plugin 'scrooloose/syntastic'
 Plugin 'SirVer/ultisnips'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'gmarik/Vundle.vim'
 Plugin 'honza/vim-snippets'
 Plugin 'kien/ctrlp.vim'
 Plugin 'rking/ag.vim'
@@ -34,15 +34,10 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-vinegar'
 Plugin 'sheerun/vim-polyglot'
-Plugin 'Raimondi/delimitMate'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'scrooloose/nerdtree'
-" Testing out vim writing environment plugins
-Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'reedes/vim-pencil'
 Plugin 'reedes/vim-wordy'
 Plugin 'reedes/vim-lexical'
-Plugin 'vimoutliner/vimoutliner'
+Plugin 'pangloss/vim-javascript'
 
 call vundle#end()
 filetype plugin indent on
@@ -112,7 +107,7 @@ set formatoptions=tqcwn                     " see :help fo-table
 set t_Co=16                                 " colors!
 syntax enable
 set background=dark
-colorscheme hybrid
+colorscheme solarized
 
 set display+=lastline                       " show partial last lines
 set nolist                                  " don't display space chars
@@ -130,9 +125,25 @@ set statusline=%f%{fugitive#statusline()}
 " Resize the splits if the vim windows is resized
 autocmd VimResized * :wincmd =
 
-" enable fancy mode with Powerline
-"let g:Powerline_symbols = 'fancy'
-"let g:Powerline_cache_enabled = 1
+" Powerline
+set laststatus=2
+set noshowmode
+let g:Powerline_stl_path_style = "short"
+
+" Gitgutter
+" -------------------------------------------------------------------
+let g:gitgutter_eager = 1
+let g:gitgutter_realtime = 1
+let g:gitgutter_sign_column_always = 1
+
+let g:gitgutter_sign_added = '█'
+let g:gitgutter_sign_modified = '█'
+let g:gitgutter_sign_modified_removed = '▁'
+let g:gitgutter_sign_removed = '▁'
+let g:gitgutter_sign_removed_first_line = '▔'
+
+autocmd BufEnter     * GitGutterAll
+autocmd ShellCmdPost * GitGutterAll
 
 " Status line
 " -------------------------------------------------------------------
@@ -291,22 +302,16 @@ autocmd FileType js set commentstring=\\ %s               " comments for javascr
 autocmd FileType rb set commentstring=#\ %s               " comments for ruby
 nmap <C-c> gcc
 
-" Auto-tab sizing
-" -------------------------------------------------------------------
-"autocmd Filetype html setlocal ts=2 sts=2 sw=2
-"autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
-"autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
-
 " Gitit
 command! -nargs=1 Wiki execute ":split $HOME/Dropbox/acad/wiki/wikidata/" . fnameescape("<args>.page") | execute ":Gwrite"
 
 " UltiSnips
 " -------------------------------------------------------------------
-let g:UltiSnipsSnippetDirectories=["/Users/jasonheppler/.dotfiles/vim/vim.symlink/UltiSnips"]
+let g:UltiSnipsSnippetDirectories=["$HOME/.dotfiles/vim/vim.symlink/UltiSnips"]
 let g:UltiSnipsEditSplit = 'horizontal'
-let g:UltiSnipsExpandTrigger=";<tab>"
-let g:UltiSnipsJumpForwardTrigger=";<f-tab>"
-let g:UltiSnipsJumpBackwardTrigger=";<b-tab>"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<b-tab>"
 map <F5> :UltiSnipsEdit<CR>
 
 " Syntastic
@@ -315,7 +320,6 @@ let g:syntastic_always_populate_loc_list=1
 let g:syntastic_javascript_checkers=['jshint']
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
-" let g:syntastic_check_on_wq = 0
 
 " Ag
 " -------------------------------------------------------------------
