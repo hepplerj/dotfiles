@@ -1,7 +1,7 @@
 # ZSH configuration
 # Jason Heppler <jason@jasonheppler.org>
 
-export ZSH=$HOME/.oh-my-zsh
+export ZSH=$HOME/.dotfiles
 source $ZSH/zsh/aliases.zsh
 
 # functions
@@ -135,13 +135,11 @@ directory_name(){
 }
 
 user_machine(){
-  echo "%{$fg[yellow]%}%n@%M%{$reset_color%}"
+  echo "%{$fg[yellow]%}%n@%m%{$reset_color%}"
 }
 
 set_prompt () {
   export PROMPT=$'\n$(user_machine):$(directory_name)$(git_prompt_info)\n%{$fg[red]%}›%{$reset_color%} '
-  # export PROMPT=$'\n$(user_machine):$(directory_name)$(git_dirty)$(has_stash)$(need_push)\n%{$fg[red]%}›%{$reset_color%} '
-  # export PROMPT=$'\n$(user_machine):$(directory_name)$(git_dirty)$(has_stash)\n%{$fg[red]%}›%{$reset_color%} '
   RPROMPT='%(?.. %?)'
 }
 
