@@ -2,7 +2,7 @@
 command! -nargs=0 Wiki call CommitToWiki()
 nnoremap _wc :call CommitToWiki()<CR>
 function! CommitToWiki()
-  :silent !cd ~/Dropbox/acad/wiki/wikidata && git --git-dir=/Users/jheppler/Dropbox/acad/wiki/wikidata/.git --no-pager add *.page && git --git-dir=/Users/jheppler/Dropbox/acad/wiki/wikidata/.git commit -a -m "Automatic commit from Vim" 
+  :silent !cd ~/Dropbox/acad/wiki/wikidata && git --git-dir=/Users/jasonheppler/Dropbox/acad/wiki/wikidata/.git --no-pager add *.page && git --git-dir=/Users/jasonheppler/Dropbox/acad/wiki/wikidata/.git commit -a -m "Automatic commit from Vim" 
 endfunction
 
 " Commit all changes in research wiki
@@ -61,14 +61,10 @@ endfunction
 " bibkeys - launch with CTRL-X CTRL-K
 " via https://github.com/lmullen/bibkeys
 set dictionary=$HOME/Dropbox/acad/bib/citekeys.txt
-"set dictionary=$HOME/.vim/dicts/bibtexpages.txt
 set complete+=k
 
 " Find text markers
 nnoremap <leader>{ :vimgrep /{\w\+}/ %<CR>:copen<CR>
-
-" auto commands
-":autocmd BufWrite *.py %retab   " retab python files
 
 " Strip trailing white space (`_sw`)
 function! StripWhitespace()
