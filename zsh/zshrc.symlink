@@ -19,6 +19,7 @@ pathdirs=(
   $HOME/.rbenv/shims
   $HOME/.dotfiles/bin
   $HOME/bin
+  $HOME/.local/bin
 )
 
 for dir in $pathdirs; do PATH=$dir:$PATH done
@@ -158,3 +159,6 @@ export MAKEFLAGS="-j 4"
 
 # no Homebrew analytics
 export HOMEBREW_NO_ANALYTICS=1
+
+# tmuxinator
+source ~/.dotfiles/bin/tmuxinator.zsh

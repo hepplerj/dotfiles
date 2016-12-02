@@ -6,7 +6,7 @@
 "
 " Author: Jason Heppler
 " Source: http://github.com/hepplerj/dotfiles/
-" Last updated: 2016-01-27 
+" Last updated: 2016-11-02 
 " This file changes a lot. Usually used with MacVim, but compatible with vim.
 
 " Vundle plugins
@@ -15,11 +15,16 @@ set nocompatible
 filetype off
 set rtp+=$HOME/.dotfiles/vim/vim.symlink/bundle/Vundle.vim
 let g:vundle_default_git_proto = 'git'
+
 call vundle#begin()
 
+" Bundle list
 Plugin 'gmarik/Vundle.vim'
+
+" Installed plugins
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdtree'
 Plugin 'SirVer/ultisnips'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'honza/vim-snippets'
@@ -33,22 +38,33 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-vinegar'
 Plugin 'sheerun/vim-polyglot'
-"Plugin 'plasticboy/vim-markdown'
 Plugin 'reedes/vim-pencil'
 Plugin 'reedes/vim-wordy'
 Plugin 'reedes/vim-lexical'
 Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'jelera/vim-javascript-syntax'
 Plugin 'amperser/proselint'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'helino/vim-json'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
-" Themes
+" Plugin Themes
 Plugin 'chriskempson/base16-vim'
 
+" Testing plugins
+"Plugin 'plasticboy/vim-markdown'
+
 call vundle#end()
-filetype plugin indent on
+
+if has('autocmd')
+  filetype plugin indent on    " enable plugins, detection and indenting
+endif
+
+if has('syntax') && !exists('g:syntax_on')
+  syntax on
+endif
 
 " Encoding
 "--------------------------------------------------------------------------
@@ -91,7 +107,7 @@ set noerrorbells
 set mouse=nicr                              " mouse scrolling
 set timeoutlen=2000
 set ttimeoutlen=10
-set autoread
+set autoread                                " automatically update file when edited outside of vim
 au FocusLost * :wa                          " save when losing focus (gvim)
 
 " Text formatting 
@@ -108,14 +124,21 @@ set shiftround                              " use shiftwidth when indenting
 " Use Q to format paragraph
 vnoremap Q gq
 nnoremap Q gwap
-set formatoptions=tqcwn                     " see :help fo-table
+"set formatoptions=tqcwn                     " see :help fo-table
+
+set formatoptions=
+set formatoptions-=t              " don't autowrap text
+set formatoptions+=c              " do autowrap comments
+set formatoptions+=r              " automatically continue comments
+set formatoptions+=o              " automatically continue comments when hitting 'o' or 'O'
+set formatoptions+=q              " allow formating of comments with 'gq'
+set formatoptions+=n              " recognize numbered lists
+set formatoptions+=l              " don't break long lines that were already there
 
 " Display
 "--------------------------------------------------------------------------
-set t_Co=16                                 " colors!
-syntax enable
-set background=light
-colorscheme solarized 
+set background=dark
+colorscheme solarized
 
 set display+=lastline                       " show partial last lines
 set nolist                                  " don't display space chars
@@ -134,9 +157,6 @@ autocmd VimResized * :wincmd =
 
 " Powerline
 let g:airline_powerline_fonts = 1
-"set laststatus=2
-"set noshowmode
-"let g:Powerline_stl_path_style = "short"
 
 " Gitgutter
 " -------------------------------------------------------------------
@@ -182,6 +202,7 @@ set statusline+=%*
 set statusline+=C:%02c,                       " cursor column
 set statusline+=L:%03l/%03L                   " cursor line/total lines
 set statusline+=\ %P                          " percent through file
+set cmdheight=2
 
 " Tab completion
 "--------------------------------------------------------------------------
@@ -200,15 +221,6 @@ noremap <leader>yy "*Y
 
 " Preserve indentation while pasting text from the OS X clipboard
 noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
-
-" Cursorline
-"--------------------------------------------------------------------------
-" Only show cursorline in the current window and in normal mode.
-augroup cline
-    au!
-    au WinLeave,InsertEnter * set nocursorline
-    au WinEnter,InsertLeave * set cursorline
-augroup END
 
 " Word count and editing
 "--------------------------------------------------------------------------
@@ -260,9 +272,13 @@ autocmd BufRead,BufNewFile *.md set filetype=markdown
 
 " Quick editing
 "--------------------------------------------------------------------------
-command! -nargs=0 Evimrc e $MYVIMRC
-command! -nargs=0 Svimrc source $MYVIMRC
-command! -nargs=0 Efunctions e $HOME/.vim/functions.vim
+"command! -nargs=0 Evimrc e $MYVIMRC<cr>
+
+" open vimrc in new tab for editing
+nmap <leader>EV :tabedit $MYVIMRC<cr>
+
+" reload .vimrc
+map <silent> <leader>RV :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 " Search
 "--------------------------------------------------------------------------
@@ -316,10 +332,25 @@ let g:ctrlp_dotfiles = 0                    " ignore dotfiles and dotdirs
 let g:ctrlp_custom_ignore = { 'dir': '\.git$\|\_site$' }
 
 " NERDTree
-map <C-t> :NERDTreeToggle<CR>
+
+" Start up nerdtree if no file was specified on startup
+function! StartUpNerdtree()
+  if 0 == argc()
+    NERDTree
+  end
+endfunction
+
+autocmd VimEnter * call StartUpNerdtree()
+
+" NERDTree
+"--------------------------------------------------------------------------
+nnoremap <silent> <leader>b :NERDTreeToggle<CR>   " open a horizontal split and switch to it (,h)
+"nnoremap <silent> <leader>f :NERDTreeFind<CR>   " open a horizontal split and switch to it (,h)
+"let g:NERDTreeHijackNetrw=0
 
 " Formating file
 "--------------------------------------------------------------------------
+
 " Run equalprg on the entire file
 nnoremap <silent> <leader>= mpgg=G`p
 
@@ -415,6 +446,26 @@ if $TERM_PROGRAM =~ "iTerm"
     let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
     let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
 endif
+
+" Miscellaneous
+"--------------------------------------------------------------------------
+
+" toggle listchars on or off
+noremap <Leader>i :set list!<CR>
+
+" Toggle relative line numbers
+noremap <Leader>l :set relativenumber!<CR>
+
+" fix Vim's regex handling
+nnoremap / /\v
+vnoremap / /\v
+
+" Better pasting from clipboard
+" http://tilvim.com/2014/03/18/a-better-paste.html
+map <Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
+
+set clipboard=unnamed   " yank and paste with the system clipboard
+
 
 " Source configs
 "--------------------------------------------------------------------------
