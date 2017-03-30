@@ -24,10 +24,6 @@ pathdirs=(
 
 for dir in $pathdirs; do PATH=$dir:$PATH done
 
-# Handle MySQL installed from Homebrew
-export MYSQL_PATH=/usr/local/Cellar/mysql/5.7.14
-export PATH=$PATH:$MYSQL_PATH/bin
-
 # Handle rbenv 
 if which rbenv &>/dev/null; then
   eval "$(rbenv init - --no-rehash)"
@@ -140,7 +136,7 @@ user_machine(){
 }
 
 set_prompt () {
-  export PROMPT=$'\n$(user_machine):$(directory_name)$(git_prompt_info)\n%{$fg[red]%}›%{$reset_color%} '
+  export PROMPT=$'\n$(user_machine) $(directory_name) ›%{$reset_color%} '
   RPROMPT='%(?.. %?)'
 }
 

@@ -9,44 +9,32 @@
 # http://kevinushey.github.io/blog/2015/02/02/rprofile-essentials/
 # https://github.com/lmullen/dotfiles/blob/master/r/Rprofile.symlink
 
-# warn on partial matches
-options(warnPartialMatchAttr = TRUE,
-        warnPartialMatchDollar = TRUE,
-        warnPartialMatchArgs = TRUE)
+options(
+       width = 80,
+       repos = c(CRAN = "https://cran.rstudio.com"),
+       download.file.method = "libcurl",
+       useFancyQuotes = FALSE,
+       menu.graphics = FALSE,
+       editor = "vim",
+       browserNLdisabled = TRUE,
+       max.print = 1e3,
+       Ncpus = 6L,
+       devtools.name = "Jason Heppler",
+       devtools.desc = list(
+        "Authors@R" = 'c(person("Jason", "Heppler", role = c("aut", "cre"),
+        email = "jason@jasonheppler.org"))',
+        License = "MIT + file LICENSE",
+        Version = "0.0.0.9000",
+        VignetteBuilder = "knitr",
+        URL = "https://github.com/hepplerj/pkgname",
+        BugReports = "https://github.com/hepplerj/pkgname/issues",
+        LazyData = "yes"
+       )
+)
 
 # enable autocompletions for package names in
 # `require()`, `library()`
 utils::rc.settings(ipck = TRUE)
-
-# warnings are errors
-options(warn = 2)
-
-# fancy quotes are annoying and lead to
-# 'copy + paste' bugs / frustrations
-options(useFancyQuotes = FALSE)
-
-options(
-    warnPartialMatchAttr = TRUE,
-    warnPartialMatchDollar = TRUE,
-    warnPartialMatchArgs = TRUE,
-    repos = c(CRAN = "https://cran.rstudio.com"),
-    download.file.method = "libcurl",
-    useFancyQuotes = FALSE,
-    menu.graphics = FALSE,
-    editor = "vim",
-    browserNLdisabled = TRUE,
-    deparse.max.lines = 2,
-    devtools.name = "Jason Heppler",
-    devtools.desc= list(
-      Author     = "Jason Heppler",
-      Maintainer = "Jason Heppler <jason@jasonheppler.org> [aut, cre]",
-      License    = "MIT + file LICENSE",
-      Version    = "0.0.1.9000",
-      VignetteBuilder = "knitr",
-      URL        = "",
-      BugReports = "")
-    # max.print = 100
-    )
 
 Sys.setenv(R_PACKRAT_CACHE_DIR='~/R/packrat/')
 Sys.setenv(R_HISTSIZE='10000')

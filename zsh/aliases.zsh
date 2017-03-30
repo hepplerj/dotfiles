@@ -5,8 +5,6 @@ alias book='mvim -S ~/Dropbox/machinesvalley/Session.vim'
 alias dot='mvim -S ~/Dropbox/dev/dotfiles/Session.vim'
 alias notebook='mvim -S ~/Dropbox/acad/wiki/wikidata/Session.vim'
 
-alias vim='/usr/local/bin/vim'
-
 # Unix
 # -------------------------------------------------------------------
 alias ..="cd .."
@@ -26,13 +24,14 @@ alias cpu='top -a -o cpu -n 10'
 alias cp='cp -i'
 alias f='open -a Finder ./' # open current dir in Finder
 alias grep='grep --color=auto'
+alias mvim='open -a MacVim'
 alias mem='top -o rsize -n 10'
 alias more='more -R'
 alias mutt='cd ~/Desktop && mutt'
 alias process="ps aux | grep -i"
 alias scanlocal='nmap -sP 192.168.1.0/24'
 alias servedir='http-server -p 8008'
-alias serve='Rscript -e "servr::httw()" -b'
+alias serve='open http://localhost:8000 && http-server -p 8000'
 alias reload='exec $SHELL -l'
 alias tmux='tmux -u'
 
@@ -40,7 +39,6 @@ alias tmux='tmux -u'
 # -------------------------------------------------------------------
 alias atsp="cd ~/Dropbox/work/ATSP/ATS\ -\ History/"
 alias brewup='brew update && brew upgrade'
-alias cesta="~/Dropbox/work/ATSP/ATS\ -\ CESTA/"
 alias dirsize="du -sx ./* 2>/dev/null | sort -n"
 alias ducks='du -cks ~/**/* | sort -rn | head -n 20'
 alias duh='du -hs * | sort -h -r'  # Sort files/dirs by size
@@ -51,6 +49,8 @@ alias process="ps aux | grep"
 alias runwiki='cd ~/Dropbox/acad/wiki && gitit -f my.conf > /dev/null 2>&1 &'
 alias zshreload='source ~/.zshrc'
 
+# R
+# -------------------------------------------------------------------
 shiny() {
     if [ -z "$1" ]
     then
@@ -81,7 +81,3 @@ alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C
 alias gp='git push'
 alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
 alias gs='git status -sb'
-
-# Environment variables
-# -------------------------------------------------------------------
-source "$HOME/.env.zsh"
