@@ -12,6 +12,7 @@ mutt/mutt.symlink/offlineimaprc
 vim/vim.symlink/.netrwhist
 vim/vim.symlink/.tmp/
 vim/vim.symlink/bundle
+vim/vim.symlink/plugged/
 ls-R
 secret
 .Rproj.user
