@@ -1,15 +1,3 @@
-"        _
-" __   _(_)_ __ ___  _ __ ___
-" \ \ / / | '_ ` _ \| '__/ __|
-"  \ V /| | | | | | | | | (__
-"   \_/ |_|_| |_| |_|_|  \___|
-"
-" Author: Jason Heppler
-" Source: http://github.com/hepplerj/dotfiles/
-" Last updated: 2017-06-17
-" This file changes a lot. Usually used with MacVim. Used with neovim, 
-" but compatible with vim.
-
 call plug#begin('~/.vim/plugged')
 
 Plug 'wakatime/vim-wakatime'
@@ -80,8 +68,8 @@ Plug 'juanedi/predawn.vim'
 Plug 'cocopon/iceberg.vim'
 Plug 'mhinz/vim-janah'
 Plug 'cloudhead/shady.vim'
-Plug 'reeds/vim-pencil'
 Plug 'reedes/vim-colors-pencil'
+Plug 'reedes/vim-pencil'
 call plug#end()
 
 set nocompatible
@@ -147,6 +135,12 @@ let g:jsx_ext_required = 0
 " deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#file#enable_buffer_path = 1
+
+" pencil
+augroup pencil
+  autocmd FileType markdown,mkd,md call pencil#init({'wrap': 'soft'})
+  autocmd FileType text            call pencil#init({'wrap': 'soft'})
+augroup END
 
 " pencil colorscheme
 let g:pencil_higher_contrast_ui = 1
@@ -230,9 +224,3 @@ autocmd BufReadPost quickfix noremap <silent> <buffer> v  <C-w><CR><C-w>H<C-W>b<
 " never engage ex mode
 " http://www.bestofvim.com/tip/leave-ex-mode-good/
 nnoremap Q <nop>
-
-" Source configs
-"--------------------------------------------------------------------------
-nmap <leader>src :source %<cr>
-source $HOME/.vim/abbreviations.vimrc
-source $HOME/.vim/functions.vimrc

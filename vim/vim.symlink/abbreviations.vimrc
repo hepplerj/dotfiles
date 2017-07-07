@@ -4,9 +4,9 @@ iab 20C twentieth-century
 iab 20c twentieth century
 iab 21C twenty-first-century
 iab 21c twenty-first century
-iab Chp Chater
-iab addr 450 Serra Mall, Building 200,<CR>Stanford CA 94305-2024
+iab Chp Chapter 
+iab addr 6001 Dodge Street, Criss Library<CR>Omaha NE 68182
 iab atb All the best,<CR>Jason<CR>
-iab sig All the best,<CR>Jason<CR><CR>-- <CR>Jason A. Heppler<CR>Academic Technology Specialist<CR>Department of History & SUL<CR>Building 200, Room 332<CR>450 Serra Mall<CR>Stanford University<CR>jheppler@stanford.edu<CR><CR>Center for Spatial and Textual Analysis (CESTA)<CR>Spatial History Project - Literary Lab - Humanities+Design<CR>http://cesta.stanford.edu<CR><CR>Ph.D. Candidate<CR>Department of History<CR>University of Nebraska-Lincoln<CR>@jaheppler \| jasonheppler.org
+iab esig All the best,<CR>Jason<CR><CR>-- <CR>Jason A. Heppler<CR>Assistant Professor<CR>UNO Libraries & Dept. of History<CR>6001 Dodge Street<CR>University of Nebraska at Omaha<CR>jheppler@unomaha.edu<CR>@jaheppler \| jasonheppler.org
 iab eemail jason@jasonheppler.org
 iab tnks Thanks,<CR>Jason<CR>
