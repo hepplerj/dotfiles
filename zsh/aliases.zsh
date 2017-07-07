@@ -34,6 +34,7 @@ alias servedir='http-server -p 8008'
 alias serve='open http://localhost:8000 && http-server -p 8000'
 alias reload='exec $SHELL -l'
 alias tmux='tmux -u'
+alias vim='nvim'
 
 # File and system management
 # -------------------------------------------------------------------
@@ -81,3 +82,11 @@ alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C
 alias gp='git push'
 alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
 alias gs='git status -sb'
+
+# Collect my vim usage for _something_…
+# http://www.patrick-wied.at/projects/heatmap-keyboard/
+if command -v nvim &> /dev/null; then
+    alias vim="nvim -w ~/.vim_keystrokes"
+else
+    alias vim="vim -w ~/.vim_keystrokes"
+fi
