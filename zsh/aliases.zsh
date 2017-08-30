@@ -14,10 +14,10 @@ alias edit='mvim'
 alias tlf="tail -f"
 alias ln='ln -v'
 alias mkdir='mkdir -p'
-alias l='ls'
-alias ls='ls -FG'
-alias ll='ls -al'
-alias lh='ls -Alh'
+alias l='exa'
+alias ls='exa'
+alias ll='exa -al'
+alias lh='exa -Alh'
 alias c='clear'
 alias home='cd && clear'
 alias cpu='top -a -o cpu -n 10'
@@ -34,6 +34,7 @@ alias servedir='http-server -p 8008'
 alias serve='open http://localhost:8000 && http-server -p 8000'
 alias reload='exec $SHELL -l'
 alias tmux='tmux -u'
+alias whatsnew='whatsnew()'
 alias vim='nvim'
 
 # File and system management
@@ -63,6 +64,22 @@ shiny() {
 
 # Attach a tmux session if it exists; otherwise start a new one
 tm() { tmux attach-session -t $1 || tmux new-session -s $1 }
+
+whatsnew() {
+  echo "Checking homebrew packages..."
+  brew update > /dev/null;
+  new_packages=$(brew outdated --quiet)
+  num_packages=$(echo $new_packages | wc -w)
+
+  if [ $num_packages -gt 0 ]; then
+    echo "New package updates available:"
+    for package in $new_packages; do 
+      echo "  * $package";
+    done
+  else
+    echo "No new package updates available."
+  fi
+}
 
 # Git 
 # -------------------------------------------------------------------
