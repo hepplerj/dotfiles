@@ -86,7 +86,33 @@ call plug#end()
 
 set nocompatible
 
+if has('autocmd')
+  filetype plugin indent on    " enable plugins, detection and indenting
+endif
+
+if has('syntax') && !exists('g:syntax_on')
+  syntax on
+endif
+
+" Mapping
+"--------------------------------------------------------------------------
+let mapleader = ","
+
+" Buffer navigation
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+
+" I want `j` and `k` to work visually, where `down` means the next line
+map j gj
+map k gk
+
+" I'd rather not reach; escape with `jj`
+noremap! jj <Esc>
+
 " Keybindings
+"--------------------------------------------------------------------------
 nnoremap <C-k> :tabnext<CR>
 nnoremap <C-j> :tabprevious<CR>
 nnoremap <C-p> :FZF<CR>
@@ -97,10 +123,12 @@ nnoremap <Leader>Q :qa<CR>
 nmap <leader>a :GrepperRg 
 
 " Tern
+"--------------------------------------------------------------------------
 " let g:tern#command = ["tern"]
 let g:tern#arguments = ["--persistent"]
 
 " Flow
+"--------------------------------------------------------------------------
 let g:flow#enable = 0
 let local_flow = finddir('node_modules', '.;') . '/.bin/flow'
 if matchstr(local_flow, "^\/\\w") == ''
@@ -110,13 +138,13 @@ if executable(local_flow)
   let g:flow#flowpath = local_flow
 endif
 
+" General
+"--------------------------------------------------------------------------
 set termguicolors
-set shiftwidth=2
 set visualbell
 set noerrorbells
 set number
 set noincsearch
-set nowrap
 set hlsearch
 " performance: don't highlight beyond 400 columns
 set synmaxcol=400
@@ -125,15 +153,56 @@ set colorcolumn=81
 set wildignore+=node_modules
 set splitright
 set ttimeoutlen=0
+set showmode
+set showcmd
+set hidden
+set ruler
+set backspace=indent,eol,start	" backspace through everything in insert mode
+set showmatch
+set smarttab
+set history=1000
+set undolevels=100
+set undofile
+set undodir=~/.cache/undodir
+set noerrorbells
+set autoread
+au FocusLost * :wa
 
 " Appearance
+"--------------------------------------------------------------------------
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-let $PATH .= ':node_modules/.bin/:/Users/tmcw/.cargo/bin/'
+let $PATH .= ':node_modules/.bin/:/Users/jheppler/.cargo/bin/'
 set background=dark
 set statusline=%f%{fugitive#statusline()}
 colorscheme janah
 
+" Text formatting
+"--------------------------------------------------------------------------
+set wrap
+set linebreak
+set textwidth=78
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab
+set autoindent
+set copyindent
+set shiftround
+" Use Q to format paragraph
+vnoremap Q gq
+nnoremap Q gwap
+
+set formatoptions=
+set formatoptions-=t              " don't autowrap text
+set formatoptions+=c              " do autowrap comments
+set formatoptions+=r              " automatically continue comments
+set formatoptions+=o              " automatically continue comments when hitting 'o' or 'O'
+set formatoptions+=q              " allow formating of comments with 'gq'
+set formatoptions+=n              " recognize numbered lists
+set formatoptions+=l " don't break long lines that were already there
+
 " vim-javascript
+"--------------------------------------------------------------------------
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_flow = 1
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -142,13 +211,16 @@ let g:tern_show_signature_in_pum = 0
 set completeopt-=preview
 
 " mxw/vim-jsx
+"--------------------------------------------------------------------------
 let g:jsx_ext_required = 0
 
 " deoplete
+"--------------------------------------------------------------------------
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#file#enable_buffer_path = 1
 
 " pencil colorscheme
+"--------------------------------------------------------------------------
 let g:pencil_higher_contrast_ui = 1
 
 let g:thematic#themes = {
@@ -167,12 +239,14 @@ autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufWinLeave * call clearmatches()
 
 " Disable netrw
+"--------------------------------------------------------------------------
 let loaded_netrwPlugin = 1
 augroup my_dirvish_events
   autocmd FileType dirvish sort r /[^\/]$/
 augroup END
 
 " Prettier
+"--------------------------------------------------------------------------
 function! TogglePrettier()
     if !exists('#PrettierAutoGroup#BufWritePre')
         echo "autoformat on"
@@ -190,24 +264,17 @@ endfunction
 
 nnoremap <leader>f :call TogglePrettier()<CR>
 
-let g:deoplete#sources#rust#racer_binary='/Users/tmcw/.cargo/bin/racer'
-let g:deoplete#sources#rust#rust_source_path='/Users/tmcw/.multirust/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust'
-
-" function! neoformat#formatters#javascript#prettier() abort
-"     return {
-"         \ 'exe': './node_modules/.bin/prettier',
-"         \ 'args': ['--stdin', '--single-quote'],
-"         \ 'stdin': 1,
-"         \ }
-" endfunction
-
+let g:deoplete#sources#rust#racer_binary='/Users/jheppler/.cargo/bin/racer'
+let g:deoplete#sources#rust#rust_source_path='/Users/jheppler/.multirust/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust'
 let g:neoformat_only_msg_on_error = 1
 
 " Configure Gist
+"--------------------------------------------------------------------------
 let g:gist_clip_command = 'pbcopy'
 let g:gist_detect_filetype = 1
 
 " Elm
+"--------------------------------------------------------------------------
 let g:elm_format_autosave = 1
 
 inoremap <expr><TAB>  pumvisible() ? "<C-n>" : "<TAB>"
