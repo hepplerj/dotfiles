@@ -39,3 +39,4 @@ Session.vim
 vc.tex
 .Rproj.user
 *.zip
+.httr-oauth
