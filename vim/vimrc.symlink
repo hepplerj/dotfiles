@@ -6,8 +6,8 @@
 "
 " Author: Jason Heppler
 " Source: http://github.com/hepplerj/dotfiles/
-" Last updated: 2017-06-17
-" This file changes a lot. Usually used with MacVim. Used with neovim, 
+" Last updated: 2017-10-04 
+" This file changes a lot. Usually used with MacVim. Used with neovid, 
 " but compatible with vim.
 
 call plug#begin('~/.vim/plugged')
@@ -20,17 +20,14 @@ Plug 'reedes/vim-thematic'
 Plug 'justinmk/vim-dirvish'
 Plug 'tpope/vim-commentary'
 Plug 'easymotion/vim-easymotion'
+Plug 'vim-scripts/mru.vim' " open recently opened
+Plug 'itchyny/lightline.vim' " light statusline
 
 " Git
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'mattn/gist-vim'
-
-" Clojure
-Plug 'venantius/vim-cljfmt'
-Plug 'tpope/vim-fireplace'
-Plug 'guns/vim-clojure-static'
 
 " JavaScript
 Plug 'pangloss/vim-javascript'
@@ -50,9 +47,6 @@ Plug 'mhinz/vim-grepper'
 Plug 'junegunn/fzf'
 
 " VimScript Utilities
-" Used by gist-vim and rust.vim
-Plug 'mattn/webapi-vim'
-
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
@@ -63,14 +57,6 @@ Plug 'tpope/vim-sleuth'
 Plug 'w0rp/ale'
 Plug 'tmcw/vim-eslint-compiler'
 
-" Languages
-Plug 'fatih/vim-go', { 'for': ['go'] }
-Plug 'tikhomirov/vim-glsl'
-Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
-Plug 'ElmCast/elm-vim', { 'for': ['elm'] }
-Plug 'sebastianmarkow/deoplete-rust'
-Plug 'rhysd/vim-wasm'
-
 " color schemes
 Plug 'agude/vim-eldar'
 Plug 'nanotech/jellybeans.vim'
@@ -80,8 +66,8 @@ Plug 'juanedi/predawn.vim'
 Plug 'cocopon/iceberg.vim'
 Plug 'mhinz/vim-janah'
 Plug 'cloudhead/shady.vim'
-Plug 'reeds/vim-pencil'
-Plug 'reedes/vim-colors-pencil'
+Plug 'junegunn/goyo.vim'
+Plug 'amix/vim-zenroom2'
 call plug#end()
 
 set nocompatible
@@ -111,6 +97,9 @@ map k gk
 " I'd rather not reach; escape with `jj`
 noremap! jj <Esc>
 
+" Fast saving
+nmap <leader>w :w!<cr>
+
 " Keybindings
 "--------------------------------------------------------------------------
 nnoremap <C-k> :tabnext<CR>
@@ -124,7 +113,6 @@ nmap <leader>a :GrepperRg
 
 " Tern
 "--------------------------------------------------------------------------
-" let g:tern#command = ["tern"]
 let g:tern#arguments = ["--persistent"]
 
 " Flow
@@ -141,49 +129,54 @@ endif
 " General
 "--------------------------------------------------------------------------
 set termguicolors
-set visualbell
 set noerrorbells
+set novisualbell
 set number
-set noincsearch
-set hlsearch
-" performance: don't highlight beyond 400 columns
-set synmaxcol=400
-" style: show the 81th line
+set ignorecase                " ignore case when searching
+set smartcase                 " try to be smart about cases
+set incsearch                 " search act like modern browsers
+set hlsearch                  " highlight search results
 set colorcolumn=81
+set wildmenu                  " turn on Wild Menu
 set wildignore+=node_modules
 set splitright
 set ttimeoutlen=0
 set showmode
 set showcmd
+set lazyredraw                " don't redraw when executing macros
 set hidden
 set ruler
+set cmdheight=2
 set backspace=indent,eol,start	" backspace through everything in insert mode
 set showmatch
+set mat=2
 set smarttab
 set history=1000
 set undolevels=100
 set undofile
 set undodir=~/.cache/undodir
-set noerrorbells
-set autoread
+set autoread                   " Set to auto read when file changed from outside
 au FocusLost * :wa
 
 " Appearance
 "--------------------------------------------------------------------------
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-let $PATH .= ':node_modules/.bin/:/Users/jheppler/.cargo/bin/'
+"let $PATH .= ':node_modules/.bin/:/Users/jheppler/.cargo/bin/'
 set background=dark
 set statusline=%f%{fugitive#statusline()}
 colorscheme janah
+
+" Disable highlight when <leader><cr> is pressed
+map <silent> <leader><cr> :noh<cr>
 
 " Text formatting
 "--------------------------------------------------------------------------
 set wrap
 set linebreak
 set textwidth=78
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 set expandtab
 set autoindent
 set copyindent
@@ -201,6 +194,27 @@ set formatoptions+=q              " allow formating of comments with 'gq'
 set formatoptions+=n              " recognize numbered lists
 set formatoptions+=l " don't break long lines that were already there
 
+" Spell checking
+" Press ,ss to toggle spell check
+map <leader>ss :setlocal spell!<cr>
+
+map <leader>sn ]s
+map <leader>sp [s
+map <leader>sa zg
+map <leader>s? z=
+
+" Vimroom
+
+let g:goyo_width=100
+let g:goyo_margin_top=2
+let g:goyo_margin_bottom=2
+nnoremap <silent> <leader>Z :Goyo<cr>
+
+
+" MRU
+"--------------------------------------------------------------------------
+map <leader>r :MRU<CR>
+
 " vim-javascript
 "--------------------------------------------------------------------------
 let g:javascript_plugin_jsdoc = 1
@@ -214,89 +228,38 @@ set completeopt-=preview
 "--------------------------------------------------------------------------
 let g:jsx_ext_required = 0
 
-" deoplete
-"--------------------------------------------------------------------------
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#file#enable_buffer_path = 1
-
-" pencil colorscheme
-"--------------------------------------------------------------------------
-let g:pencil_higher_contrast_ui = 1
-
-let g:thematic#themes = {
-\ 'pencil_lite' :{ 'colorscheme': 'pencil',
-\                  'background': 'light',
-\                  'airline-theme': 'light',
-\                  'laststatus': 0,
-\                  'ruler': 1,
-\                },
-\ }
-
-set mouse=a
-
-autocmd BufNewFile,BufRead *.json set filetype=javascript
-autocmd BufRead,BufNewFile *.md set filetype=markdown
-autocmd BufWinLeave * call clearmatches()
-
-" Disable netrw
-"--------------------------------------------------------------------------
-let loaded_netrwPlugin = 1
-augroup my_dirvish_events
-  autocmd FileType dirvish sort r /[^\/]$/
-augroup END
-
-" Prettier
-"--------------------------------------------------------------------------
-function! TogglePrettier()
-    if !exists('#PrettierAutoGroup#BufWritePre')
-        echo "autoformat on"
-        augroup PrettierAutoGroup
-            autocmd!
-            autocmd BufWritePre * Neoformat
-        augroup END
-    else
-        echo "autoformat off"
-        augroup PrettierAutoGroup
-            autocmd!
-        augroup END
-    endif
-endfunction
-
-nnoremap <leader>f :call TogglePrettier()<CR>
-
-let g:deoplete#sources#rust#racer_binary='/Users/jheppler/.cargo/bin/racer'
-let g:deoplete#sources#rust#rust_source_path='/Users/jheppler/.multirust/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust'
-let g:neoformat_only_msg_on_error = 1
-
 " Configure Gist
 "--------------------------------------------------------------------------
 let g:gist_clip_command = 'pbcopy'
 let g:gist_detect_filetype = 1
 
-" Elm
-"--------------------------------------------------------------------------
-let g:elm_format_autosave = 1
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => lightline
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ }
 
-inoremap <expr><TAB>  pumvisible() ? "<C-n>" : "<TAB>"
-" automatically open and close the popup menu / preview window
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-
-set shell=/usr/local/bin/zsh
-
-let g:grepper = {}
-let g:grepper.tools = ['rg', 'ag']
-let g:grepper.simple_prompt = 1
-let g:grepper.quickfix = 1
-let g:grepper.highlight = 1
-
-autocmd BufReadPost quickfix noremap <silent> <buffer> o  <CR>
-autocmd BufReadPost quickfix noremap <silent> <buffer> t  <C-w><CR><C-w>T
-autocmd BufReadPost quickfix noremap <silent> <buffer> T  <C-w><CR><C-w>TgT<C-W><C-W>
-autocmd BufReadPost quickfix noremap <silent> <buffer> v  <C-w><CR><C-w>H<C-W>b<C-W>J<C-W>t
-
-" never engage ex mode
-" http://www.bestofvim.com/tip/leave-ex-mode-good/
-nnoremap Q <nop>
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ ['mode', 'paste'],
+      \             ['fugitive', 'readonly', 'filename', 'modified'] ],
+      \   'right': [ [ 'lineinfo' ], ['percent'] ]
+      \ },
+      \ 'component': {
+      \   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+      \ },
+      \ 'component_visible_condition': {
+      \   'readonly': '(&filetype!="help"&& &readonly)',
+      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+      \ },
+      \ 'separator': { 'left': ' ', 'right': ' ' },
+      \ 'subseparator': { 'left': ' ', 'right': ' ' }
+      \ }
 
 " Source configs
 "--------------------------------------------------------------------------
