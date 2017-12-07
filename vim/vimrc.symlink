@@ -23,6 +23,9 @@ Plug 'easymotion/vim-easymotion'
 Plug 'vim-scripts/mru.vim' " open recently opened
 Plug 'itchyny/lightline.vim' " light statusline
 
+Plug 'xolox/vim-notes'
+Plug 'xolox/vim-misc'
+
 " Git
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-fugitive'
