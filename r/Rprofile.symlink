@@ -38,6 +38,7 @@ utils::rc.settings(ipck = TRUE)
 
 Sys.setenv(R_PACKRAT_CACHE_DIR='~/R/packrat/')
 Sys.setenv(R_HISTSIZE='10000')
+Sys.setenv(TZ = "America/Chicago")
 
 if(interactive()){
 
