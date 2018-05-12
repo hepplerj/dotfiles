@@ -5,6 +5,8 @@ alias book='mvim -S ~/Dropbox/machinesvalley/Session.vim'
 alias dot='mvim -S ~/Dropbox/dev/dotfiles/Session.vim'
 alias notebook='mvim -S ~/Dropbox/acad/wiki/wikidata/Session.vim'
 
+code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
+
 # Unix
 # -------------------------------------------------------------------
 alias ..="cd .."
@@ -65,6 +67,8 @@ shiny() {
 # Attach a tmux session if it exists; otherwise start a new one
 tm() { tmux attach-session -t $1 || tmux new-session -s $1 }
 
+# Functions
+
 whatsnew() {
   echo "Checking homebrew packages..."
   brew update > /dev/null;
@@ -80,6 +84,22 @@ whatsnew() {
     echo "No new package updates available."
   fi
 }
+
+# Create a new directory and enter it
+function md() {
+  mkdir -p "$@" && cd "$@"
+}
+
+# Find shorthand
+function f() {
+  find . -name "$1" 2>&1 | grep -v 'Permission denied'
+}
+
+# cd into whatever is the forefront Finder window
+cdf() {
+  cd "`osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)'`"
+}
+
 
 # Git 
 # -------------------------------------------------------------------
