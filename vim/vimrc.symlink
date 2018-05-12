@@ -6,22 +6,18 @@
 "
 " Author: Jason Heppler
 " Source: http://github.com/hepplerj/dotfiles/
-" Last updated: 2017-10-04 
-" This file changes a lot. Usually used with MacVim. Used with neovid, 
+" Last updated: 2018-05-11
+" This file changes a lot. Usually used with MacVim. Used with neovim, 
 " but compatible with vim.
 
 call plug#begin('~/.vim/plugged')
 
 Plug 'wakatime/vim-wakatime'
-
-Plug 'tweekmonster/startuptime.vim'
-Plug 'reedes/vim-thematic'
-
 Plug 'justinmk/vim-dirvish'
+
 Plug 'tpope/vim-commentary'
 Plug 'easymotion/vim-easymotion'
 Plug 'vim-scripts/mru.vim' " open recently opened
-Plug 'itchyny/lightline.vim' " light statusline
 
 Plug 'xolox/vim-notes'
 Plug 'xolox/vim-misc'
@@ -29,6 +25,7 @@ Plug 'xolox/vim-misc'
 " Git
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-eunuch'
 Plug 'airblade/vim-gitgutter'
 Plug 'mattn/gist-vim'
 
@@ -39,11 +36,7 @@ Plug 'mxw/vim-jsx'
 Plug 'sbdchd/neoformat'
 
 " Completion
-Plug 'ervandew/supertab'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins', 'for': ['javascript', 'javascript.jsx'] }
-Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g tern' }
-Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install' }
-Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx'] }
 
 " Searching
 Plug 'mhinz/vim-grepper'
@@ -55,23 +48,22 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
+Plug 'mattn/webapi-vim'
 
 " Syntax
 Plug 'w0rp/ale'
 Plug 'tmcw/vim-eslint-compiler'
 
 " color schemes
-Plug 'agude/vim-eldar'
 Plug 'nanotech/jellybeans.vim'
-Plug 'chriskempson/base16-vim'
-Plug 'morhetz/gruvbox'
 Plug 'juanedi/predawn.vim'
-Plug 'cocopon/iceberg.vim'
 Plug 'mhinz/vim-janah'
-Plug 'cloudhead/shady.vim'
-Plug 'junegunn/goyo.vim'
-Plug 'amix/vim-zenroom2'
+
+Plug 'davidoc/taskpaper.vim'
 call plug#end()
+
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
 
 set nocompatible
 
@@ -103,6 +95,9 @@ noremap! jj <Esc>
 " Fast saving
 nmap <leader>w :w!<cr>
 
+" Performance: highlighting ends after 400 columns
+set synmaxcol=400
+
 " Keybindings
 "--------------------------------------------------------------------------
 nnoremap <C-k> :tabnext<CR>
@@ -114,24 +109,12 @@ nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :qa<CR>
 nmap <leader>a :GrepperRg 
 
-" Tern
-"--------------------------------------------------------------------------
-let g:tern#arguments = ["--persistent"]
-
-" Flow
-"--------------------------------------------------------------------------
-let g:flow#enable = 0
-let local_flow = finddir('node_modules', '.;') . '/.bin/flow'
-if matchstr(local_flow, "^\/\\w") == ''
-  let local_flow= getcwd() . "/" . local_flow
-endif
-if executable(local_flow)
-  let g:flow#flowpath = local_flow
-endif
+autocmd BufNewFile,BufRead *.json set filetype=javascript
+autocmd BufRead,BufNewFile *.md set filetype=markdown
+autocmd BufWinLeave * call clearmatches()
 
 " General
 "--------------------------------------------------------------------------
-set termguicolors
 set noerrorbells
 set novisualbell
 set number
@@ -143,6 +126,7 @@ set colorcolumn=81
 set wildmenu                  " turn on Wild Menu
 set wildignore+=node_modules
 set splitright
+set ttimeout
 set ttimeoutlen=0
 set showmode
 set showcmd
@@ -164,10 +148,11 @@ au FocusLost * :wa
 " Appearance
 "--------------------------------------------------------------------------
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-"let $PATH .= ':node_modules/.bin/:/Users/jheppler/.cargo/bin/'
-set background=dark
+let $PATH .= ':node_modules/.bin/:/Users/jheppler/.cargo/bin/'
+set termguicolors
 set statusline=%f%{fugitive#statusline()}
-colorscheme janah
+set background=dark
+colorscheme jellybeans 
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
@@ -222,10 +207,6 @@ map <leader>r :MRU<CR>
 "--------------------------------------------------------------------------
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_flow = 1
-let g:SuperTabDefaultCompletionType = "<c-n>"
-let g:tern_request_timeout = 1
-let g:tern_show_signature_in_pum = 0
-set completeopt-=preview
 
 " mxw/vim-jsx
 "--------------------------------------------------------------------------
@@ -236,33 +217,23 @@ let g:jsx_ext_required = 0
 let g:gist_clip_command = 'pbcopy'
 let g:gist_detect_filetype = 1
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => lightline
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ }
+set shell=/usr/local/bin/zsh
 
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ ['mode', 'paste'],
-      \             ['fugitive', 'readonly', 'filename', 'modified'] ],
-      \   'right': [ [ 'lineinfo' ], ['percent'] ]
-      \ },
-      \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
-      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-      \ },
-      \ 'component_visible_condition': {
-      \   'readonly': '(&filetype!="help"&& &readonly)',
-      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-      \ },
-      \ 'separator': { 'left': ' ', 'right': ' ' },
-      \ 'subseparator': { 'left': ' ', 'right': ' ' }
-      \ }
+let g:grepper = {}
+let g:grepper.tools = ['rg']
+let g:grepper.simple_prompt = 1
+let g:grepper.quickfix = 1
+let g:grepper.highlight = 1
+
+autocmd BufReadPost quickfix noremap <silent> <buffer> o  <CR>
+autocmd BufReadPost quickfix noremap <silent> <buffer> t  <C-w><CR><C-w>T
+autocmd BufReadPost quickfix noremap <silent> <buffer> T  <C-w><CR><C-w>TgT<C-W><C-W>
+autocmd BufReadPost quickfix noremap <silent> <buffer> v <C-w><CR><C-w>H<C-W>b<C-W>J<C-W>t
+
+" vim markdown
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_fenced_languages = ['js=javascript']
+let g:vim_markdown_frontmatter = 1
 
 " Source configs
 "--------------------------------------------------------------------------
