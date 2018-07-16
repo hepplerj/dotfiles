@@ -1,7 +1,5 @@
 # Projects
 # -------------------------------------------------------------------
-alias blog='mvim -S ~/Dropbox/acad/hepplerj.github.com/source/_drafts/*.md'
-alias book='mvim -S ~/Dropbox/machinesvalley/Session.vim'
 alias dot='mvim -S ~/Dropbox/dev/dotfiles/Session.vim'
 alias notebook='mvim -S ~/Dropbox/acad/wiki/wikidata/Session.vim'
 
@@ -43,6 +41,7 @@ alias vim='nvim'
 # -------------------------------------------------------------------
 alias atsp="cd ~/Dropbox/work/ATSP/ATS\ -\ History/"
 alias brewup='brew update && brew upgrade'
+alias did="vim +'normal Go' +'r!date' ~/did.txt"
 alias dirsize="du -sx ./* 2>/dev/null | sort -n"
 alias ducks='du -cks ~/**/* | sort -rn | head -n 20'
 alias duh='du -hs * | sort -h -r'  # Sort files/dirs by size
@@ -51,6 +50,7 @@ alias findf="find . -type f -iname" # find a file
 alias ip="curl icanhazip.com"       # get current public IP
 alias process="ps aux | grep"
 alias runwiki='cd ~/Dropbox/acad/wiki && gitit -f my.conf > /dev/null 2>&1 &'
+alias unowork="cd ~/Dropbox/work/UNO"
 alias zshreload='source ~/.zshrc'
 
 # R
@@ -64,11 +64,12 @@ shiny() {
     fi
 }
 
+# Functions
+
 # Attach a tmux session if it exists; otherwise start a new one
 tm() { tmux attach-session -t $1 || tmux new-session -s $1 }
 
-# Functions
-
+# Check for updates
 whatsnew() {
   echo "Checking homebrew packages..."
   brew update > /dev/null;
