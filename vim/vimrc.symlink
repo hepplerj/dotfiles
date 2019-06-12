@@ -6,7 +6,7 @@
 "
 " Author: Jason Heppler
 " Source: http://github.com/hepplerj/dotfiles/
-" Last updated: 2018-05-11
+" Last updated: 2018-09-24 
 " This file changes a lot. Usually used with MacVim. Used with neovim, 
 " but compatible with vim.
 
@@ -58,6 +58,7 @@ Plug 'tmcw/vim-eslint-compiler'
 Plug 'nanotech/jellybeans.vim'
 Plug 'juanedi/predawn.vim'
 Plug 'mhinz/vim-janah'
+Plug 'rakr/vim-two-firewatch'
 
 Plug 'davidoc/taskpaper.vim'
 call plug#end()
@@ -152,7 +153,8 @@ let $PATH .= ':node_modules/.bin/:/Users/jheppler/.cargo/bin/'
 set termguicolors
 set statusline=%f%{fugitive#statusline()}
 set background=dark
-colorscheme jellybeans 
+let g:two_firewatch_italics=1
+colorscheme two-firewatch "jellybeans 
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>

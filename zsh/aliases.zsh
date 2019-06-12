@@ -10,36 +10,30 @@ code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 alias ..="cd .."
 alias ...="cd ../.."
 function cs() { cd "$@" && ls; }
-alias edit='mvim'
-alias tlf="tail -f"
-alias ln='ln -v'
-alias mkdir='mkdir -p'
-alias l='exa'
-alias ls='exa'
-alias ll='exa -al'
-alias lh='exa -Alh'
-alias c='clear'
-alias home='cd && clear'
-alias cpu='top -a -o cpu -n 10'
 alias cp='cp -i'
-alias f='open -a Finder ./' # open current dir in Finder
+alias cpu='top -a -o cpu -n 10'
+alias edit='mvim'
+alias ln='ln -v'
+alias ls='ls -FG'
+alias home='cd && clear'
+alias finder='open -a Finder ./' # open current dir in Finder
 alias grep='grep --color=auto'
 alias mvim='open -a MacVim'
 alias mem='top -o rsize -n 10'
+alias mkdir='mkdir -p'
 alias more='more -R'
-alias mutt='cd ~/Desktop && mutt'
 alias process="ps aux | grep -i"
+alias reload='exec $SHELL -l'
 alias scanlocal='nmap -sP 192.168.1.0/24'
 alias servedir='http-server -p 8008'
 alias serve='open http://localhost:8000 && http-server -p 8000'
-alias reload='exec $SHELL -l'
+alias tlf="tail -f"
 alias tmux='tmux -u'
-alias whatsnew='whatsnew()'
 alias vim='nvim'
 
 # File and system management
 # -------------------------------------------------------------------
-alias atsp="cd ~/Dropbox/work/ATSP/ATS\ -\ History/"
+#alias atsp="cd ~/Dropbox/work/ATSP/ATS\ -\ History/"
 alias brewup='brew update && brew upgrade'
 alias did="vim +'normal Go' +'r!date' ~/did.txt"
 alias dirsize="du -sx ./* 2>/dev/null | sort -n"
@@ -50,7 +44,7 @@ alias findf="find . -type f -iname" # find a file
 alias ip="curl icanhazip.com"       # get current public IP
 alias process="ps aux | grep"
 alias runwiki='cd ~/Dropbox/acad/wiki && gitit -f my.conf > /dev/null 2>&1 &'
-alias unowork="cd ~/Dropbox/work/UNO"
+alias work="cd ~/Dropbox/work/UNO"
 alias zshreload='source ~/.zshrc'
 
 # R
@@ -111,8 +105,6 @@ alias gca='git commit -a'
 alias gcam='git commit -a -m'
 alias gcm='git commit -m'
 alias gco='git checkout'
-alias gd='git diff'
-alias gwd='git diff --word-diff'
 alias gi="echo $1 >> .gitignore"
 alias gl='git pull --prune'
 alias glast='git diff HEAD^ HEAD' # diff of last commit

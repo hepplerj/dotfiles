@@ -1,6 +1,10 @@
+[hub]
+    protocol = ssh
+
 [user]
 	name = hepplerj
 	email = jason.heppler@gmail.com
+	signingkey = 2EFE62637F1156B1
 
 [github]
     user = hepplerj
@@ -27,10 +31,13 @@
 
 [apply]
         whitespace = nowarn
+
 [mergetool]
         keepBackup = false
+
 [difftool]
         prompt = false
+
 [help]
         autocorrect = 1
         
@@ -38,9 +45,7 @@
 	helper = osxkeychain
 
 [merge]
-        tool = vimdiff
-[filter "lfs"]
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
+    tool = vimdiff
+
+[commit]
+    gpgsign = false

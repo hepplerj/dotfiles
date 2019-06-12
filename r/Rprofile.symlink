@@ -11,14 +11,14 @@
 
 options(
        width = 80,
-       repos = c(CRAN = "https://cran.rstudio.com"),
+       repos = c(CRAN = "https://cloud.r-project.org"),
        download.file.method = "libcurl",
        useFancyQuotes = FALSE,
        menu.graphics = FALSE,
        editor = "vim",
        browserNLdisabled = TRUE,
-       max.print = 1e3,
-       Ncpus = 6L,
+       #max.print = 1e3,
+       Ncpus = 8L,
        devtools.name = "Jason Heppler",
        devtools.desc = list(
         "Authors@R" = 'c(person("Jason", "Heppler", role = c("aut", "cre"),

@@ -1,0 +1,82 @@
+{
+    "workbench.statusBar.feedback.visible": false,
+    "files.autoSave": "onWindowChange",
+    "files.insertFinalNewline": true,
+    "keyboard.dispatch": "keyCode",
+    "editor.fontFamily": "PragmataPro, monospace",
+    "editor.fontSize": 14,
+    "editor.tabSize": 2,
+    "editor.rulers": [80,120],
+    "editor.snippetSuggestions": "top",
+    "editor.renderWhitespace": "boundary",
+    "editor.wordWrap": "bounded",
+    "editor.minimap.enabled": false,
+    "editor.quickSuggestionsDelay": 100,
+    "workbench.colorTheme": "Visual Studio Light",
+    "go.formatTool": "gofmt",
+    "git.enableCommitSigning": false,
+    "git.enableSmartCommit": true,
+    "vim.useSystemClipboard": false,
+    // "vim.cmdLineInitialColon": true,
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "j"
+            ],
+            "after": [
+                "g",
+                "j"
+            ]
+        },
+        {
+            "before": [
+                "k"
+            ],
+            "after": [
+                "g",
+                "k"
+            ]
+        },
+        {
+            "before": [
+                "K"
+            ],
+            "after": [
+                "~"
+            ]
+        }
+    ],
+    "[markdown]": {
+        "editor.wordWrap": "bounded"
+    },
+    "[html]": {
+        "editor.wordWrap": "on",
+        "editor.wordBasedSuggestions": false
+    },
+        "explorer.confirmDelete": false,
+    "extensions.ignoreRecommendations": true,
+    "workbench.startupEditor": "welcomePage",
+    "explorer.confirmDragAndDrop": false,
+    "editor.tabCompletion": "on",
+    "go.docsTool": "gogetdoc",
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.wordWrapColumn": 160,
+    "search.useGlobalIgnoreFiles": true,
+    "window.zoomLevel": 0,
+    "git.confirmSync": false,
+    "breadcrumbs.enabled": true,
+    "markdown.format.wrapLineLength": 0,
+    "cSpell.maxNumberOfProblems": 50,
+    "javascript.implicitProjectConfig.experimentalDecorators": true,
+     "[python]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4,
+        "editor.formatOnSave": true,
+    },
+    "python.linting.pylintArgs": [
+        // "--errors-only",
+        "--load-plugins",
+        "pylint_django"
+    ],
+    "editor.renderControlCharacters": true
+}
