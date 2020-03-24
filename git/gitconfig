@@ -20,9 +20,6 @@
     branch = auto
     ui = true
 
-[push]
-    default = current
-
 [core]
     editor = vim
     excludesfile = ~/.gitignore
@@ -30,19 +27,19 @@
     eol = lf
 
 [apply]
-        whitespace = nowarn
+    whitespace = nowarn
 
 [mergetool]
-        keepBackup = false
+    keepBackup = false
 
 [difftool]
-        prompt = false
+    prompt = false
 
 [help]
-        autocorrect = 1
+    autocorrect = 1
         
 [credential]
-	helper = osxkeychain
+    helper = cache --timeout=604800
 
 [merge]
     tool = vimdiff

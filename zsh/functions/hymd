@@ -1,5 +1,0 @@
-hymd () { # copy raw markdown to clipboard
-  encurl=$(urlenc $1)
-  curl "http://heckyesmarkdown.com/go/?read=1&preview=0&showframe=0&u=$encurl"|pbcopy
-  echo "In your clipboard, man."
-}

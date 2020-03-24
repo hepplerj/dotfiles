@@ -36,7 +36,6 @@
 .drake
 .dropbox
 .gitignore
-.httr-oauth
 .svn
 .tags
 .tags_sorted_by_file
@@ -49,3 +48,7 @@ __pycache__
 *.pyc
 env/
 *.sqlite3
+.env
+.cache/
+TODO.txt
+*.scriv

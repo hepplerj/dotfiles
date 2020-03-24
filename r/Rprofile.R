@@ -89,3 +89,5 @@ options(max.print = 100)
   }
 }
 
+# On load, synchronize the RStudio editor theme to the OS appearance using the darkly package
+  setHook("rstudio.sessionInit", function(newSession) if (interactive() & require("darkly", quietly = TRUE)) darkly::darkly_sync(), action = "append")

@@ -1,5 +1,0 @@
-# markdownify
-# thanks to Brett Terpstra
-urlenc () { #url encode the passed string
-  echo -n "$1" | perl -pe's/([^-_.~A-Za-z0-9])/sprintf("%%%02X", ord($1))/seg'
-}

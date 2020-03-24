@@ -1,39 +1,27 @@
 # ZSH configuration
-# Jason Heppler <jason@jasonheppler.org>
 
+# Environment variables
+if [[ -a "$HOME/.env.zsh" ]]; then
+  source "$HOME/.env.zsh"
+fi
+export EDITOR='vim'
+export PROJECTS=$HOME/Dropbox/github # c + <tab> for autocomplete
 export ZSH=$HOME/.dotfiles
+export GOPATH=$HOME/go
+if [[ -v NUMCORES ]]; then
+  export MAKEFLAGS="-j $NUMCORES"
+else
+  export MAKEFLAGS="-j 4"
+fi
+export HOMEBREW_NO_ANALYTICS=1
+
+# Aliases
 source $ZSH/zsh/aliases.zsh
 
-# functions
-fpath=($ZSH/zsh/functions /usr/local/share/zsh-completions $fpath)
+# Functions
 autoload -U $ZSH/zsh/functions/*(:t)
 
-# Path
-# -------------------------------------------------------------------
-pathdirs=(
-  /usr/texbin
-  /usr/X11/bin
-  /usr/local/bin
-  /usr/local/sbin
-  /usr/local/opt/coreutils/libexec/gnubin
-  $HOME/.rbenv/shims
-  $HOME/.dotfiles/bin
-  $HOME/bin
-  $HOME/.local/bin
-)
-
-for dir in $pathdirs; do PATH=$dir:$PATH done
-
-# Handle rbenv 
-if which rbenv &>/dev/null; then
-  eval "$(rbenv init - --no-rehash)"
-fi
-
-# Config
-# -------------------------------------------------------------------
-export EDITOR=vim
-
-# History
+# Options
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
@@ -41,44 +29,28 @@ setopt APPEND_HISTORY # adds history
 setopt INC_APPEND_HISTORY SHARE_HISTORY  # adds history incrementally and share it across sessions
 setopt HIST_IGNORE_ALL_DUPS  # don't record dupes in history
 setopt HIST_REDUCE_BLANKS
-setopt EXTENDED_HISTORY # add timestamps to history
-
-# Options
 export CLICOLOR=true
 export TERM="xterm-256color"
 setopt NO_BG_NICE # don't nice background tasks
-setopt NO_HUP
 setopt NO_LIST_BEEP
-setopt LOCAL_OPTIONS # allow functions to have local options
-setopt LOCAL_TRAPS # allow functions to have local traps
 setopt PROMPT_SUBST
 setopt CORRECT
 setopt COMPLETE_IN_WORD
 setopt AUTOPUSHD        # keep history of directories
-setopt AUTO_LIST
+setopt AUTO_LIST        # list ambiguous completions automatically
 setopt complete_aliases
 # matches case insensitive for lowercase
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # pasting with tabs doesn't perform completion
 zstyle ':completion:*' insert-tab pending
-
-# Local Config
-if [[ -s $HOME/.zshrc_local ]] ; then source $HOME/.zshrc_local ; fi
-
-# Keybindings
-# -------------------------------------------------------------------
-
-# Vim style key bindings
+# Vim key bindings and Vim-like line editor
 bindkey -v
 autoload -U   edit-command-line
 zle -N        edit-command-line
 bindkey -M vicmd v edit-command-line
 bindkey '^R' history-incremental-search-backward
 bindkey '^S' history-incremental-search-forward
-
 unsetopt nomatch
-
-cdpath=( . ~ )
 autoload colors zsh/terminfo && colors
 
 # Prompt
@@ -95,48 +67,56 @@ git_dirty() {
   else
     if [[ $st == "nothing to commit, working directory clean" ]]
     then
-      echo ":%{$fg[green]%}$(git_prompt_info)%{$reset_color%}"
+      echo " (%{$fg[green]%}$(git_prompt_info)%{$reset_color%})"
     else
-      echo ":%{$fg[red]%}$(git_prompt_info)%{$reset_color%}"
+      echo " (%{$fg[red]%}$(git_prompt_info)%{$reset_color%})"
     fi
   fi
 }
 
-git_prompt_info () {
- ref=$(/usr/bin/git symbolic-ref HEAD 2>/dev/null) || return
-# echo "(%{\e[0;33m%}${ref#refs/heads/}%{\e[0m%})"
- echo ":%{$fg[magenta]%}${ref#refs/heads/}${reset_color%}"
+git_prompt_info() {
+  ref=$(/usr/bin/git symbolic-ref HEAD 2>/dev/null) || return
+  # echo "(%{\e[0;33m%}${ref#refs/heads/}%{\e[0m%})"
+  echo " (%{$fg[magenta]%}${ref#refs/heads/}${reset_color%})"
 }
 
-unpushed () {
+unpushed() {
   /usr/bin/git cherry -v @{upstream} 2>/dev/null
 }
 
-need_push () {
+need_push() {
   if [[ $(unpushed) == "" ]]
   then
     echo ""
   else
-    echo ":%{$fg[magenta]%}unpushed%{$reset_color%}"
+    echo " (%{$fg[magenta]%}unpushed%{$reset_color%})"
   fi
 }
 
-has_stash () {
+has_stash() {
   if [[ -n "$(git stash list 2>/dev/null)" ]]; then
-    echo ":%{$fg[magenta]%}stash%{$reset_color%}"
+    echo " (%{$fg[magenta]%}stash%{$reset_color%})"
   fi
 }
 
 directory_name(){
-  echo "%{$fg[blue]%}%~%{$reset_color%}"
+  echo "%{$fg[blue]%}%1d%{$reset_color%}"
 }
 
 user_machine(){
   echo "%{$fg[yellow]%}%n@%m%{$reset_color%}"
 }
 
-set_prompt () {
-  export PROMPT=$'\n$(user_machine) $(directory_name) ›%{$reset_color%} '
+python_venv() {
+   if [[ -z $VIRTUAL_ENV ]] then
+     echo ""
+   else
+     echo ":%{$fg[green]%}venv$reset_color%}"
+   fi
+}
+
+set_prompt() {
+  export PROMPT=$'\n%{$fg[green]%}→%{$reset_color%} $(directory_name)$(git_prompt_info)\n%{$fg[red]%}›%{$reset_color%} '
   RPROMPT='%(?.. %?)'
 }
 
@@ -146,15 +126,20 @@ precmd() {
   print -Pn "\e]0;%~\a"
 }
 
+# Path
+# -------------------------------------------------------------------
+pathdirs=(
+  $HOME/.dotfiles/bin
+  $HOME/go/bin
+  $HOME/.rbenv/shims
+)
+
+for dir in $pathdirs; do
+  if [ -d $dir ]; then
+    PATH=$dir:$PATH
+  fi
+done
+
 # initialize autocomplete here, otherwise functions won't be loaded
 autoload -U compinit
 compinit
-
-# Make
-export MAKEFLAGS="-j 4"
-
-# no Homebrew analytics
-export HOMEBREW_NO_ANALYTICS=1
-
-# tmuxinator
-source ~/.dotfiles/bin/tmuxinator.zsh

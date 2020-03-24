@@ -1,3 +1,0 @@
-sman () { # open man page in Sublime
-  MANWIDTH=160 MANPAGER='col -bx' man $@ | sublime
-}
