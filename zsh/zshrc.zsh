@@ -5,7 +5,7 @@ if [[ -a "$HOME/.env.zsh" ]]; then
   source "$HOME/.env.zsh"
 fi
 export EDITOR='vim'
-export PROJECTS=$HOME/Dropbox/github # c + <tab> for autocomplete
+export PROJECTS=$HOME/github # c + <tab> for autocomplete
 export ZSH=$HOME/.dotfiles
 export GOPATH=$HOME/go
 if [[ -v NUMCORES ]]; then
@@ -19,6 +19,7 @@ export HOMEBREW_NO_ANALYTICS=1
 source $ZSH/zsh/aliases.zsh
 
 # Functions
+fpath=($ZSH/zsh/functions /usr/local/share/zsh-completions $fpath)
 autoload -U $ZSH/zsh/functions/*(:t)
 
 # Options
@@ -67,9 +68,9 @@ git_dirty() {
   else
     if [[ $st == "nothing to commit, working directory clean" ]]
     then
-      echo " (%{$fg[green]%}$(git_prompt_info)%{$reset_color%})"
+      echo ":%{$fg[green]%}$(git_prompt_info)%{$reset_color%}"
     else
-      echo " (%{$fg[red]%}$(git_prompt_info)%{$reset_color%})"
+      echo ":%{$fg[red]%}$(git_prompt_info)%{$reset_color%}"
     fi
   fi
 }
@@ -77,7 +78,7 @@ git_dirty() {
 git_prompt_info() {
   ref=$(/usr/bin/git symbolic-ref HEAD 2>/dev/null) || return
   # echo "(%{\e[0;33m%}${ref#refs/heads/}%{\e[0m%})"
-  echo " (%{$fg[magenta]%}${ref#refs/heads/}${reset_color%})"
+  echo ":%{$fg[magenta]%}${ref#refs/heads/}${reset_color%}"
 }
 
 unpushed() {
@@ -89,18 +90,18 @@ need_push() {
   then
     echo ""
   else
-    echo " (%{$fg[magenta]%}unpushed%{$reset_color%})"
+    echo ":%{$fg[magenta]%}unpushed%{$reset_color%}"
   fi
 }
 
 has_stash() {
   if [[ -n "$(git stash list 2>/dev/null)" ]]; then
-    echo " (%{$fg[magenta]%}stash%{$reset_color%})"
+    echo ":%{$fg[magenta]%}stash%{$reset_color%}"
   fi
 }
 
 directory_name(){
-  echo "%{$fg[blue]%}%1d%{$reset_color%}"
+  echo "%{$fg[blue]%}%~%{$reset_color%}"
 }
 
 user_machine(){
@@ -116,7 +117,7 @@ python_venv() {
 }
 
 set_prompt() {
-  export PROMPT=$'\n%{$fg[green]%}→%{$reset_color%} $(directory_name)$(git_prompt_info)\n%{$fg[red]%}›%{$reset_color%} '
+  export PROMPT=$'\n$(user_machine):$(directory_name)$(git_prompt_info)\n%{$fg[red]%}›%{$reset_color%} '
   RPROMPT='%(?.. %?)'
 }
 
@@ -129,9 +130,9 @@ precmd() {
 # Path
 # -------------------------------------------------------------------
 pathdirs=(
+  /snap/bin
+  /usr/local/opt/ruby/bin
   $HOME/.dotfiles/bin
-  $HOME/go/bin
-  $HOME/.rbenv/shims
 )
 
 for dir in $pathdirs; do

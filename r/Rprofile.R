@@ -1,6 +1,6 @@
 # Rprofile settings
 
-# Jason A. Heppler | jason@jasonheppler.org | http://jasonheppler.org
+# Jason A. Heppler | jason@jasonheppler.org | https://jasonheppler.org
 # MIT License <http://heppler.mit-license.org/>
 
 # Some settings from these useRs:
