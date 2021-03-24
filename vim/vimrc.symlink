@@ -12,7 +12,6 @@
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'wakatime/vim-wakatime'
 Plug 'justinmk/vim-dirvish'
 
 Plug 'tpope/vim-commentary'
