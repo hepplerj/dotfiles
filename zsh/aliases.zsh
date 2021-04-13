@@ -11,6 +11,7 @@ alias ip="curl icanhazip.com"       # get current public IP
 alias more='more -R'                # give more colors
 alias process="ps aux | grep -i"
 alias scanlocal='nmap -sP 192.168.1.0/24'
+alias servethis='python3 -m http.server'
 alias dfd='df -h -x squashfs -x tmpfs -x devtmpfs'
 alias runwiki='cd ~/Dropbox/acad/wiki && gitit -f my.conf > /dev/null 2>&1 &'
 
