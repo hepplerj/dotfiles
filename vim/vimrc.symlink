@@ -4,35 +4,29 @@
 "  \ V /| | | | | | | | | (__
 "   \_/ |_|_| |_| |_|_|  \___|
 "
-" Author: Jason Heppler
+" Author: Jason Heppler <jason@jasonheppler.org>
 " Source: http://github.com/hepplerj/dotfiles/
-" Last updated: 2018-09-24 
-" This file changes a lot. Usually used with MacVim. Used with neovim, 
-" but compatible with vim.
 
 call plug#begin('~/.vim/plugged')
 
 Plug 'justinmk/vim-dirvish'
 
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
-Plug 'easymotion/vim-easymotion'
-Plug 'vim-scripts/mru.vim' " open recently opened
-
-Plug 'xolox/vim-notes'
-Plug 'xolox/vim-misc'
+Plug 'preservim/nerdtree' " Tree Explorer plugin for vim
+Plug 'preservim/nerdcommenter' " Plugin for intensely nerdy commenting powers
 
 " Git
 Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-eunuch'
 Plug 'airblade/vim-gitgutter'
 Plug 'mattn/gist-vim'
 
-" JavaScript
-Plug 'pangloss/vim-javascript'
-Plug 'gavocanov/vim-js-indent'
-Plug 'mxw/vim-jsx'
-Plug 'sbdchd/neoformat'
+" Code specifics 
+ Plug 'kevinoid/vim-jsonc' " Syntax support for JSON with C-style comments
+Plug 'pangloss/vim-javascript' " Syntax support for Javascript and better highlighting
+Plug 'maxmellon/vim-jsx-pretty' " Syntax support for JSX and TSX
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' } " Syntax support for golang
 
 " Completion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins', 'for': ['javascript', 'javascript.jsx'] }
@@ -115,6 +109,7 @@ autocmd BufWinLeave * call clearmatches()
 
 " General
 "--------------------------------------------------------------------------
+set title
 set noerrorbells
 set novisualbell
 set number
@@ -139,7 +134,9 @@ set showmatch
 set mat=2
 set smarttab
 set history=1000
-set undolevels=100
+set undolevels=1000
+set noswapfile
+set nowritebackup
 set undofile
 set undodir=~/.cache/undodir
 set autoread                   " Set to auto read when file changed from outside
@@ -153,7 +150,7 @@ set termguicolors
 set statusline=%f%{fugitive#statusline()}
 set background=dark
 let g:two_firewatch_italics=1
-colorscheme two-firewatch "jellybeans 
+colorscheme two-firewatch
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
@@ -235,6 +232,20 @@ autocmd BufReadPost quickfix noremap <silent> <buffer> v <C-w><CR><C-w>H<C-W>b<C
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_fenced_languages = ['js=javascript']
 let g:vim_markdown_frontmatter = 1
+
+" NERDTree configurations
+map <C-n> :NERDTreeToggle<CR>
+map <C-t> :NERDTreeFind<CR>
+let g:NERDTreeIgnore = ['.git', 'node_modules', '__pycache__']
+
+nmap <F8> :TagbarToggle<CR>
+
+" Window navigation, Use <leader> + {j, k, l, h} to move around the available
+" windows. (<C-W> & :wincmd are aliased)
+nnoremap <leader>j :wincmd j<CR>
+nnoremap <leader>k :wincmd k<CR>
+nnoremap <leader>l :wincmd l<CR>
+nnoremap <leader>h :wincmd h<CR>
 
 " Source configs
 "--------------------------------------------------------------------------

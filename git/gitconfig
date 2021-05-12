@@ -37,10 +37,6 @@
 
 [help]
     autocorrect = 1
-        
-[credential]
-    helper = cache --timeout=604800
-
 [merge]
     tool = vimdiff
 
