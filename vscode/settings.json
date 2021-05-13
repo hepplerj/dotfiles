@@ -31,6 +31,7 @@
     "editor.showUnused": false,
     "editor.tabSize": 2,
     "editor.tabCompletion": "on",
+    "terminal.integrated.tabs.enabled": true,
     "workbench.editor.tabCloseButton": "left",
     "workbench.iconTheme": "macos-classic-icons",
     "workbench.startupEditor": "none",

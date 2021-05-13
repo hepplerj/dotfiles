@@ -137,7 +137,7 @@ set_prompt() {
 #}
 
 # Change the PROMPT style to something like | (base) hades in ~ >
-export PROMPT='%F{8}[%f%F{37}%n%f%F{8}]%f %F{8}%~%f$(git_branch) %F{13}$%f '
+export PROMPT='%F{8}[%f%F{37}%n%f%F{8}]%f %F{8}% ~ %f$(git_branch) %F{13}>%f '
 setopt promptsubst
 
 # Path
