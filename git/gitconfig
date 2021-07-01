@@ -2,7 +2,7 @@
     protocol = ssh
 
 [user]
-	name = hepplerj
+	name = Jason Heppler
 	email = jason.heppler@gmail.com
 	signingkey = 2EFE62637F1156B1
 
@@ -45,3 +45,8 @@
 
 [pull]
     ff = only
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
