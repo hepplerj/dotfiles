@@ -9,31 +9,7 @@ $ git clone https://github.com/hepplerj/dotfiles.git ~/.dotfiles
 
 $ cd ~/.dotfiles
 
-$ rake
-```
-
-## Sensible OS X defaults
-
-Hat tip to Mathias Bynen's excellent OS X defaults. **Current as of OS X 10.12.5**. You can set these by running:
-
-```bash
-$ cd system
-
-$ chmod +x osx
-
-$ ./osx
-```
-
-## Install Homebrew formulae
-
-When setting up a new Mac, I install some common Homebrew formulae once Homebrew is installed:
-
-```bash
-$ cd system
-
-$ chmod +x brew
-
-$ ./brew
+$ make all 
 ```
 
 ## Feedback
