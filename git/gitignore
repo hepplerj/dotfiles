@@ -52,3 +52,4 @@ env/
 .cache/
 TODO.txt
 *.scriv
+.httr-oauth

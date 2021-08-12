@@ -13,7 +13,6 @@ Plug 'justinmk/vim-dirvish'
 
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
-Plug 'preservim/nerdtree' " Tree Explorer plugin for vim
 Plug 'preservim/nerdcommenter' " Plugin for intensely nerdy commenting powers
 
 " Git
@@ -23,17 +22,15 @@ Plug 'airblade/vim-gitgutter'
 Plug 'mattn/gist-vim'
 
 " Code specifics 
- Plug 'kevinoid/vim-jsonc' " Syntax support for JSON with C-style comments
+Plug 'kevinoid/vim-jsonc' " Syntax support for JSON with C-style comments
 Plug 'pangloss/vim-javascript' " Syntax support for Javascript and better highlighting
 Plug 'maxmellon/vim-jsx-pretty' " Syntax support for JSX and TSX
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' } " Syntax support for golang
-
-" Completion
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins', 'for': ['javascript', 'javascript.jsx'] }
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
 " Searching
 Plug 'mhinz/vim-grepper'
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', {'do': {-> fzf#install() } }
 
 " VimScript Utilities
 Plug 'tpope/vim-surround'
@@ -42,22 +39,31 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
 Plug 'mattn/webapi-vim'
+Plug 'davidoc/taskpaper.vim'
+
+" VSCode-style plugins
+Plug 'BurntSushi/ripgrep'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
+Plug 'jiangmiao/auto-pairs'
+Plug 'prettier/vim-prettier', {'do': 'yarn install'}
 
 " Syntax
 Plug 'w0rp/ale'
 Plug 'tmcw/vim-eslint-compiler'
 
-" color schemes
+" Color schemes
 Plug 'nanotech/jellybeans.vim'
 Plug 'juanedi/predawn.vim'
 Plug 'mhinz/vim-janah'
 Plug 'rakr/vim-two-firewatch'
+Plug 'mhartington/oceanic-next'
+Plug 'jnurmine/zenburn' "Theme plugin
+Plug 'vim-airline/vim-airline' "Status bar
+Plug 'vim-airline/vim-airline-themes' "Applicable themes
+Plug 'ap/vim-css-color' "  color name highlighter
 
-Plug 'davidoc/taskpaper.vim'
 call plug#end()
-
-" Use deoplete.
-let g:deoplete#enable_at_startup = 1
 
 set nocompatible
 
@@ -67,6 +73,13 @@ endif
 
 if has('syntax') && !exists('g:syntax_on')
   syntax on
+endif
+
+set encoding=UTF-8
+
+colors OceanicNext 
+if (has("termguicolors")) 
+  set termguicolors
 endif
 
 " Mapping
@@ -97,7 +110,7 @@ set synmaxcol=400
 nnoremap <C-k> :tabnext<CR>
 nnoremap <C-j> :tabprevious<CR>
 nnoremap <C-p> :FZF<CR>
-nnoremap <C-l> :FZF<CR> %<Tab>
+nnoremap <C-s> :FZF<CR> %<Tab>
 nnoremap <Leader>w :update<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :qa<CR>
@@ -113,6 +126,7 @@ set title
 set noerrorbells
 set novisualbell
 set number
+set nu
 set ignorecase                " ignore case when searching
 set smartcase                 " try to be smart about cases
 set incsearch                 " search act like modern browsers
@@ -121,8 +135,9 @@ set colorcolumn=81
 set wildmenu                  " turn on Wild Menu
 set wildignore+=node_modules
 set splitright
-set ttimeout
+set timeoutlen=1000
 set ttimeoutlen=0
+set ttyfast
 set showmode
 set showcmd
 set lazyredraw                " don't redraw when executing macros
@@ -146,11 +161,7 @@ au FocusLost * :wa
 "--------------------------------------------------------------------------
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 let $PATH .= ':node_modules/.bin/:/Users/jheppler/.cargo/bin/'
-set termguicolors
 set statusline=%f%{fugitive#statusline()}
-set background=dark
-let g:two_firewatch_italics=1
-colorscheme two-firewatch
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
@@ -197,10 +208,6 @@ let g:goyo_margin_bottom=2
 nnoremap <silent> <leader>Z :Goyo<cr>
 
 
-" MRU
-"--------------------------------------------------------------------------
-map <leader>r :MRU<CR>
-
 " vim-javascript
 "--------------------------------------------------------------------------
 let g:javascript_plugin_jsdoc = 1
@@ -234,21 +241,40 @@ let g:vim_markdown_fenced_languages = ['js=javascript']
 let g:vim_markdown_frontmatter = 1
 
 " NERDTree configurations
+"Changes NerdTree Toggle to Ctrl + n
 map <C-n> :NERDTreeToggle<CR>
-map <C-t> :NERDTreeFind<CR>
-let g:NERDTreeIgnore = ['.git', 'node_modules', '__pycache__']
+autocmd VimEnter * NERDTree "Toggles Nerdtree on vim open
+let NERDTreeQuitOnOpen = 1 "closes NerdTree when opening a file
 
-nmap <F8> :TagbarToggle<CR>
+" Conquer of Completion
+" use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
 
-" Window navigation, Use <leader> + {j, k, l, h} to move around the available
-" windows. (<C-W> & :wincmd are aliased)
-nnoremap <leader>j :wincmd j<CR>
-nnoremap <leader>k :wincmd k<CR>
-nnoremap <leader>l :wincmd l<CR>
-nnoremap <leader>h :wincmd h<CR>
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+
+" Prettier
+" Autosave
+" disables autosave feature
+let g:prettier#autoformat = 0
+
+" print spaces between brackets
+" Prettier default: true
+let g:prettier#config#bracket_spacing = 'true'
+
+" runs prettier on file formats
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+
 
 " Source configs
 "--------------------------------------------------------------------------
 nmap <leader>src :source %<cr>
 source $HOME/.vim/abbreviations.vimrc
 source $HOME/.vim/functions.vimrc
+
+set secure "disables unsafe commands in project specific .vimrc
