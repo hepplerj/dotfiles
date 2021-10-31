@@ -1,6 +1,6 @@
 # Editors and languages
 # -------------------------------------------------------------------
-#alias vim='nvim'
+alias vim='nvim'
 alias R="R --no-save --no-restore-data --quiet"
 
 # System management

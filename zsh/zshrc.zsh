@@ -54,8 +54,6 @@ bindkey '^S' history-incremental-search-forward
 unsetopt nomatch
 autoload colors zsh/terminfo && colors
 
-
-
 # Prompt
 # -------------------------------------------------------------------
 git_branch() {
@@ -79,7 +77,6 @@ git_dirty() {
 
 git_prompt_info() {
   ref=$(/usr/bin/git symbolic-ref HEAD 2>/dev/null) || return
-  # echo "(%{\e[0;33m%}${ref#refs/heads/}%{\e[0m%})"
   echo ":%{$fg[magenta]%}${ref#refs/heads/}${reset_color%}"
 }
 
@@ -123,22 +120,22 @@ set_prompt() {
   RPROMPT='%(?.. %?)'
 }
 
-# Set the correct prompt
-#precmd() {
-#  set_prompt
-#  print -Pn "\e]0;%~\a"
-#}
+# Set the prompt
+precmd() {
+  set_prompt
+  print -Pn "\e]0;%~\a"
+}
 
-export PROMPT='%B%F{3}%1~%f%b %F{13}$(git_branch)%f %F{8}>%f '
+#export PROMPT='%B%F{3}%1~%f%b %F{13}$(git_branch)%f %F{8}>%f '
 setopt promptsubst
 
 # Path
 # -------------------------------------------------------------------
 pathdirs=(
   /opt/homebrew/bin
-  /snap/bin
   /usr/local/opt/ruby/bin
   $HOME/.dotfiles/bin
+  $HOME/go/bin
 )
 
 for dir in $pathdirs; do
@@ -147,7 +144,7 @@ for dir in $pathdirs; do
   fi
 done
 
-# initialize autocomplete here, otherwise functions won't be loaded
+# initialize autocomplete 
 autoload -U compinit
 compinit
 
