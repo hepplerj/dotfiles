@@ -51,6 +51,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'mattn/gist-vim'
 
 " JavaScript
+Plug 'jiangmiao/auto-pairs'
 Plug 'kevinoid/vim-jsonc' " Syntax support for JSON with C-style comments
 Plug 'gavocanov/vim-js-indent'
 Plug 'pangloss/vim-javascript' " Syntax support for Javascript and better highlighting
@@ -221,8 +222,11 @@ set formatoptions+=l " don't break long lines that were already there
 " ----------------------------------------------------------------------------
 " goyo.vim + limelight.vim
 " ----------------------------------------------------------------------------
-let g:limelight_paragraph_span = 1
-let g:limelight_priority = -1
+" Color name (:help cterm-colors) or ANSI code
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
+"let g:limelight_paragraph_span = 1
+"let g:limelight_priority = -1
 
 function! s:goyo_enter()
   if has('gui_running')
@@ -289,7 +293,7 @@ map <leader>s? z=
 let g:fzf_layout = { 'window': { 'width': 0.6, 'height': 0.3 } }
 
 "" O for 'open'
-nnoremap <silent> <leader>o :FZF<CR> 
+nnoremap <silent> <leader>o :GFiles<CR> 
 nnoremap <silent> <leader>O :FZF<CR> %<Tab>
 
 let $FZF_DEFAULT_OPTS .= ' --inline-info'
@@ -373,24 +377,10 @@ let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_fenced_languages = ['js=javascript']
 let g:vim_markdown_frontmatter = 1
 
-" Prettier
-" Autosave
-" disables autosave feature
-let g:prettier#autoformat = 0
-
-" print spaces between brackets
-" Prettier default: true
-let g:prettier#config#bracket_spacing = 'true'
-
-" runs prettier on file formats
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
-
-" ===
 " Functions and Commands
+" ----------------------------------------------------------------------------
 
-" ----------------------------------------------------------------------------
 " :Root | Change directory to the root of the Git repository
-" ----------------------------------------------------------------------------
 function! s:root()
   let root = systemlist('git rev-parse --show-toplevel')[0]
   if v:shell_error
@@ -402,9 +392,7 @@ function! s:root()
 endfunction
 command! Root call s:root()
 
-" ----------------------------------------------------------------------------
 " <F8> | Color scheme selector
-" ----------------------------------------------------------------------------
 function! s:rotate_colors()
   if !exists('s:colors')
     let s:colors = s:colors()
@@ -417,9 +405,7 @@ function! s:rotate_colors()
 endfunction
 nnoremap <silent> <F8> :call <SID>rotate_colors()<cr>
 
-" ----------------------------------------------------------------------------
 " Todo
-" ----------------------------------------------------------------------------
 function! s:todo() abort
   let entries = []
   for cmd in ['git grep -niI -e TODO -e FIXME -e XXX 2> /dev/null',
@@ -440,9 +426,7 @@ function! s:todo() abort
 endfunction
 command! Todo call s:todo()
 
-" ----------------------------------------------------------------------------
 " <Leader>?/! | Google it / Feeling lucky
-" ----------------------------------------------------------------------------
 function! s:goog(pat, lucky)
   let q = '"'.substitute(a:pat, '["\n]', ' ', 'g').'"'
   let q = substitute(q, '[[:punct:] ]',
