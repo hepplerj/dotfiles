@@ -6,7 +6,7 @@ if [[ -a "$HOME/.env.zsh" ]]; then
 fi
 export EDITOR='vim'
 export PROJECTS=$HOME/github # c + <tab> for autocomplete
-export ZSH=$HOME/.dotfiles
+#export ZSH=$HOME/.dotfiles
 export GOPATH=$HOME/go
 if [[ -v NUMCORES ]]; then
   export MAKEFLAGS="-j $NUMCORES"
