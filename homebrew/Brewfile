@@ -21,6 +21,10 @@ brew "ruby"
 brew "pyenv"
 brew "rbenv"
 
+# System tools
+tap federico-terzi/espanso
+brew "espanso"
+
 # CLI tools
 brew "autojump"
 brew "awscli"
