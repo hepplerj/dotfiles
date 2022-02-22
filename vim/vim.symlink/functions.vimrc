@@ -1,34 +1,3 @@
-" Commit all changes in research wiki
-command! -nargs=0 Wiki call CommitToWiki()
-nnoremap _wc :call CommitToWiki()<CR>
-function! CommitToWiki()
-  :silent !cd ~/Dropbox/acad/wiki/wikidata && git --git-dir=/Users/jasonheppler/Dropbox/acad/wiki/wikidata/.git --no-pager add *.page && git --git-dir=/Users/jasonheppler/Dropbox/acad/wiki/wikidata/.git commit -a -m "Automatic commit from Vim" 
-endfunction
-
-" Commit all changes in research wiki
-command! -nargs=0 WikiCommit call CommitToWikiTest()
-function! CommitToWikiTest()
-  :silent !cd ~/acad/research && rake wiki
-  :redraw!
-endfunction
-
-" Push all changes in research wiki
-command! -nargs=0 WikiPush call PushWiki()
-function! PushWiki()
-  :silent !cd ~/acad/research && rake pushwiki
-  :redraw!
-endfunction
-
-" With a file `test.md` in the current Vim buffer, open the file `test.md.pdf` in the OS.
-" https://gist.github.com/lmullen/b7231f5ce79eba9c6aeb
-command! -nargs=0 PDF call PDF()
-function! PDF()
-    :silent exec "!open ".expand("%:p").".pdf"
-endfunction
-
-" Commands for editing wiki pages to Gitit
-command! -nargs=1 Wiki execute ":split $HOME/Dropbox/acad/wiki/wikidata/" . fnameescape("<args>.page") | execute ":Gwrite"
-
 " Find related Pandoc footnote numbers
 " -------------------------------------------------------------------
 " Vim's * key searches for the next instance of the word under the 
@@ -108,12 +77,6 @@ function! ToggleBackground()
   else
     set background=dark
   endif
-endfunction
-
-" Open the current note file in the browser
-command! -nargs=0 Wo call OpenCurrentNoteInWiki()
-function! OpenCurrentNoteInWiki()
-  silent !xdg-open "http://localhost:5001/%:r"
 endfunction
 
 " Open the current file in the browser with the file system

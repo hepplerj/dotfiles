@@ -177,19 +177,36 @@ set smarttab
 set history=1000
 set undolevels=1000
 set noswapfile
-set nowritebackup
-set undofile
-set undodir=~/.cache/undodir
+"set nowritebackup
+"set undofile
+"set undodir=~/.cache/undodir
 set autoread                   " Set to auto read when file changed from outside
 au FocusLost * :wa
 set mouse=a 
 set shortmess=I 
 
+set backupdir=/tmp//,.
+set directory=/tmp//,.
+if has('persistent_undo')
+  set undodir=/tmp,.
+  set undofile
+endif
+
 " Appearance
 "--------------------------------------------------------------------------
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-let $PATH .= ':node_modules/.bin/:/Users/jheppler/.cargo/bin/'
-set statusline=%f%{fugitive#head()}
+function! s:statusline_expr()
+  let mod = "%{&modified ? '[+] ' : !&modifiable ? '[x] ' : ''}"
+  let ro  = "%{&readonly ? '[RO] ' : ''}"
+  let ft  = "%{len(&filetype) ? '['.&filetype.'] ' : ''}"
+  let fug = "%{exists('g:loaded_fugitive') ? fugitive#statusline() : ''}"
+  let sep = ' %= '
+  let pos = ' %-12(%l : %c%V%) '
+  let pct = ' %P'
+
+  return '[%n] %F %<'.mod.ro.ft.fug.sep.pos.'%*'.pct
+endfunction
+let &statusline = s:statusline_expr()
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
@@ -290,6 +307,7 @@ map <leader>s? z=
 
 " fzf 
 "--------------------------------------------------------------------------
+set rtp+=/opt/homebrew/opt/fzf
 let g:fzf_layout = { 'window': { 'width': 0.6, 'height': 0.3 } }
 
 "" O for 'open'
