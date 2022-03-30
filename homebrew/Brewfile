@@ -25,6 +25,10 @@ brew "rbenv"
 tap federico-terzi/espanso
 brew "espanso"
 
+# emacs
+tap "railwaycat/emacsmacport"
+brew install emacs-mac --with-modules
+
 # CLI tools
 brew "autojump"
 brew "awscli"
@@ -43,6 +47,7 @@ brew "git-lfs"
 brew "gnu-sed"
 brew "golang-migrate"
 brew "hugo"
+brew "imagemagick"
 brew "jq"
 brew "mosh"
 brew "neovim"
