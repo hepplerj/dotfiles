@@ -113,6 +113,9 @@ Plug 'ap/vim-css-color'                 " color name highlighter
 " Writing
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
+Plug 'vim-pandoc/vim-markdownfootnotes'
+Plug 'godlygeek/tabular'
+Plug 'preservim/vim-markdown'
 
 call plug#end()
 
@@ -236,6 +239,12 @@ set formatoptions+=o              " automatically continue comments when hitting
 set formatoptions+=q              " allow formating of comments with 'gq'
 set formatoptions+=n              " recognize numbered lists
 set formatoptions+=l " don't break long lines that were already there
+
+" Handle footnotes
+imap <buffer> ]r <Plug>AddVimFootnote
+nmap <buffer> ]r <Plug>AddVimFootnote
+imap <buffer> [r <Plug>ReturnFromFootnote
+nmap <buffer> [r <Plug>ReturnFromFootnote
 
 " ----------------------------------------------------------------------------
 " goyo.vim + limelight.vim
