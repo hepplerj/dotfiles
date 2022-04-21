@@ -93,6 +93,7 @@ Plug 'tmcw/vim-eslint-compiler'
 
 " Color schemes
 Plug 'arcticicestudio/nord-vim'
+Plug 'cocopon/iceberg.vim'
 Plug 'rmehri01/onenord.nvim', { 'branch' : 'main' }
 Plug 'chriskempson/base16-vim'
 Plug 'nanotech/jellybeans.vim'
@@ -112,6 +113,9 @@ Plug 'ap/vim-css-color'                 " color name highlighter
 " Writing
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
+Plug 'vim-pandoc/vim-markdownfootnotes'
+Plug 'godlygeek/tabular'
+Plug 'preservim/vim-markdown'
 
 call plug#end()
 
@@ -127,7 +131,7 @@ endif
 
 set encoding=UTF-8
 
-colorscheme nord
+colorscheme iceberg
 
 " Performance: highlighting ends after 400 columns
 set synmaxcol=400
@@ -235,6 +239,12 @@ set formatoptions+=o              " automatically continue comments when hitting
 set formatoptions+=q              " allow formating of comments with 'gq'
 set formatoptions+=n              " recognize numbered lists
 set formatoptions+=l " don't break long lines that were already there
+
+" Handle footnotes
+imap <buffer> ]r <Plug>AddVimFootnote
+nmap <buffer> ]r <Plug>AddVimFootnote
+imap <buffer> [r <Plug>ReturnFromFootnote
+nmap <buffer> [r <Plug>ReturnFromFootnote
 
 " ----------------------------------------------------------------------------
 " goyo.vim + limelight.vim
@@ -347,7 +357,7 @@ endif
 " nnoremap <silent> <Leader><Leader> :Files<CR>
 nnoremap <silent> <expr> <Leader><Leader> (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files\<cr>"
 nnoremap <silent> <Leader>C        :Colors<CR>
-nnoremap <silent> <Leader><Enter>  :Buffers<CR>
+nnoremap <silent> <Leaded><Enter>  :Buffers<CR>
 nnoremap <silent> <Leader>L        :Lines<CR>
 nnoremap <silent> <Leader>ag       :Ag <C-R><C-W><CR>
 nnoremap <silent> <Leader>AG       :Ag <C-R><C-A><CR>
