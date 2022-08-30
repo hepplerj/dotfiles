@@ -65,6 +65,7 @@ brew "zsh"
 # GUI apps
 cask "adobe-acrobat-pro"
 cask "basecamp"
+cask "dbbrowser-for-sqlite"
 cask "docker"
 cask "fantastical"
 cask "homebrew/cask-versions/firefox-developer-edition"
