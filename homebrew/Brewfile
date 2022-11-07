@@ -61,6 +61,8 @@ brew "wget"
 brew "zsh"
 
 # Dependencies 
+brew "spatialite-tools"
+brew "gdal"
 
 # GUI apps
 cask "adobe-acrobat-pro"
