@@ -21,14 +21,6 @@ brew "ruby"
 brew "pyenv"
 brew "rbenv"
 
-# System tools
-tap federico-terzi/espanso
-brew "espanso"
-
-# emacs
-tap "railwaycat/emacsmacport"
-brew install emacs-mac --with-modules
-
 # CLI tools
 brew "autojump"
 brew "awscli"
@@ -37,6 +29,7 @@ brew "ccache"
 brew "cloc"
 brew "coreutils"
 brew "curl"
+brew "exa"
 brew "doctl"
 brew "fd"
 brew "fzf"
@@ -47,7 +40,6 @@ brew "git-lfs"
 brew "gnu-sed"
 brew "golang-migrate"
 brew "hugo"
-brew "imagemagick"
 brew "jq"
 brew "mosh"
 brew "neovim"
@@ -55,24 +47,20 @@ brew "nmap"
 brew "pandoc"
 brew "postgresql", restart_services: true
 brew "sqlite"
-brew "starship"
 brew "tree"
 brew "wget"
-brew "zsh"
 
 # Dependencies 
 brew "spatialite-tools"
-brew "gdal"
+brew "sqlite-utils"
 
 # GUI apps
-cask "adobe-acrobat-pro"
 cask "basecamp"
 cask "dbbrowser-for-sqlite"
 cask "docker"
 cask "fantastical"
 cask "homebrew/cask-versions/firefox-developer-edition"
 cask "iterm2"
-cask "microblog"
 cask "microsoft-auto-update"
 cask "microsoft-excel"
 cask "microsoft-word"
@@ -86,24 +74,19 @@ cask "tropy"
 cask "visual-studio-code"
 cask "zoom"
 cask "zotero"
-# mas "1Blocker", id:1365531024
 mas "1Password", id: 1333542190
 mas "Affinity Photo", id:824183456
 mas "Affinity Designer", id:824171161
 mas "Amphetamine", id:937984704
 mas "Broadcasts", id:1469995354
 mas "Boop", id: 1518425043
-mas "DaisyDisk", id:411643860
 mas "Keynote", id:409183694
 mas "PCalc", id:403504866
 mas "PDF Expert", id:1055273043
 mas "Reeder", id:1529448980
-mas "Save to Pocket", id:1477385213
 mas "Slack", id:803453959
 mas "Soulver 3", id:1508732804
 mas "Things 3", id:904280696
-mas "Tweetbot", id: 1384080005
-mas "Xcode", id:497799835
 
 # Fonts
 cask "font-ibm-plex"
