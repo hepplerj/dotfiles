@@ -42,8 +42,6 @@
 .vscode
 Session.vim
 vc.tex
-node_modules/
-dist/
 __pycache__
 *.pyc
 env/
