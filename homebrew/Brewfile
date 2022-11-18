@@ -24,6 +24,7 @@ brew "rbenv"
 # CLI tools
 brew "autojump"
 brew "awscli"
+brew "bat"
 brew "caddy"
 brew "ccache"
 brew "cloc"
@@ -49,6 +50,7 @@ brew "postgresql", restart_services: true
 brew "sqlite"
 brew "tree"
 brew "wget"
+brew "zsh-syntax-highlighting"
 
 # Dependencies 
 brew "spatialite-tools"
