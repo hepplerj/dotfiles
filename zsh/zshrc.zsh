@@ -19,6 +19,7 @@ export HOMEBREW_NO_ANALYTICS=1
 # Functions
 fpath=($ZSH/zsh/functions /usr/local/share/zsh-completions $fpath)
 autoload -U $ZSH/zsh/functions/*(:t)
+zstyle ':completion:*' menu select
 
 # Options
 HISTFILE=~/.zsh_history
@@ -140,6 +141,7 @@ pathdirs=(
   /usr/local/opt/ruby/bin
   $HOME/.dotfiles/bin
   $HOME/go/bin
+  $HOME/Library/Python/3.10/bin
 )
 
 for dir in $pathdirs; do
