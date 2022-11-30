@@ -142,6 +142,7 @@ pathdirs=(
   $HOME/.dotfiles/bin
   $HOME/go/bin
   $HOME/Library/Python/3.10/bin
+  $HOME/.emacs.d/bin
 )
 
 for dir in $pathdirs; do
