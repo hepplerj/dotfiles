@@ -24,6 +24,7 @@ brew "rbenv"
 # CLI tools
 brew "autojump"
 brew "awscli"
+brew "basictex"
 brew "bat"
 brew "caddy"
 brew "ccache"
