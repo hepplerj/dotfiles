@@ -22,8 +22,8 @@ neovim :
 	@echo "Symlinking Neovim dotfiles"
 	ln -s $(HOME)/.dotfiles/neovim $(HOME)/.config/nvim
 
-jotunheimen-apps:
-	brew bundle install --file=$(HOME)/.dotfiles/homebrew/Jotunheimen.Brewfile
+apps:
+	brew bundle install --file=$(HOME)/.dotfiles/homebrew/Brewfile
 
 all : git R latex zsh neovim
 

@@ -4,9 +4,10 @@
 if [[ -a "$HOME/.env.zsh" ]]; then
   source "$HOME/.env.zsh"
 fi
+
 export EDITOR='vim'
 export PROJECTS=$HOME/github # c + <tab> for autocomplete
-#export ZSH=$HOME/.dotfiles
+export ZSH=$HOME/.dotfiles
 export GOPATH=$HOME/go
 if [[ -v NUMCORES ]]; then
   export MAKEFLAGS="-j $NUMCORES"
@@ -15,12 +16,10 @@ else
 fi
 export HOMEBREW_NO_ANALYTICS=1
 
-# Aliases
-source $ZSH/zsh/aliases.zsh
-
 # Functions
 fpath=($ZSH/zsh/functions /usr/local/share/zsh-completions $fpath)
 autoload -U $ZSH/zsh/functions/*(:t)
+zstyle ':completion:*' menu select
 
 # Options
 HISTFILE=~/.zsh_history
@@ -129,6 +128,12 @@ precmd() {
 #export PROMPT='%B%F{3}%1~%f%b %F{13}$(git_branch)%f %F{8}>%f '
 setopt promptsubst
 
+# Aliases, functions, external tools
+# -------------------------------------------------------------------
+source $ZSH/zsh/aliases.zsh
+source $ZSH/zsh/functions.zsh
+source $ZSH/zsh/external.zsh
+
 # Path
 # -------------------------------------------------------------------
 pathdirs=(
@@ -136,6 +141,8 @@ pathdirs=(
   /usr/local/opt/ruby/bin
   $HOME/.dotfiles/bin
   $HOME/go/bin
+  $HOME/Library/Python/3.10/bin
+  $HOME/.emacs.d/bin
 )
 
 for dir in $pathdirs; do
@@ -148,13 +155,18 @@ done
 autoload -U compinit
 compinit
 
-# Load rbenv
-eval "$(rbenv init -)"
+# Environment managers
+# -------------------------------------------------------------------
 
 # Load nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Load rbenv
+eval "$(rbenv init -)"
+
+# Load pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
