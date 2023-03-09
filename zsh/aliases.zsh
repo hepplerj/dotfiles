@@ -18,6 +18,12 @@ alias more='more -R'                # give more colors
 alias process="ps aux | grep -i"
 alias servethis='python3 -m http.server'
 
+# Django 
+# -------------------------------------------------------------------
+alias pm="python3 manage.py"
+alias pmm="python3 manage.py migrate"
+alias prs="python3 manage.py runserver"
+
 # Git 
 # -------------------------------------------------------------------
 alias ga='git add'
