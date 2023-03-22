@@ -143,6 +143,7 @@ pathdirs=(
   $HOME/go/bin
   $HOME/Library/Python/3.10/bin
   $HOME/.emacs.d/bin
+  $HOME/.local/bin:$PATH
 )
 
 for dir in $pathdirs; do
@@ -150,6 +151,7 @@ for dir in $pathdirs; do
     PATH=$dir:$PATH
   fi
 done
+export PATH="/Users/jheppler/.local/bin:$PATH"
 
 # initialize autocomplete 
 autoload -U compinit
