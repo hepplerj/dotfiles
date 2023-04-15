@@ -102,6 +102,11 @@ directory_name(){
   echo "%{$fg[blue]%}%~%{$reset_color%}"
 }
 
+current_directory_name(){
+  # only show the folder name
+  echo "%{$fg[blue]%}%1~%{$reset_color%}"
+}
+
 user_machine(){
   echo "%{$fg[yellow]%}%n@%m%{$reset_color%}"
 }
@@ -110,12 +115,12 @@ python_venv() {
    if [[ -z $VIRTUAL_ENV ]] then
      echo ""
    else
-     echo ":%{$fg[green]%}venv$reset_color%}"
+     echo "(%{$fg[green]%}venv$reset_color%})"
    fi
 }
 
 set_prompt() {
-  export PROMPT=$'\n$(user_machine):$(directory_name)$(git_prompt_info)\n%{$fg[red]%}›%{$reset_color%} '
+  export PROMPT=$'\n$(python_venv)$(user_machine) /$(current_directory_name)$(git_prompt_info)\n%{$fg[red]%}›%{$reset_color%} '
   RPROMPT='%(?.. %?)'
 }
 
@@ -174,3 +179,7 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
+
+# Load volta
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
