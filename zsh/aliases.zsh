@@ -20,7 +20,6 @@ alias servethis='python3 -m http.server'
 
 # Django 
 # -------------------------------------------------------------------
-alias python="python3"
 alias pm="python3 manage.py"
 alias pmm="python3 manage.py migrate"
 alias prs="python3 manage.py runserver"
