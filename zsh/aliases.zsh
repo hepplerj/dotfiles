@@ -16,7 +16,8 @@ alias ip="curl icanhazip.com"       # get current public IP
 alias ls="exa"
 alias more='more -R'                # give more colors
 alias process="ps aux | grep -i"
-alias servethis='python3 -m http.server'
+alias servethis="python3 -m http.server"
+alias writingdir="cd ~/Documents/Research/80.\ Writing"
 
 # Django 
 # -------------------------------------------------------------------
