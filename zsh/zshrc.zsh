@@ -5,6 +5,10 @@ if [[ -a "$HOME/.env.zsh" ]]; then
   source "$HOME/.env.zsh"
 fi
 
+test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
+
+source ~/.config/git-prompt.sh
+
 export EDITOR='vim'
 export PROJECTS=$HOME/github # c + <tab> for autocomplete
 export ZSH=$HOME/.dotfiles
@@ -126,8 +130,11 @@ set_prompt() {
 
 # Set the prompt
 precmd() {
-  set_prompt
-  print -Pn "\e]0;%~\a"
+  #set_prompt
+  source ~/.dotfiles/zsh/prompt.zsh
+  prompt_igloo_setup
+  # Set the prompt theme.
+  #print -Pn "\e]0;%~\a"
 }
 
 #export PROMPT='%B%F{3}%1~%f%b %F{13}$(git_branch)%f %F{8}>%f '
