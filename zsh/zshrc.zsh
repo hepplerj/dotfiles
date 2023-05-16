@@ -7,7 +7,7 @@ fi
 
 test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
 
-source ~/.config/git-prompt.sh
+source ~/.dotfiles/git/git-prompt.sh
 
 export EDITOR='vim'
 export PROJECTS=$HOME/github # c + <tab> for autocomplete
