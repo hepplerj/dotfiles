@@ -13,7 +13,6 @@ brew "mas"
 # Languages
 brew "go"
 brew "node"
-brew "python"
 brew "r"
 brew "ruby"
 
@@ -24,7 +23,6 @@ brew "rbenv"
 # CLI tools
 brew "autojump"
 brew "awscli"
-brew "basictex"
 brew "bat"
 brew "caddy"
 brew "ccache"
@@ -45,6 +43,7 @@ brew "gnu-sed"
 brew "golang-migrate"
 brew "hugo"
 brew "jq"
+brew "mactex"
 brew "mosh"
 brew "neovim"
 brew "nmap"
@@ -61,7 +60,6 @@ brew "sqlite-utils"
 
 # GUI apps
 cask "basecamp"
-cask "dbbrowser-for-sqlite"
 cask "docker"
 cask "fantastical"
 cask "homebrew/cask-versions/firefox-developer-edition"
@@ -73,7 +71,6 @@ cask "obsidian"
 cask "postico"
 cask "qgis"
 cask "rstudio"
-cask "scrivener"
 cask "transmit"
 cask "tropy"
 cask "visual-studio-code"
@@ -83,19 +80,12 @@ mas "1Password", id: 1333542190
 mas "Affinity Photo", id:824183456
 mas "Affinity Designer", id:824171161
 mas "Amphetamine", id:937984704
-mas "Broadcasts", id:1469995354
-mas "Boop", id: 1518425043
 mas "Keynote", id:409183694
 mas "PCalc", id:403504866
 mas "PDF Expert", id:1055273043
-mas "Reeder", id:1529448980
 mas "Slack", id:803453959
 mas "Soulver 3", id:1508732804
 mas "Things 3", id:904280696
-
-# Emacs?
-tap "d12frosted/emacs-plus"
-brew "emacs-plus"
 
 # Fonts
 cask "font-ibm-plex"
