@@ -154,7 +154,7 @@ pathdirs=(
   $HOME/.dotfiles/bin
   $HOME/go/bin
   $HOME/Library/Python/3.10/bin
-  $HOME/.emacs.d/bin
+  $HOME/.config/emacs/bin
   $HOME/.local/bin:$PATH
 )
 
