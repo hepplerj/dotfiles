@@ -14,6 +14,7 @@ vim/vim.symlink/.tmp/
 vim/vim.symlink/bundle
 vim/vim.symlink/plugged/
 tmux/dev
+tmux/plugins
 ls-R
 secret
 .Rproj.user
