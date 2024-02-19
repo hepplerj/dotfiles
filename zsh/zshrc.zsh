@@ -156,6 +156,7 @@ pathdirs=(
   $HOME/Library/Python/3.10/bin
   $HOME/.config/emacs/bin
   $HOME/.local/bin:$PATH
+  /Applications/Postgres.app/Contents/Versions/16/bin:$PATH
 )
 
 for dir in $pathdirs; do
