@@ -155,6 +155,7 @@ pathdirs=(
   $HOME/go/bin
   $HOME/Library/Python/3.10/bin
   $HOME/.config/emacs/bin
+  $HOME/.emacs.d/bin
   $HOME/.local/bin:$PATH
   /Applications/Postgres.app/Contents/Versions/16/bin:$PATH
 )
