@@ -10,9 +10,9 @@ set -g theme_hide_hostname no
 set -g theme_hostname always
 
 # aliases
-alias ls exa
+alias ls eza
 alias la "ls -a"
-alias ll "exa -l"
+alias ll "eza -l"
 alias lla "ll -a"
 alias g git
 alias chnm "cd ~/Dropbox/"
