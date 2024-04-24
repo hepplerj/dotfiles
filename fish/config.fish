@@ -10,10 +10,10 @@ set -g theme_hide_hostname no
 set -g theme_hostname always
 
 # aliases
-alias ls "exa"
-alias la "exa -A"
+alias ls exa
+alias la "ls -a"
 alias ll "exa -l"
-alias lla "ll -A"
+alias lla "ll -a"
 alias g git
 alias chnm "cd ~/Dropbox/"
 command -qv nvim && alias vim nvim
