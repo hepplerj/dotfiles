@@ -18,3 +18,5 @@ tmux/plugins
 ls-R
 secret
 .Rproj.user
+
+neovim.bak/

@@ -157,6 +157,7 @@ pathdirs=(
   $HOME/.config/emacs/bin
   $HOME/.emacs.d/bin
   $HOME/.local/bin:$PATH
+  /Applications/Postgres.app/Contents/Versions/16/bin:$PATH
 )
 
 for dir in $pathdirs; do
