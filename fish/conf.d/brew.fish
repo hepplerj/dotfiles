@@ -1,0 +1,1 @@
+eval (brew shellenv fish)

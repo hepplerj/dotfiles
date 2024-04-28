@@ -9,38 +9,22 @@ set -g theme_display_user yes
 set -g theme_hide_hostname no
 set -g theme_hostname always
 
-# aliases
-alias ls eza
-alias la "ls -a"
-alias ll "eza -l"
-alias lla "ll -a"
-alias g git
-alias chnm "cd ~/Dropbox/"
 command -qv nvim && alias vim nvim
 
 set -gx EDITOR nvim
+set -U EDITOR nvim
 
 set -gx PATH bin $PATH
 set -gx PATH ~/bin $PATH
 set -gx PATH ~/.local/bin $PATH
 
-# NodeJS
-set -gx PATH node_modules/.bin $PATH
+source ~/.config/fish/conf.d/aliases.fish
+source ~/.config/fish/conf.d/code.fish
 
-# Go
-set -g GOPATH $HOME/go
-set -gx PATH $GOPATH/bin $PATH
+# source local configs from conf.d/
+source (dirname (status --current-filename))/conf.d/*.fish
 
-# NVM
-function __check_rvm --on-variable PWD --description 'Do nvm stuff'
-    status --is-command-substitution; and return
-
-    if test -f .nvmrc; and test -r .nvmrc
-        nvm use
-    else
-    end
-end
-
+# source os specific config
 switch (uname)
     case Darwin
         source (dirname (status --current-filename))/osx.fish
