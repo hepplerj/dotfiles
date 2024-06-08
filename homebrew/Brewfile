@@ -9,12 +9,13 @@ tap "homebrew/core"
 tap "homebew/services"
 
 brew "mas"
+brew "jordanbaird-ice"
 
 # Languages
 brew "go"
 brew "node"
-brew "r"
 brew "ruby"
+cask "r"
 
 # Language tools
 brew "pyenv"
