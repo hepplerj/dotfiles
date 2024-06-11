@@ -1,25 +1,27 @@
 # Dependences and settings
-
 cask_args appdir: "/Applications"
 
 tap "homebrew/bundle"
 tap "homebrew/cask"
-tap "homebrew/cask-fonts"
+tap "homebrew/cask-fonts" # find fonts with: brew search font
+tap "buo/cask-upgrade" # handle App Store app updates: brew cu
 tap "homebrew/core"
 tap "homebew/services"
-
 brew "mas"
+
+# macOS Utilities
 brew "jordanbaird-ice"
 
 # Languages
 brew "go"
+brew "golang-migrate"
+brew "lua"
 brew "node"
-brew "ruby"
 cask "r"
+# no Python; use pyenv
 
 # Language tools
 brew "pyenv"
-brew "rbenv"
 
 # CLI tools
 brew "autojump"
@@ -31,19 +33,21 @@ brew "cloc"
 brew "coreutils"
 brew "curl"
 brew "duckdb"
-brew "eza"
+brew "eza" # exa/ls replacement
 brew "doctl"
 brew "fd"
+brew "fish" # fish shell
 brew "fzf"
 brew "gdal"
-brew "gh"
-brew "gibo"
+brew "gh" # GitHub CLI
+brew "gibo" # sensible .gitignore defaults
 brew "git"
+brew "git-delta" # used in combination with lazygit
 brew "git-lfs"
 brew "gnu-sed"
-brew "golang-migrate"
 brew "hugo"
 brew "jq"
+brew "lazygit"
 brew "mactex"
 brew "mosh"
 brew "neovim"
@@ -51,9 +55,11 @@ brew "nmap"
 brew "pandoc"
 brew "postgresql", restart_services: true
 brew "sqlite"
+brew "task" # taskwarrior
+brew "timewarrior"
+brew "tmux"
 brew "tree"
 brew "wget"
-brew "zsh-syntax-highlighting"
 
 # Dependencies 
 brew "spatialite-tools"
@@ -63,6 +69,7 @@ brew "sqlite-utils"
 cask "basecamp"
 cask "docker"
 cask "fantastical"
+cask "firefox"
 cask "homebrew/cask-versions/firefox-developer-edition"
 cask "iterm2"
 cask "microsoft-auto-update"
@@ -92,3 +99,4 @@ mas "Things 3", id:904280696
 cask "font-ibm-plex"
 cask "font-fira-code"
 cask "font-inconsolata"
+cask "font-source-sans-3"
