@@ -38,3 +38,5 @@ set LOCAL_CONFIG (dirname (status --current-filename))/local.fish
 if test -f $LOCAL_CONFIG
     source $LOCAL_CONFIG
 end
+
+rbenv init - | source
