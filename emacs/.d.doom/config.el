@@ -149,7 +149,8 @@
 (setq org-agenda-custom-commands
       '(("g" "Get Things Done (GTD)"
          ((agenda ""
-                  ((org-agenda-start-day "-0d")
+                ((org-agenda-span 'day)
+                  (org-agenda-start-day "today")
                    (org-agenda-span 1)
                    (org-deadline-warning-days 7)))
           (todo "NEXT"
@@ -157,7 +158,22 @@
                   '(org-agenda-skip-entry-if 'deadline))
                  (org-agenda-prefix-format "  %i %-12:c [%e] ")
                  (org-agenda-overriding-header "\nTasks\n")))
-          (tags-todo "inbox"
+        (tags-todo "+DEADLINE<=\"<+30d>\"|+SCHEDULED<=\"<+30d>\""
+                     ((org-agenda-overriding-header "Deadlines\n")
+                      (org-agenda-skip-function
+                       '(org-agenda-skip-entry-if 'todo 'done))
+                      (org-agenda-sorting-strategy '(deadline-up scheduled-up))
+                      (org-agenda-prefix-format "  %i %-12:c %s")))
+          (agenda ""
+                ((org-agenda-start-day "+1d")
+                 (org-agenda-span 5)
+                 (org-agenda-time-grid nil)
+                 (org-agenda-show-all-dates nil)
+                 (org-agenda-entry-types '(:scheduled :deadline :timestamp :sexp))
+                 (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                 (org-agenda-prefix-format "  %i %-12:c %s")
+                 (org-agenda-overriding-header "\nUpcoming\n")))
+         (tags-todo "inbox"
                      ((org-agenda-prefix-format "  %?-12t% s")
                       (org-agenda-overriding-header "\nInbox\n")))
           (tags "CLOSED>=\"<today>\""
