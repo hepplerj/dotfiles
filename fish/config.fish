@@ -40,3 +40,4 @@ if test -f $LOCAL_CONFIG
 end
 
 rbenv init - | source
+pyenv init - | source
