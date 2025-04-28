@@ -39,10 +39,14 @@ brew "fd"
 brew "fish" # fish shell
 brew "fzf"
 brew "gdal"
-brew "gh" # GitHub CLI
-brew "gibo" # sensible .gitignore defaults
+ # GitHub CLI
+brew "gh"
+# Sensible .gitignore defaults
+brew "gibo" 
 brew "git"
-brew "git-delta" # used in combination with lazygit
+ # Used in combination with lazygit: Syntax-highlighting pager for git and diff output
+brew "git-delta"
+# Git extension for versioning large files
 brew "git-lfs"
 brew "gnu-sed"
 brew "hugo"
@@ -77,6 +81,7 @@ cask "microsoft-auto-update"
 cask "microsoft-excel"
 cask "microsoft-word"
 cask "obsidian"
+cask "ollama"
 cask "postico"
 cask "qgis"
 cask "rstudio"
@@ -85,7 +90,6 @@ cask "tropy"
 cask "visual-studio-code"
 cask "zoom"
 cask "zotero"
-mas "1Password", id: 1333542190
 mas "Affinity Photo", id:824183456
 mas "Affinity Designer", id:824171161
 mas "Amphetamine", id:937984704
@@ -95,6 +99,27 @@ mas "PDF Expert", id:1055273043
 mas "Slack", id:803453959
 mas "Soulver 3", id:1508732804
 mas "Things 3", id:904280696
+
+# VSCode
+vscode "charliermarsh.ruff"
+vscode "davidanson.vscode-markdownlint"
+vscode "dbaeumer.vscode-eslint"
+vscode "eamodio.gitlens"
+vscode "editorconfig.editorconfig"
+vscode "esbenp.prettier-vscode"
+vscode "github.copilot"
+vscode "github.copilot-chat"
+vscode "graphql.vscode-graphql"
+vscode "graphql.vscode-graphql-syntax"
+vscode "ms-python.debugpy"
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
+vscode "ms-toolsai.jupyter"
+vscode "ms-toolsai.jupyter-keymap"
+vscode "ms-toolsai.jupyter-renderers"
+vscode "ms-toolsai.vscode-jupyter-cell-tags"
+vscode "ms-toolsai.vscode-jupyter-slideshow"
+vscode "ms-vscode-remote.remote-containers"
 
 # Fonts
 cask "font-ibm-plex"
