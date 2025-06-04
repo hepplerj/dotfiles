@@ -22,6 +22,9 @@ neovim :
 	@echo "Symlinking Neovim dotfiles"
 	ln -s $(HOME)/.dotfiles/neovim $(HOME)/.config/nvim
 
+emacs-install : 
+	brew tap d12frosted/emacs-plus && brew install emacs-plus@29 --with-debug --with-xwidgets --with-imagemagick --with-native-comp --with-savchenkovaleriy-big-sur-icon
+
 apps:
 	brew bundle install --file=$(HOME)/.dotfiles/homebrew/Brewfile
 
