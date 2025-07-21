@@ -1,6 +1,4 @@
 font-family = "Berkeley Mono"
-# native fullscreen is way too slow (the animation kills me)
-macos-non-native-fullscreen = true
-fullscreen = true
-theme = catppuccin-mocha
 font-size = 16
+theme = dark:nightfox,light:dayfox
+shell-integration = fish
