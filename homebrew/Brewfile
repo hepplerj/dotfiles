@@ -31,23 +31,19 @@ brew "caddy"
 brew "ccache"
 brew "cloc"
 brew "coreutils"
+brew "csvkit"
 brew "curl"
 brew "duckdb"
-brew "eza" # exa/ls replacement
 brew "doctl"
 brew "fd"
-brew "fish" # fish shell
+brew "fish"
 brew "fzf"
 brew "gdal"
- # GitHub CLI
-brew "gh"
-# Sensible .gitignore defaults
-brew "gibo" 
+brew "gh" # GitHub CLI
+brew "gibo" # Sensible .gitignore defaults
 brew "git"
- # Used in combination with lazygit: Syntax-highlighting pager for git and diff output
-brew "git-delta"
-# Git extension for versioning large files
-brew "git-lfs"
+brew "git-delta" # Used in combination with lazygit
+brew "git-lfs" # Versioning large files
 brew "gnu-sed"
 brew "hugo"
 brew "jq"
@@ -60,13 +56,13 @@ brew "nmap"
 brew "pandoc"
 brew "postgresql", restart_services: true
 brew "sqlite"
-brew "task" # taskwarrior
+brew "task" # Taskwarrior
 brew "timewarrior"
 brew "tmux"
 brew "tree"
 brew "wget"
 
-# Dependencies 
+# Dependencies
 brew "spatialite-tools"
 brew "sqlite-utils"
 
