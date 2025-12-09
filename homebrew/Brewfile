@@ -50,6 +50,7 @@ brew "jq"
 brew "just"
 brew "lazygit"
 brew "mactex"
+brew "miller" # working with CSV files
 brew "mosh"
 brew "neovim"
 brew "nmap"
