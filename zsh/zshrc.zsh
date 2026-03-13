@@ -167,7 +167,7 @@ for dir in $pathdirs; do
 done
 export PATH="/Users/jheppler/.local/bin:$PATH"
 
-# initialize autocomplete 
+# initialize autocomplete
 autoload -U compinit
 compinit
 
