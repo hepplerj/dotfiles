@@ -11,6 +11,9 @@ set -g theme_hostname always
 
 command -qv nvim && alias vim nvim
 
+# fishvim
+set -g fish_key_bindings fish_vi_key_bindings
+
 set -gx EDITOR nvim
 set -U EDITOR nvim
 
