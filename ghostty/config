@@ -1,4 +1,16 @@
-font-family = "Berkeley Mono"
 font-size = 16
-theme = dark:nightfox,light:dayfox
+theme = dark:Catppuccin Mocha,light:Flexoki Light
 shell-integration = fish
+
+adjust-cell-height = 10%
+font-family = "BlexMono Nerd Font Mono"
+font-thicken = true
+mouse-hide-while-typing = true
+window-padding-y = 0
+window-padding-x = 0
+window-padding-color = extend-always
+window-padding-balance = true
+window-save-state = always
+
+keybind = shift+enter=text:\x1b\r
+
