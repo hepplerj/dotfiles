@@ -1,14 +1,3 @@
-mutt/mutt.symlink/accounts
-mutt/mutt.symlink/cache
-mutt/mutt.symlink/certificates
-mutt/mutt.symlink/mutt-colors-solarized/
-mutt/mutt.symlink/mutt.symlink
-mutt/mutt.symlink/muttrc.aliases
-mutt/mutt.symlink/temp
-mutt/mutt.symlink/Equifax_Secure_CA.cert
-mutt/mutt.symlink/offlineimap.py
-mutt/mutt.symlink/offlineimap.pyc
-mutt/mutt.symlink/offlineimaprc
 vim/vim.symlink/.netrwhist
 vim/vim.symlink/.tmp/
 vim/vim.symlink/bundle
@@ -18,6 +7,4 @@ tmux/plugins
 ls-R
 secret
 .Rproj.user
-
-neovim.bak/
 fish_variables
