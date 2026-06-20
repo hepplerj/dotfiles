@@ -8,3 +8,21 @@ ls-R
 secret
 .Rproj.user
 fish_variables
+
+# fisher-managed plugin files (installed via `fisher install`)
+# only fish_plugins should be committed
+fish/functions/fisher.fish
+fish/functions/fish_prompt.fish
+fish/functions/fish_mode_prompt.fish
+fish/functions/__z*.fish
+fish/functions/_nvm_*.fish
+fish/functions/nvm.fish
+fish/functions/_fzf_*.fish
+fish/functions/fzf_configure_bindings.fish
+fish/conf.d/nvm.fish
+fish/conf.d/z.fish
+fish/conf.d/hydro.fish
+fish/conf.d/fzf.fish
+fish/completions/fisher.fish
+fish/completions/nvm.fish
+fish/completions/fzf_configure_bindings.fish
