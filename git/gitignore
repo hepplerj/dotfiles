@@ -47,3 +47,5 @@ env/
 TODO.txt
 *.scriv
 .httr-oauth
+
+**/.claude/settings.local.json
